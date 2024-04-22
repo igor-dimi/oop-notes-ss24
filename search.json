@@ -14,9 +14,16 @@
     "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
   },
   {
+    "objectID": "01/fundamentals.html#preface",
+    "href": "01/fundamentals.html#preface",
+    "title": "2  Fundamental Concepts of C++",
+    "section": "2.1 Preface",
+    "text": "2.1 Preface\n\nvariables and types\npointers and references\ncontrol structures\nfunctions and templates\nclasses and inheritance\nnamespaces and structure\n\n\n2.1.1 Variables, Temporaries, Literals\nsome stuff comes here…"
+  },
+  {
     "objectID": "summary.html",
     "href": "summary.html",
-    "title": "2  Summary",
+    "title": "3  Summary",
     "section": "",
     "text": "In summary, this book has no content whatsoever."
   },
