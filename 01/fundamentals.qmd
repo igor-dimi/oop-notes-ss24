@@ -88,3 +88,101 @@ a: 4
 a: 5
 b: 5
 ```
+
+
+### Rvalue (double) References 
+
+Two uses:
+
+* **range-based** `for` loops
+* **move semantics** 
+
+lvalue references refer to entities, rvalue references refer to literals. 
+
+
+### Const-Correctness 
+
+Marks something that can't be modified. 
+
+```{.cpp}
+#include <iostream>
+
+int main(int argc, char const *argv[])
+{
+    int n = 5;
+    const int j = 4;
+    const int &k = n; //k can't be modified, equivalently n can't be modified over k
+    n++; //but this changes n and indirectly k (because k references n)
+    
+
+    const int *p1 = &n; // modifiable pointer to const int 
+    int const *p2 = &n; // same thing
+    int *const p3 = &n; // constant pointer to modifiable int
+
+    // p1 = &j -- ok
+    // *p1 = 3 -- not ok! 
+    // p3 = &j -- not ok
+    // *p3 = 10 -- ok
+
+    std::cout << "n: " << n << std::endl
+              << "j: " << j << std::endl
+              << "p1: " << p1 << std::endl
+              << "p2: " << p2 << std::endl
+              << "p3: " << p3 << std::endl;
+    
+    
+    return 0;
+}
+```
+
+### Control Flow 
+
+#### If 
+
+```{.cpp}
+#include <iostream>
+
+int main(int argc, char const *argv[])
+{
+    int i;
+    std::cin >> i;
+
+    if (i % 2 == 0) std::cout << i << " is even" << std::endl;
+    else std::cout << i << " is odd" << std::endl;
+    return 0;
+}
+```
+
+#### Switch
+
+```{.cpp}
+#include <iostream>
+
+enum Color {RED, BLUE, GREEN};
+
+int main(int argc, char const *argv[])
+{
+    int i;
+    Color c = RED;
+
+    std::cin >> i;
+
+    switch(i) {
+        case 0:
+            c = RED;
+            break;
+        case 1 :
+            c = BLUE;
+            break;
+        case 2 :
+            c = GREEN;
+            break;
+        default :
+            std::cout << "error: invalid color" << std::endl;
+    }
+
+    std::cout << c << std::endl;
+
+    return 0;
+}
+```
