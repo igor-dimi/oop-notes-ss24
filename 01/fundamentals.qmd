@@ -14,3 +14,14 @@ title: "Fundamental Concepts of C++"
 ### Variables, Temporaries, Literals
 
 some stuff comes here... 
+
+### Introducing New Types
+
+* `enum` 
+
+```cpp
+enum Color = {RED, BLUE, GREEN}
+```
+
+* `struct`
+
