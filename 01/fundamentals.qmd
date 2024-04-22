@@ -1,0 +1,16 @@
+---
+title: "Fundamental Concepts of C++"
+---
+
+## Preface 
+
+* variables and types
+* pointers and references
+* control structures
+* functions and templates
+* classes and inheritance 
+* namespaces and structure
+
+### Variables, Temporaries, Literals
+
+some stuff comes here... 
