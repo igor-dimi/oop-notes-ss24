@@ -2,8 +2,6 @@
 title: "Fundamental Concepts of C++"
 ---
 
-## Preface 
-
 * variables and types
 * pointers and references
 * control structures
@@ -11,11 +9,11 @@ title: "Fundamental Concepts of C++"
 * classes and inheritance 
 * namespaces and structure
 
-### Variables, Temporaries, Literals
+## Variables, Temporaries, Literals
 
 some stuff comes here... 
 
-### Introducing New Types
+## Introducing New Types
 
 * `enum` 
 
@@ -25,10 +23,10 @@ enum Color = {RED, BLUE, GREEN}
 
 * `struct`
 
-### Pointers 
+## Pointers 
 
 ```{.c}
-#include <iostream>
+include <iostream>
 
 int main(int argc, char const *argv[])
 {
@@ -61,12 +59,12 @@ p2: 0x55c014358eb0
 * release memory with `delete`. 
 * deleting too early -> bugs, too late -> memory leaks
 
-### References 
+## References 
 
 References are **aliases for an existing entity**. k
 
 ```{.cpp}
-#include <iostream>
+include <iostream>
 
 int main(int argc, const char** argv) {
 
@@ -90,7 +88,7 @@ b: 5
 ```
 
 
-### Rvalue (double) References 
+## Rvalue (double) References 
 
 Two uses:
 
@@ -100,12 +98,12 @@ Two uses:
 lvalue references refer to entities, rvalue references refer to literals. 
 
 
-### Const-Correctness 
+## Const-Correctness 
 
 Marks something that can't be modified. 
 
 ```{.cpp}
-#include <iostream>
+include <iostream>
 
 int main(int argc, char const *argv[])
 {
@@ -135,12 +133,12 @@ int main(int argc, char const *argv[])
 }
 ```
 
-### Control Flow 
+## Control Flow 
 
-#### If 
+### If 
 
 ```{.cpp}
-#include <iostream>
+include <iostream>
 
 int main(int argc, char const *argv[])
 {
@@ -153,10 +151,10 @@ int main(int argc, char const *argv[])
 }
 ```
 
-#### Switch
+### Switch
 
 ```{.cpp}
-#include <iostream>
+include <iostream>
 
 enum Color {RED, BLUE, GREEN};
 

@@ -8,7 +8,7 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - part: "Notes"
+    - part: "fundamentals"
       chapters: 
         - 01/fundamentals.qmd
     - summary.qmd
