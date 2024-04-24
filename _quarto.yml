@@ -8,7 +8,10 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - part: "fundamentals"
+    - part: 01/cmake/cmake.qmd
+      chapters:
+        - 01/cmake/01.qmd
+    - part: "fundamentals of c++"
       chapters: 
         - 01/fundamentals.qmd
     - summary.qmd

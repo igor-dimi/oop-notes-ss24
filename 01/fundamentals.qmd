@@ -1,5 +1,5 @@
 ---
-title: "Fundamental Concepts of C++"
+title: "Basic Concepts of C++"
 ---
 
 * variables and types

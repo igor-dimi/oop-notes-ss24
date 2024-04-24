@@ -1,0 +1,123 @@
+---
+title: "Step 1"
+---
+
+* Introduce CMake basic syntax, commands, and variables. 
+* Do three exercises and create a simple project. 
+
+## Exercise 1
+
+* Most basic CMake project is an executable built from a **single file**. Only `CMakeLists.txt` with **three**
+components is required. This is our **goal** with this exercise. 
+
+::: {.callout-note}
+Stylistically lower case commands are preffered in CMake
+:::
+
+### The Three Basic Commands 
+
+1. Any project's top most `CMakeLists.txt` must start by specifying a minimum CMake version using 
+using the `cmake_minimum_required()` command. 
+1. Afterwards we use the `project()` command to set the **project name**. 
+1. Finally we use the `add_executable()` to make CMake create an executable using the specified source code files
+
+### Getting Started 
+
+We will build the following c++ file that computes the square root of a number:
+
+```{.cpp}
+// A simple program that computes the square root of a number
+#include <cmath>
+#include <cstdlib> // TODO 5: Remove this line
+#include <iostream>
+#include <string>
+
+// TODO 11: Include TutorialConfig.h
+
+int main(int argc, char* argv[])
+{
+  if (argc < 2) {
+    // TODO 12: Create a print statement using Tutorial_VERSION_MAJOR
+    //          and Tutorial_VERSION_MINOR
+    std::cout << "Usage: " << argv[0] << " number" << std::endl;
+    return 1;
+  }
+
+  // convert input to double
+  // TODO 4: Replace atof(argv[1]) with std::stod(argv[1])
+  const double inputValue = atof(argv[1]);
+
+  // calculate square root
+  const double outputValue = sqrt(inputValue);
+  std::cout << "The square root of " << inputValue << " is " << outputValue
+            << std::endl;
+  return 0;
+}
+```
+
+* We complete the initial 3 TODOS of the `CMakeLists.txt`:
+
+```{text}
+# TODO 1: Set the minimum required version of CMake to be 3.10
+cmake_minimum_required(VERSION 3.10)
+
+# TODO 2: Create a project named Tutorial
+project(Tutorial)
+
+# TODO 7: Set the project version number as 1.0 in the above project command
+
+# TODO 6: Set the variable CMAKE_CXX_STANDARD to 11
+#         and the variable CMAKE_CXX_STANDARD_REQUIRED to True
+
+# TODO 8: Use configure_file to configure and copy TutorialConfig.h.in to
+#         TutorialConfig.h
+
+# TODO 3: Add an executable called Tutorial to the project
+# Hint: Be sure to specify the source file as tutorial.cxx
+add_executable(Tutorial tutorial.cxx)
+
+# TODO 9: Use target_include_directories to include ${PROJECT_BINARY_DIR}
+```
+
+
+### Build and Run
+
+1. create a build directory:
+
+   ```{.bash}
+   mkdir build
+   ```
+1. change into the build directory and build with `cmake`:
+
+   ```{.bash}
+   cd build 
+   cmake ../
+   ```
+1. Actually compile/link the project with
+
+   ```{.bash}
+   cmake --build .
+   ```
+
+Now an executable `Tutorial` has been created and can be run with 
+
+```{.bash}
+./Tutorial 3.0
+```
+
+with the output 
+
+```{text}
+The square root of 3 is 1.73205
+```
+
+All good! 
+
+## Exercise 2
+
+
+
+
+
+
+
