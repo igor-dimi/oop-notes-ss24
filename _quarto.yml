@@ -5,17 +5,18 @@ book:
   title: "OOP for Scientific Computing Notes - SoSe 24"
   author: "Igor Dimitrov"
   date: "4/22/2024"
+  page-navigation: true
   chapters:
     - index.qmd
-    - intro.qmd
     - part: 01/cmake/cmake.qmd
       chapters:
         - 01/cmake/01.qmd
-    - part: "fundamentals of c++"
+    - part: 01/fundamentals/00-fundamentals.qmd
       chapters: 
-        - 01/fundamentals.qmd
-    - summary.qmd
-    - references.qmd
+        - 01/fundamentals/01-vars.qmd
+        - 01/fundamentals/02-types.qmd
+        - 01/fundamentals/03-indirection.qmd
+        - 01/fundamentals/04-control-flow.qmd
 
 bibliography: references.bib
 

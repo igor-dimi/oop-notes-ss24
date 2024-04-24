@@ -1,5 +1,6 @@
 ---
 title: "Step 1"
+number-depth: 2
 ---
 
 * Introduce CMake basic syntax, commands, and variables. 
