@@ -4,34 +4,159 @@
     "href": "index.html",
     "title": "OOP for Scientific Computing Notes - SoSe 24",
     "section": "",
-    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books."
+    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "crumbs": [
+      "Preface"
+    ]
   },
   {
     "objectID": "intro.html",
     "href": "intro.html",
     "title": "1  Introduction",
     "section": "",
-    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
   },
   {
-    "objectID": "01/fundamentals.html#preface",
-    "href": "01/fundamentals.html#preface",
-    "title": "2  Fundamental Concepts of C++",
-    "section": "2.1 Preface",
-    "text": "2.1 Preface\n\nvariables and types\npointers and references\ncontrol structures\nfunctions and templates\nclasses and inheritance\nnamespaces and structure\n\n\n2.1.1 Variables, Temporaries, Literals\nsome stuff comes here…\n\n\n2.1.2 Introducing New Types\n\nenum\n\nenum Color = {RED, BLUE, GREEN}\n\nstruct\n\n\n\n2.1.3 Pointers\n#include &lt;iostream&gt;\n\nint main(int argc, char const *argv[])\n{\n    int i = 5;\n    int *p1 = &i;\n    int *p2 = new int;\n\n    std::cout &lt;&lt; \"i: \" &lt;&lt; i &lt;&lt; std::endl\n              &lt;&lt; \"*p1: \" &lt;&lt; *p1 &lt;&lt; std::endl\n              &lt;&lt; \"p1: \" &lt;&lt; p1 &lt;&lt; std::endl\n              &lt;&lt; \"&p1: \" &lt;&lt; &p1 &lt;&lt; std::endl\n              &lt;&lt; \"p2: \" &lt;&lt; p2 &lt;&lt; std::endl\n              &lt;&lt; \"*p2: \" &lt;&lt; *p2 &lt;&lt; std::endl;\n    delete p2;\n    return 0;\n}\noutput:\ni: 5\n*p1: 5\np1: 0x7fff8d568184\n&p1: 0x7fff8d568188\np2: 0x55c014358eb0\n*p2: 0\n\nrelease memory with delete.\ndeleting too early -&gt; bugs, too late -&gt; memory leaks\n\n\n\n2.1.4 References\nReferences are aliases for an existing entity. k\n#include &lt;iostream&gt;\n\nint main(int argc, const char** argv) {\n\n    int a = 4;\n    std::cout &lt;&lt; \"a: \" &lt;&lt; a &lt;&lt;std::endl;\n    int &b = a;\n    b = 5;\n    std::cout &lt;&lt; \"a: \" &lt;&lt; a &lt;&lt; std::endl\n              &lt;&lt; \"b: \" &lt;&lt; b &lt;&lt; std::endl;\n\n    return 0;\n}\noutput:\na: 4\na: 5\nb: 5\n\n\n2.1.5 Rvalue (double) References\nTwo uses:\n\nrange-based for loops\nmove semantics\n\nlvalue references refer to entities, rvalue references refer to literals.\n\n\n2.1.6 Const-Correctness\nMarks something that can’t be modified.\n#include &lt;iostream&gt;\n\nint main(int argc, char const *argv[])\n{\n    int n = 5;\n    const int j = 4;\n    const int &k = n; //k can't be modified, equivalently n can't be modified over k\n    n++; //but this changes n and indirectly k (because k references n)\n    \n\n    const int *p1 = &n; // modifiable pointer to const int \n    int const *p2 = &n; // same thing\n    int *const p3 = &n; // constant pointer to modifiable int\n\n    // p1 = &j -- ok\n    // *p1 = 3 -- not ok! \n    // p3 = &j -- not ok\n    // *p3 = 10 -- ok\n\n    std::cout &lt;&lt; \"n: \" &lt;&lt; n &lt;&lt; std::endl\n              &lt;&lt; \"j: \" &lt;&lt; j &lt;&lt; std::endl\n              &lt;&lt; \"p1: \" &lt;&lt; p1 &lt;&lt; std::endl\n              &lt;&lt; \"p2: \" &lt;&lt; p2 &lt;&lt; std::endl\n              &lt;&lt; \"p3: \" &lt;&lt; p3 &lt;&lt; std::endl;\n    \n    \n    return 0;\n}\n\n\n2.1.7 Control Flow\n\n2.1.7.1 If\n#include &lt;iostream&gt;\n\nint main(int argc, char const *argv[])\n{\n    int i;\n    std::cin &gt;&gt; i;\n\n    if (i % 2 == 0) std::cout &lt;&lt; i &lt;&lt; \" is even\" &lt;&lt; std::endl;\n    else std::cout &lt;&lt; i &lt;&lt; \" is odd\" &lt;&lt; std::endl;\n    return 0;\n}\n\n\n2.1.7.2 Switch\n#include &lt;iostream&gt;\n\nenum Color {RED, BLUE, GREEN};\n\nint main(int argc, char const *argv[])\n{\n    int i;\n    Color c = RED;\n\n    std::cin &gt;&gt; i;\n\n    switch(i) {\n        case 0:\n            c = RED;\n            break;\n        case 1 :\n            c = BLUE;\n            break;\n        case 2 :\n            c = GREEN;\n            break;\n        default :\n            std::cout &lt;&lt; \"error: invalid color\" &lt;&lt; std::endl;\n    }\n\n    std::cout &lt;&lt; c &lt;&lt; std::endl;\n\n    return 0;\n}"
+    "objectID": "01/cmake/cmake.html",
+    "href": "01/cmake/cmake.html",
+    "title": "CMake Tutorial",
+    "section": "",
+    "text": "Notes from the official CMake Tutorial link",
+    "crumbs": [
+      "CMake Tutorial"
+    ]
+  },
+  {
+    "objectID": "01/cmake/01.html",
+    "href": "01/cmake/01.html",
+    "title": "2  Step 1",
+    "section": "",
+    "text": "2.1 Exercise 1",
+    "crumbs": [
+      "CMake Tutorial",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Step 1</span>"
+    ]
+  },
+  {
+    "objectID": "01/cmake/01.html#exercise-1",
+    "href": "01/cmake/01.html#exercise-1",
+    "title": "2  Step 1",
+    "section": "",
+    "text": "Most basic CMake project is an executable built from a single file. Only CMakeLists.txt with three components is required. This is our goal with this exercise.\n\n\n\n\n\n\n\nNote\n\n\n\nStylistically lower case commands are preffered in CMake\n\n\n\n2.1.1 The Three Basic Commands\n\nAny project’s top most CMakeLists.txt must start by specifying a minimum CMake version using using the cmake_minimum_required() command.\nAfterwards we use the project() command to set the project name.\nFinally we use the add_executable() to make CMake create an executable using the specified source code files\n\n\n\n2.1.2 Getting Started\nWe will build the following c++ file that computes the square root of a number:\n// A simple program that computes the square root of a number\n#include &lt;cmath&gt;\n#include &lt;cstdlib&gt; // TODO 5: Remove this line\n#include &lt;iostream&gt;\n#include &lt;string&gt;\n\n// TODO 11: Include TutorialConfig.h\n\nint main(int argc, char* argv[])\n{\n  if (argc &lt; 2) {\n    // TODO 12: Create a print statement using Tutorial_VERSION_MAJOR\n    //          and Tutorial_VERSION_MINOR\n    std::cout &lt;&lt; \"Usage: \" &lt;&lt; argv[0] &lt;&lt; \" number\" &lt;&lt; std::endl;\n    return 1;\n  }\n\n  // convert input to double\n  // TODO 4: Replace atof(argv[1]) with std::stod(argv[1])\n  const double inputValue = atof(argv[1]);\n\n  // calculate square root\n  const double outputValue = sqrt(inputValue);\n  std::cout &lt;&lt; \"The square root of \" &lt;&lt; inputValue &lt;&lt; \" is \" &lt;&lt; outputValue\n            &lt;&lt; std::endl;\n  return 0;\n}\n\nWe complete the initial 3 TODOS of the CMakeLists.txt:\n\n# TODO 1: Set the minimum required version of CMake to be 3.10\ncmake_minimum_required(VERSION 3.10)\n\n# TODO 2: Create a project named Tutorial\nproject(Tutorial)\n\n# TODO 7: Set the project version number as 1.0 in the above project command\n\n# TODO 6: Set the variable CMAKE_CXX_STANDARD to 11\n#         and the variable CMAKE_CXX_STANDARD_REQUIRED to True\n\n# TODO 8: Use configure_file to configure and copy TutorialConfig.h.in to\n#         TutorialConfig.h\n\n# TODO 3: Add an executable called Tutorial to the project\n# Hint: Be sure to specify the source file as tutorial.cxx\nadd_executable(Tutorial tutorial.cxx)\n\n# TODO 9: Use target_include_directories to include ${PROJECT_BINARY_DIR}\n\n\n2.1.3 Build and Run\n\ncreate a build directory:\nmkdir build\nchange into the build directory and build with cmake:\ncd build \ncmake ../\nActually compile/link the project with\ncmake --build .\n\nNow an executable Tutorial has been created and can be run with\n./Tutorial 3.0\nwith the output\nThe square root of 3 is 1.73205\nAll good!",
+    "crumbs": [
+      "CMake Tutorial",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Step 1</span>"
+    ]
+  },
+  {
+    "objectID": "01/cmake/01.html#exercise-2",
+    "href": "01/cmake/01.html#exercise-2",
+    "title": "2  Step 1",
+    "section": "2.2 Exercise 2",
+    "text": "2.2 Exercise 2",
+    "crumbs": [
+      "CMake Tutorial",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Step 1</span>"
+    ]
+  },
+  {
+    "objectID": "01/fundamentals.html",
+    "href": "01/fundamentals.html",
+    "title": "3  Basic Concepts of C++",
+    "section": "",
+    "text": "3.1 Variables, Temporaries, Literals\nsome stuff comes here…",
+    "crumbs": [
+      "fundamentals of c++",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Basic Concepts of C++</span>"
+    ]
+  },
+  {
+    "objectID": "01/fundamentals.html#introducing-new-types",
+    "href": "01/fundamentals.html#introducing-new-types",
+    "title": "3  Basic Concepts of C++",
+    "section": "3.2 Introducing New Types",
+    "text": "3.2 Introducing New Types\n\nenum\n\nenum Color = {RED, BLUE, GREEN}\n\nstruct",
+    "crumbs": [
+      "fundamentals of c++",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Basic Concepts of C++</span>"
+    ]
+  },
+  {
+    "objectID": "01/fundamentals.html#pointers",
+    "href": "01/fundamentals.html#pointers",
+    "title": "3  Basic Concepts of C++",
+    "section": "3.3 Pointers",
+    "text": "3.3 Pointers\ninclude &lt;iostream&gt;\n\nint main(int argc, char const *argv[])\n{\n    int i = 5;\n    int *p1 = &i;\n    int *p2 = new int;\n\n    std::cout &lt;&lt; \"i: \" &lt;&lt; i &lt;&lt; std::endl\n              &lt;&lt; \"*p1: \" &lt;&lt; *p1 &lt;&lt; std::endl\n              &lt;&lt; \"p1: \" &lt;&lt; p1 &lt;&lt; std::endl\n              &lt;&lt; \"&p1: \" &lt;&lt; &p1 &lt;&lt; std::endl\n              &lt;&lt; \"p2: \" &lt;&lt; p2 &lt;&lt; std::endl\n              &lt;&lt; \"*p2: \" &lt;&lt; *p2 &lt;&lt; std::endl;\n    delete p2;\n    return 0;\n}\noutput:\ni: 5\n*p1: 5\np1: 0x7fff8d568184\n&p1: 0x7fff8d568188\np2: 0x55c014358eb0\n*p2: 0\n\nrelease memory with delete.\ndeleting too early -&gt; bugs, too late -&gt; memory leaks",
+    "crumbs": [
+      "fundamentals of c++",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Basic Concepts of C++</span>"
+    ]
+  },
+  {
+    "objectID": "01/fundamentals.html#references",
+    "href": "01/fundamentals.html#references",
+    "title": "3  Basic Concepts of C++",
+    "section": "3.4 References",
+    "text": "3.4 References\nReferences are aliases for an existing entity. k\ninclude &lt;iostream&gt;\n\nint main(int argc, const char** argv) {\n\n    int a = 4;\n    std::cout &lt;&lt; \"a: \" &lt;&lt; a &lt;&lt;std::endl;\n    int &b = a;\n    b = 5;\n    std::cout &lt;&lt; \"a: \" &lt;&lt; a &lt;&lt; std::endl\n              &lt;&lt; \"b: \" &lt;&lt; b &lt;&lt; std::endl;\n\n    return 0;\n}\noutput:\na: 4\na: 5\nb: 5",
+    "crumbs": [
+      "fundamentals of c++",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Basic Concepts of C++</span>"
+    ]
+  },
+  {
+    "objectID": "01/fundamentals.html#rvalue-double-references",
+    "href": "01/fundamentals.html#rvalue-double-references",
+    "title": "3  Basic Concepts of C++",
+    "section": "3.5 Rvalue (double) References",
+    "text": "3.5 Rvalue (double) References\nTwo uses:\n\nrange-based for loops\nmove semantics\n\nlvalue references refer to entities, rvalue references refer to literals.",
+    "crumbs": [
+      "fundamentals of c++",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Basic Concepts of C++</span>"
+    ]
+  },
+  {
+    "objectID": "01/fundamentals.html#const-correctness",
+    "href": "01/fundamentals.html#const-correctness",
+    "title": "3  Basic Concepts of C++",
+    "section": "3.6 Const-Correctness",
+    "text": "3.6 Const-Correctness\nMarks something that can’t be modified.\ninclude &lt;iostream&gt;\n\nint main(int argc, char const *argv[])\n{\n    int n = 5;\n    const int j = 4;\n    const int &k = n; //k can't be modified, equivalently n can't be modified over k\n    n++; //but this changes n and indirectly k (because k references n)\n    \n\n    const int *p1 = &n; // modifiable pointer to const int \n    int const *p2 = &n; // same thing\n    int *const p3 = &n; // constant pointer to modifiable int\n\n    // p1 = &j -- ok\n    // *p1 = 3 -- not ok! \n    // p3 = &j -- not ok\n    // *p3 = 10 -- ok\n\n    std::cout &lt;&lt; \"n: \" &lt;&lt; n &lt;&lt; std::endl\n              &lt;&lt; \"j: \" &lt;&lt; j &lt;&lt; std::endl\n              &lt;&lt; \"p1: \" &lt;&lt; p1 &lt;&lt; std::endl\n              &lt;&lt; \"p2: \" &lt;&lt; p2 &lt;&lt; std::endl\n              &lt;&lt; \"p3: \" &lt;&lt; p3 &lt;&lt; std::endl;\n    \n    \n    return 0;\n}",
+    "crumbs": [
+      "fundamentals of c++",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Basic Concepts of C++</span>"
+    ]
+  },
+  {
+    "objectID": "01/fundamentals.html#control-flow",
+    "href": "01/fundamentals.html#control-flow",
+    "title": "3  Basic Concepts of C++",
+    "section": "3.7 Control Flow",
+    "text": "3.7 Control Flow\n\n3.7.1 If\ninclude &lt;iostream&gt;\n\nint main(int argc, char const *argv[])\n{\n    int i;\n    std::cin &gt;&gt; i;\n\n    if (i % 2 == 0) std::cout &lt;&lt; i &lt;&lt; \" is even\" &lt;&lt; std::endl;\n    else std::cout &lt;&lt; i &lt;&lt; \" is odd\" &lt;&lt; std::endl;\n    return 0;\n}\n\n\n3.7.2 Switch\ninclude &lt;iostream&gt;\n\nenum Color {RED, BLUE, GREEN};\n\nint main(int argc, char const *argv[])\n{\n    int i;\n    Color c = RED;\n\n    std::cin &gt;&gt; i;\n\n    switch(i) {\n        case 0:\n            c = RED;\n            break;\n        case 1 :\n            c = BLUE;\n            break;\n        case 2 :\n            c = GREEN;\n            break;\n        default :\n            std::cout &lt;&lt; \"error: invalid color\" &lt;&lt; std::endl;\n    }\n\n    std::cout &lt;&lt; c &lt;&lt; std::endl;\n\n    return 0;\n}",
+    "crumbs": [
+      "fundamentals of c++",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Basic Concepts of C++</span>"
+    ]
   },
   {
     "objectID": "summary.html",
     "href": "summary.html",
-    "title": "3  Summary",
+    "title": "4  Summary",
     "section": "",
-    "text": "In summary, this book has no content whatsoever."
+    "text": "In summary, this book has no content whatsoever.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Summary</span>"
+    ]
   },
   {
     "objectID": "references.html",
     "href": "references.html",
     "title": "References",
     "section": "",
-    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "crumbs": [
+      "References"
+    ]
   }
 ]
