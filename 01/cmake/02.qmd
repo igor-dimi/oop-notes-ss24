@@ -1,0 +1,51 @@
+---
+title: "Step 2"
+number-depth: 2
+---
+
+* In step 1 we learned how to create a simple project with a single `.cxx` file and a single executable
+* In step 2 we learn:
+  * how to create and use a **library**,
+  * how to make the use of the library optional
+
+## Exercise 1 - Creating a Library
+
+**Goal**: Add and use a library
+
+To add a library with CMake, use the `add_library()` command and specify the source files
+that make up the library. 
+
+Instead of placing all source files in a single directory, we can **organize** our project
+with one or more subdirectories. Here we create a subdirectory specifically for our library.
+
+To this subdirectory we add another `CMakeLists.txt` file and source files. 
+
+In the top level `CMakeLists.txt` file, use the `add_subdirectory()` command to add the subdirectory
+to the build.
+
+The library is connected to the executable target with
+
+* `target_include_directories()`
+* `target_link_libraries()`
+
+### Getting Started 
+
+We add a library that contains own implementation for computing a square root of a number.
+The executable can then use this library instead of the standard square root function.
+
+The libary is put into a subdirectory `MathFunctions`. This directory already contains:
+
+* header files:
+    * `mysqrt.h`
+    * `MathFunctions.h`
+* their respective source files:
+  * `mysqrt.cxx` contains custom implementation of square root function
+  * `MathFunctions.cxx` contains a wrapper around `sqrt` function from `msqrt.cxx` 
+     in order to hide implementation details. 
+
+* TODO: 1 - 6
+
+
+
+
+
