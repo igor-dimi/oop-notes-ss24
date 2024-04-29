@@ -64,6 +64,28 @@
     ]
   },
   {
+    "objectID": "01/cmake/02.html",
+    "href": "01/cmake/02.html",
+    "title": "2  Step 2",
+    "section": "",
+    "text": "2.1 Exercise 1 - Creating a Library\nGoal: Add and use a library\nTo add a library with CMake, use the add_library() command and specify the source files that make up the library.\nInstead of placing all source files in a single directory, we can organize our project with one or more subdirectories. Here we create a subdirectory specifically for our library.\nTo this subdirectory we add another CMakeLists.txt file and source files.\nIn the top level CMakeLists.txt file, use the add_subdirectory() command to add the subdirectory to the build.\nThe library is connected to the executable target with",
+    "crumbs": [
+      "CMake Tutorial",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Step 2</span>"
+    ]
+  },
+  {
+    "objectID": "01/cmake/02.html#exercise-1---creating-a-library",
+    "href": "01/cmake/02.html#exercise-1---creating-a-library",
+    "title": "2  Step 2",
+    "section": "",
+    "text": "target_include_directories()\ntarget_link_libraries()\n\n\nGetting Started\nWe add a library that contains own implementation for computing a square root of a number. The executable can then use this library instead of the standard square root function.\nThe libary is put into a subdirectory MathFunctions. This directory already contains:\n\nheader files:\n\nmysqrt.h\nMathFunctions.h\n\ntheir respective source files:\n\nmysqrt.cxx contains custom implementation of square root function\nMathFunctions.cxx contains a wrapper around sqrt function from msqrt.cxx in order to hide implementation details.\n\nTODO: 1 - 6",
+    "crumbs": [
+      "CMake Tutorial",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Step 2</span>"
+    ]
+  },
+  {
     "objectID": "01/fundamentals/00-fundamentals.html",
     "href": "01/fundamentals/00-fundamentals.html",
     "title": "Basic Concepts of C++",
@@ -76,144 +98,144 @@
   {
     "objectID": "01/fundamentals/01-vars.html",
     "href": "01/fundamentals/01-vars.html",
-    "title": "2  Variables, Temporaries, Literals",
+    "title": "3  Variables, Temporaries, Literals",
     "section": "",
-    "text": "2.1 Variables",
+    "text": "3.1 Variables",
     "crumbs": [
       "Basic Concepts of C++",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Variables, Temporaries, Literals</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Variables, Temporaries, Literals</span>"
     ]
   },
   {
     "objectID": "01/fundamentals/01-vars.html#temporaries",
     "href": "01/fundamentals/01-vars.html#temporaries",
-    "title": "2  Variables, Temporaries, Literals",
-    "section": "2.2 Temporaries",
-    "text": "2.2 Temporaries",
+    "title": "3  Variables, Temporaries, Literals",
+    "section": "3.2 Temporaries",
+    "text": "3.2 Temporaries",
     "crumbs": [
       "Basic Concepts of C++",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Variables, Temporaries, Literals</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Variables, Temporaries, Literals</span>"
     ]
   },
   {
     "objectID": "01/fundamentals/01-vars.html#literals",
     "href": "01/fundamentals/01-vars.html#literals",
-    "title": "2  Variables, Temporaries, Literals",
-    "section": "2.3 Literals",
-    "text": "2.3 Literals",
+    "title": "3  Variables, Temporaries, Literals",
+    "section": "3.3 Literals",
+    "text": "3.3 Literals",
     "crumbs": [
       "Basic Concepts of C++",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Variables, Temporaries, Literals</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Variables, Temporaries, Literals</span>"
     ]
   },
   {
     "objectID": "01/fundamentals/02-types.html",
     "href": "01/fundamentals/02-types.html",
-    "title": "3  Data Types",
+    "title": "4  Data Types",
     "section": "",
-    "text": "3.1 Introducing New Types",
+    "text": "4.1 Introducing New Types",
     "crumbs": [
       "Basic Concepts of C++",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Types</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Types</span>"
     ]
   },
   {
     "objectID": "01/fundamentals/02-types.html#introducing-new-types",
     "href": "01/fundamentals/02-types.html#introducing-new-types",
-    "title": "3  Data Types",
+    "title": "4  Data Types",
     "section": "",
     "text": "Enum\nenum Color = {RED, BLUE, GREEN}\n\n\nStruct\n…",
     "crumbs": [
       "Basic Concepts of C++",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Types</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Types</span>"
     ]
   },
   {
     "objectID": "01/fundamentals/02-types.html#const-correctness",
     "href": "01/fundamentals/02-types.html#const-correctness",
-    "title": "3  Data Types",
-    "section": "3.2 Const-Correctness",
-    "text": "3.2 Const-Correctness\nMarks something that can’t be modified.\ninclude &lt;iostream&gt;\n\nint main(int argc, char const *argv[])\n{\n    int n = 5;\n    const int j = 4;\n    const int &k = n; //k can't be modified, equivalently n can't be modified over k\n    n++; //but this changes n and indirectly k (because k references n)\n    \n\n    const int *p1 = &n; // modifiable pointer to const int \n    int const *p2 = &n; // same thing\n    int *const p3 = &n; // constant pointer to modifiable int\n\n    // p1 = &j -- ok\n    // *p1 = 3 -- not ok! \n    // p3 = &j -- not ok\n    // *p3 = 10 -- ok\n\n    std::cout &lt;&lt; \"n: \" &lt;&lt; n &lt;&lt; std::endl\n              &lt;&lt; \"j: \" &lt;&lt; j &lt;&lt; std::endl\n              &lt;&lt; \"p1: \" &lt;&lt; p1 &lt;&lt; std::endl\n              &lt;&lt; \"p2: \" &lt;&lt; p2 &lt;&lt; std::endl\n              &lt;&lt; \"p3: \" &lt;&lt; p3 &lt;&lt; std::endl;\n    \n    \n    return 0;\n}",
+    "title": "4  Data Types",
+    "section": "4.2 Const-Correctness",
+    "text": "4.2 Const-Correctness\nMarks something that can’t be modified.\ninclude &lt;iostream&gt;\n\nint main(int argc, char const *argv[])\n{\n    int n = 5;\n    const int j = 4;\n    const int &k = n; //k can't be modified, equivalently n can't be modified over k\n    n++; //but this changes n and indirectly k (because k references n)\n    \n\n    const int *p1 = &n; // modifiable pointer to const int \n    int const *p2 = &n; // same thing\n    int *const p3 = &n; // constant pointer to modifiable int\n\n    // p1 = &j -- ok\n    // *p1 = 3 -- not ok! \n    // p3 = &j -- not ok\n    // *p3 = 10 -- ok\n\n    std::cout &lt;&lt; \"n: \" &lt;&lt; n &lt;&lt; std::endl\n              &lt;&lt; \"j: \" &lt;&lt; j &lt;&lt; std::endl\n              &lt;&lt; \"p1: \" &lt;&lt; p1 &lt;&lt; std::endl\n              &lt;&lt; \"p2: \" &lt;&lt; p2 &lt;&lt; std::endl\n              &lt;&lt; \"p3: \" &lt;&lt; p3 &lt;&lt; std::endl;\n    \n    \n    return 0;\n}",
     "crumbs": [
       "Basic Concepts of C++",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Types</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Types</span>"
     ]
   },
   {
     "objectID": "01/fundamentals/03-indirection.html",
     "href": "01/fundamentals/03-indirection.html",
-    "title": "4  Indirection",
+    "title": "5  Indirection",
     "section": "",
-    "text": "4.1 Pointers\noutput:",
+    "text": "5.1 Pointers\noutput:",
     "crumbs": [
       "Basic Concepts of C++",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Indirection</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Indirection</span>"
     ]
   },
   {
     "objectID": "01/fundamentals/03-indirection.html#pointers",
     "href": "01/fundamentals/03-indirection.html#pointers",
-    "title": "4  Indirection",
+    "title": "5  Indirection",
     "section": "",
     "text": "include &lt;iostream&gt;\n\nint main(int argc, char const *argv[])\n{\n    int i = 5;\n    int *p1 = &i;\n    int *p2 = new int;\n\n    std::cout &lt;&lt; \"i: \" &lt;&lt; i &lt;&lt; std::endl\n              &lt;&lt; \"*p1: \" &lt;&lt; *p1 &lt;&lt; std::endl\n              &lt;&lt; \"p1: \" &lt;&lt; p1 &lt;&lt; std::endl\n              &lt;&lt; \"&p1: \" &lt;&lt; &p1 &lt;&lt; std::endl\n              &lt;&lt; \"p2: \" &lt;&lt; p2 &lt;&lt; std::endl\n              &lt;&lt; \"*p2: \" &lt;&lt; *p2 &lt;&lt; std::endl;\n    delete p2;\n    return 0;\n}\n\ni: 5\n*p1: 5\np1: 0x7fff8d568184\n&p1: 0x7fff8d568188\np2: 0x55c014358eb0\n*p2: 0\n\nrelease memory with delete.\ndeleting too early -&gt; bugs, too late -&gt; memory leaks",
     "crumbs": [
       "Basic Concepts of C++",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Indirection</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Indirection</span>"
     ]
   },
   {
     "objectID": "01/fundamentals/03-indirection.html#references",
     "href": "01/fundamentals/03-indirection.html#references",
-    "title": "4  Indirection",
-    "section": "4.2 References",
-    "text": "4.2 References\nReferences are aliases for an existing entity. k\ninclude &lt;iostream&gt;\n\nint main(int argc, const char** argv) {\n\n    int a = 4;\n    std::cout &lt;&lt; \"a: \" &lt;&lt; a &lt;&lt;std::endl;\n    int &b = a;\n    b = 5;\n    std::cout &lt;&lt; \"a: \" &lt;&lt; a &lt;&lt; std::endl\n              &lt;&lt; \"b: \" &lt;&lt; b &lt;&lt; std::endl;\n\n    return 0;\n}\noutput:\na: 4\na: 5\nb: 5",
+    "title": "5  Indirection",
+    "section": "5.2 References",
+    "text": "5.2 References\nReferences are aliases for an existing entity. k\ninclude &lt;iostream&gt;\n\nint main(int argc, const char** argv) {\n\n    int a = 4;\n    std::cout &lt;&lt; \"a: \" &lt;&lt; a &lt;&lt;std::endl;\n    int &b = a;\n    b = 5;\n    std::cout &lt;&lt; \"a: \" &lt;&lt; a &lt;&lt; std::endl\n              &lt;&lt; \"b: \" &lt;&lt; b &lt;&lt; std::endl;\n\n    return 0;\n}\noutput:\na: 4\na: 5\nb: 5",
     "crumbs": [
       "Basic Concepts of C++",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Indirection</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Indirection</span>"
     ]
   },
   {
     "objectID": "01/fundamentals/03-indirection.html#rvalue-double-references",
     "href": "01/fundamentals/03-indirection.html#rvalue-double-references",
-    "title": "4  Indirection",
-    "section": "4.3 Rvalue (double) References",
-    "text": "4.3 Rvalue (double) References\nTwo uses:\n\nrange-based for loops\nmove semantics\n\nlvalue references refer to entities, rvalue references refer to literals.",
+    "title": "5  Indirection",
+    "section": "5.3 Rvalue (double) References",
+    "text": "5.3 Rvalue (double) References\nTwo uses:\n\nrange-based for loops\nmove semantics\n\nlvalue references refer to entities, rvalue references refer to literals.",
     "crumbs": [
       "Basic Concepts of C++",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Indirection</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Indirection</span>"
     ]
   },
   {
     "objectID": "01/fundamentals/04-control-flow.html",
     "href": "01/fundamentals/04-control-flow.html",
-    "title": "5  Control Flow",
+    "title": "6  Control Flow",
     "section": "",
-    "text": "5.1 If",
+    "text": "6.1 If",
     "crumbs": [
       "Basic Concepts of C++",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Control Flow</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Control Flow</span>"
     ]
   },
   {
     "objectID": "01/fundamentals/04-control-flow.html#if",
     "href": "01/fundamentals/04-control-flow.html#if",
-    "title": "5  Control Flow",
+    "title": "6  Control Flow",
     "section": "",
     "text": "include &lt;iostream&gt;\n\nint main(int argc, char const *argv[])\n{\n    int i;\n    std::cin &gt;&gt; i;\n\n    if (i % 2 == 0) std::cout &lt;&lt; i &lt;&lt; \" is even\" &lt;&lt; std::endl;\n    else std::cout &lt;&lt; i &lt;&lt; \" is odd\" &lt;&lt; std::endl;\n    return 0;\n}",
     "crumbs": [
       "Basic Concepts of C++",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Control Flow</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Control Flow</span>"
     ]
   },
   {
     "objectID": "01/fundamentals/04-control-flow.html#switch",
     "href": "01/fundamentals/04-control-flow.html#switch",
-    "title": "5  Control Flow",
-    "section": "5.2 Switch",
-    "text": "5.2 Switch\ninclude &lt;iostream&gt;\n\nenum Color {RED, BLUE, GREEN};\n\nint main(int argc, char const *argv[])\n{\n    int i;\n    Color c = RED;\n\n    std::cin &gt;&gt; i;\n\n    switch(i) {\n        case 0:\n            c = RED;\n            break;\n        case 1 :\n            c = BLUE;\n            break;\n        case 2 :\n            c = GREEN;\n            break;\n        default :\n            std::cout &lt;&lt; \"error: invalid color\" &lt;&lt; std::endl;\n    }\n\n    std::cout &lt;&lt; c &lt;&lt; std::endl;\n\n    return 0;\n}",
+    "title": "6  Control Flow",
+    "section": "6.2 Switch",
+    "text": "6.2 Switch\ninclude &lt;iostream&gt;\n\nenum Color {RED, BLUE, GREEN};\n\nint main(int argc, char const *argv[])\n{\n    int i;\n    Color c = RED;\n\n    std::cin &gt;&gt; i;\n\n    switch(i) {\n        case 0:\n            c = RED;\n            break;\n        case 1 :\n            c = BLUE;\n            break;\n        case 2 :\n            c = GREEN;\n            break;\n        default :\n            std::cout &lt;&lt; \"error: invalid color\" &lt;&lt; std::endl;\n    }\n\n    std::cout &lt;&lt; c &lt;&lt; std::endl;\n\n    return 0;\n}",
     "crumbs": [
       "Basic Concepts of C++",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Control Flow</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Control Flow</span>"
     ]
   }
 ]

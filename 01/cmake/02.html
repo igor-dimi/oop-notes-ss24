@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>OOP for Scientific Computing Notes - SoSe 24 - 3&nbsp; Variables, Temporaries, Literals</title>
+<title>OOP for Scientific Computing Notes - SoSe 24 - 2&nbsp; Step 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../01/fundamentals/02-types.html" rel="next">
-<link href="../../01/fundamentals/00-fundamentals.html" rel="prev">
+<link href="../../01/fundamentals/00-fundamentals.html" rel="next">
+<link href="../../01/cmake/01.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../01/fundamentals/00-fundamentals.html">Basic Concepts of C++</a></li><li class="breadcrumb-item"><a href="../../01/fundamentals/01-vars.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variables, Temporaries, Literals</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../01/cmake/cmake.html">CMake Tutorial</a></li><li class="breadcrumb-item"><a href="../../01/cmake/02.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Step 2</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -129,7 +129,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../01/cmake/02.html" class="sidebar-item-text sidebar-link">
+  <a href="../../01/cmake/02.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Step 2</span></span></a>
   </div>
 </li>
@@ -146,7 +146,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../01/fundamentals/01-vars.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../01/fundamentals/01-vars.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variables, Temporaries, Literals</span></span></a>
   </div>
 </li>
@@ -180,18 +180,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#variables" id="toc-variables" class="nav-link active" data-scroll-target="#variables"><span class="header-section-number">3.1</span> Variables</a></li>
-  <li><a href="#temporaries" id="toc-temporaries" class="nav-link" data-scroll-target="#temporaries"><span class="header-section-number">3.2</span> Temporaries</a></li>
-  <li><a href="#literals" id="toc-literals" class="nav-link" data-scroll-target="#literals"><span class="header-section-number">3.3</span> Literals</a></li>
+  <li><a href="#exercise-1---creating-a-library" id="toc-exercise-1---creating-a-library" class="nav-link active" data-scroll-target="#exercise-1---creating-a-library"><span class="header-section-number">2.1</span> Exercise 1 - Creating a Library</a>
+  <ul class="collapse">
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../01/fundamentals/00-fundamentals.html">Basic Concepts of C++</a></li><li class="breadcrumb-item"><a href="../../01/fundamentals/01-vars.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variables, Temporaries, Literals</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../01/cmake/cmake.html">CMake Tutorial</a></li><li class="breadcrumb-item"><a href="../../01/cmake/02.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Step 2</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variables, Temporaries, Literals</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Step 2</span></h1>
 </div>
 
 
@@ -208,16 +209,46 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="variables" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="variables"><span class="header-section-number">3.1</span> Variables</h2>
-</section>
-<section id="temporaries" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="temporaries"><span class="header-section-number">3.2</span> Temporaries</h2>
-</section>
-<section id="literals" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="literals"><span class="header-section-number">3.3</span> Literals</h2>
+<ul>
+<li>In step 1 we learned how to create a simple project with a single <code>.cxx</code> file and a single executable</li>
+<li>In step 2 we learn:
+<ul>
+<li>how to create and use a <strong>library</strong>,</li>
+<li>how to make the use of the library optional</li>
+</ul></li>
+</ul>
+<section id="exercise-1---creating-a-library" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="exercise-1---creating-a-library"><span class="header-section-number">2.1</span> Exercise 1 - Creating a Library</h2>
+<p><strong>Goal</strong>: Add and use a library</p>
+<p>To add a library with CMake, use the <code>add_library()</code> command and specify the source files that make up the library.</p>
+<p>Instead of placing all source files in a single directory, we can <strong>organize</strong> our project with one or more subdirectories. Here we create a subdirectory specifically for our library.</p>
+<p>To this subdirectory we add another <code>CMakeLists.txt</code> file and source files.</p>
+<p>In the top level <code>CMakeLists.txt</code> file, use the <code>add_subdirectory()</code> command to add the subdirectory to the build.</p>
+<p>The library is connected to the executable target with</p>
+<ul>
+<li><code>target_include_directories()</code></li>
+<li><code>target_link_libraries()</code></li>
+</ul>
+<section id="getting-started" class="level3">
+<h3 class="anchored" data-anchor-id="getting-started">Getting Started</h3>
+<p>We add a library that contains own implementation for computing a square root of a number. The executable can then use this library instead of the standard square root function.</p>
+<p>The libary is put into a subdirectory <code>MathFunctions</code>. This directory already contains:</p>
+<ul>
+<li>header files:
+<ul>
+<li><code>mysqrt.h</code></li>
+<li><code>MathFunctions.h</code></li>
+</ul></li>
+<li>their respective source files:
+<ul>
+<li><code>mysqrt.cxx</code> contains custom implementation of square root function</li>
+<li><code>MathFunctions.cxx</code> contains a wrapper around <code>sqrt</code> function from <code>msqrt.cxx</code> in order to hide implementation details.</li>
+</ul></li>
+<li>TODO: 1 - 6</li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -632,13 +663,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../01/fundamentals/00-fundamentals.html" class="pagination-link" aria-label="Basic Concepts of C++">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Basic Concepts of C++</span>
+      <a href="../../01/cmake/01.html" class="pagination-link" aria-label="Step 1">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Step 1</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../01/fundamentals/02-types.html" class="pagination-link" aria-label="Data Types">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Types</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../01/fundamentals/00-fundamentals.html" class="pagination-link" aria-label="Basic Concepts of C++">
+        <span class="nav-page-text">Basic Concepts of C++</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
