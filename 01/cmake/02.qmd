@@ -268,6 +268,25 @@ using `MathFunctions` library. Users can toggle `USE_MYMATH` to this end.
 
 ### Building & Running
 
+We can manually configure CMake to use the variable providing an option from the command line:
+
+```bash
+cmake ../ -DUSE_MYMATH=OFF #or ON
+```
+
+Alternatively we can use `cmake-gui` or `ccmake`:
+
+```bash
+ccmake ../
+```
+
+and set the automatically detected `USE_MYMATH` variable via the user interface.
+Afterwards build from within the build directory:
+
+```bash
+cmake --build .
+```
+
 
 
 
