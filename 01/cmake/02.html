@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -184,6 +218,11 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
   </ul></li>
+  <li><a href="#exercise-2---adding-an-option" id="toc-exercise-2---adding-an-option" class="nav-link" data-scroll-target="#exercise-2---adding-an-option"><span class="header-section-number">2.2</span> Exercise 2 - Adding an Option</a>
+  <ul class="collapse">
+  <li><a href="#getting-started-1" id="toc-getting-started-1" class="nav-link" data-scroll-target="#getting-started-1">Getting Started</a></li>
+  <li><a href="#building-running" id="toc-building-running" class="nav-link" data-scroll-target="#building-running">Building &amp; Running</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -231,7 +270,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <section id="getting-started" class="level3">
 <h3 class="anchored" data-anchor-id="getting-started">Getting Started</h3>
-<p>We add a library that contains own implementation for computing a square root of a number. The executable can then use this library instead of the standard square root function.</p>
+<p>We add a library that contains own implementation for computing square root of a number. The executable can then optionally use this library instead of the standard square root function.</p>
 <p>The libary is put into a subdirectory <code>MathFunctions</code>. This directory already contains:</p>
 <ul>
 <li>header files:
@@ -244,8 +283,230 @@ ul.task-list li input[type="checkbox"] {
 <li><code>mysqrt.cxx</code> contains custom implementation of square root function</li>
 <li><code>MathFunctions.cxx</code> contains a wrapper around <code>sqrt</code> function from <code>msqrt.cxx</code> in order to hide implementation details.</li>
 </ul></li>
-<li>TODO: 1 - 6</li>
+<li>TODO: 1 - 6
+<ol type="1">
+<li>Creating a library target</li>
+<li>Making use of the new library target</li>
+<li>Linking the new library target to the executable target</li>
+<li>Specifying library’s header location</li>
+<li>Using the library</li>
+<li>Replacing <code>sqrt</code> with the wrapper function <code>mathfunctions::sqrt</code></li>
+</ol></li>
 </ul>
+<p>In the <code>CMakeLists.txt</code> file in the <code>MathFunctions</code> directoyr, we craete a library target called <code>MathFunctions</code> with <code>add_library()</code>.</p>
+<section id="todo-1---creating-a-library-target" class="level4">
+<h4 class="anchored" data-anchor-id="todo-1---creating-a-library-target">TODO 1 - Creating a Library Target</h4>
+<p>In the <code>CMakeLists.txt</code> in the <code>MathFunctions</code> directory, we create a library target called <code>MathFunctions</code> with <code>add_library()</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>MathFunctions/CMakeLists.txt</strong></pre>
+</div>
+<div class="sourceCode" id="cb1" data-filename="MathFunctions/CMakeLists.txt"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a># TODO 1: Add a library called MathFunctions with sources MathFunctions.cxx</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>add_library(MathFunctions MathFunctions.cxx mysqrt.cxx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The source files of the library are passed as arguments.</p>
+</section>
+<section id="todo-2---making-use-of-the-new-library" class="level4">
+<h4 class="anchored" data-anchor-id="todo-2---making-use-of-the-new-library">TODO 2 - Making use of the new Library</h4>
+<p>To make use of the new library we add an <code>add_subdirectory()</code> in the <strong>top-level</strong> <code>CMakeLists.txt</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>CMakeLists.txt</strong></pre>
+</div>
+<div class="sourceCode" id="cb2" data-filename="CMakeLists.txt"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>add_subdirectory(MathFunctions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="todo-3---linking-the-new-library-target-to-the-executable-target" class="level4">
+<h4 class="anchored" data-anchor-id="todo-3---linking-the-new-library-target-to-the-executable-target">TODO 3 - Linking the new Library Target to the Executable Target</h4>
+<p>We link the new library target to the executable target with <code>target_link_libraries()</code></p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>CMakeLists.txt</strong></pre>
+</div>
+<div class="sourceCode" id="cb3" data-filename="CMakeLists.txt"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>target_link_libraries(Tutorial PUBLIC MathFunctions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="todo-4---specifying-librarys-header-file-location" class="level4">
+<h4 class="anchored" data-anchor-id="todo-4---specifying-librarys-header-file-location">TODO 4 - Specifying Library’s Header File Location</h4>
+<p>Modify the existing <code>target_include_directories()</code> to add the <code>MathFunctions</code> subdirectory as an include directory so that the <code>MathFunctions.h</code> header file can be found:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>CMakeLists.txt</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-filename="CMakeLists.txt"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a># TODO 4: Add MathFunctions to Tutorial's target_include_directories()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a># Hint: ${PROJECT_SOURCE_DIR} is a path to the project source. AKA This folder!</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a># add the binary tree to the search path for include files</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a># so that we will find TutorialConfig.h</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>target_include_directories(Tutorial PUBLIC</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                           "${PROJECT_BINARY_DIR}"</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                           "${PROJECT_BINARY_DIR}/MathFunctions"</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                           )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="todo-5-6--using-the-library" class="level4">
+<h4 class="anchored" data-anchor-id="todo-5-6--using-the-library">TODO 5 &amp; 6- Using the Library</h4>
+<p>We use the library by including <code>MathFunctions.h</code> in <code>tutorial.cxx</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>tutorial.cxx</strong></pre>
+</div>
+<div class="sourceCode" id="cb5" data-filename="tutorial.cxx"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// </span><span class="al">TODO</span><span class="co"> 5: Include MathFunctions.h</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"MathFunctions/MathFunctions.h"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Replace <code>sqrt</code> with the wrapper function <code>mathfunctions::sqrt</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>tutorial.cxx</strong></pre>
+</div>
+<div class="sourceCode" id="cb6" data-filename="tutorial.cxx"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">// </span><span class="al">TODO</span><span class="co"> 6: Replace sqrt with mathfunctions::sqrt</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// calculate square root</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// const double outputValue = sqrt(inputValue);</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">double</span> outputValue <span class="op">=</span> mathfunctions<span class="op">::</span>sqrt<span class="op">(</span>inputValue<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="exercise-2---adding-an-option" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="exercise-2---adding-an-option"><span class="header-section-number">2.2</span> Exercise 2 - Adding an Option</h2>
+<p>In this exercise we add an option in the <code>MathFunctions</code> library to allow developers to select either the custom or the built-in implementation using the <code>option()</code> command</p>
+<p><strong>Goal</strong>: Add an option to build without <code>MathFunctions</code></p>
+<section id="getting-started-1" class="level3">
+<h3 class="anchored" data-anchor-id="getting-started-1">Getting Started</h3>
+<p>We will create a variable <code>USE_MYMATH</code> using <code>option()</code> in <code>MathFunctions/CMakeLists.txt</code> There we use that option to pass a <strong>compile time definition</strong> to the <code>MathFunctions</code> library.</p>
+<p>Then, update <code>MathFunctions.cxx</code> to redirect compilation based on <code>USE_MYMATH</code>.</p>
+<p>Lastly, we prevent <code>mysqrt.cxx</code> from being compiled when <code>USE_MYMATH</code> is on by making it its own library inside of the <code>USE_MYMATH</code> block of <code>MathFunctions/CMakeLists.txt</code></p>
+<p>TODOS: 7 - 14:</p>
+<ol start="7" type="1">
+<li>Add an option to <code>MathFunctions/CMakeLists.txt</code></li>
+<li>Make building and linking our library with <code>mysqrt</code> function conditional using this new option</li>
+<li>Add the corresponding changes to the source code <code>MathFunctions/MathFunctions.cxx</code></li>
+<li>Including <code>mysqrt.h</code> if the optional varible is defined.</li>
+<li>Including <code>cmath</code> as well</li>
+<li>Ommitting unneccesary usage/build of <code>mysqrt.cxx</code> if the custom option is off.</li>
+<li>Link <code>SqrtLibrary</code> onto <code>MathFunctions</code> when the optional variable is enabled.</li>
+<li>We remove <code>mysqrt.cxx</code> from <code>MathFunctions</code> library source list because it will be pulled when <code>SqrtLibrary</code> is enabled.</li>
+</ol>
+<section id="todo-7---adding-an-option" class="level4">
+<h4 class="anchored" data-anchor-id="todo-7---adding-an-option">TODO 7 - Adding an Option</h4>
+<p>We add an option to <code>MathFunctions/CMakeLists.txt</code>. This will be displayed in the <code>cmake-gui</code> and <code>ccmake</code> with a default value of <code>ON</code>.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>MathFunctions/CMakeLists.txt</strong></pre>
+</div>
+<div class="sourceCode" id="cb7" data-filename="MathFunctions/CMakeLists.txt"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a># TODO 7: Create a variable USE_MYMATH using option and set default to ON</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>option(USE_MYMATH "Use custom math implementation" ON)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="todo-8---make-building-and-linking-the-library-conditional" class="level4">
+<h4 class="anchored" data-anchor-id="todo-8---make-building-and-linking-the-library-conditional">TODO 8 - Make Building and Linking the Library Conditional</h4>
+<p>Make building and linking our library with <code>mysqrt</code> function conditional using this new option.</p>
+<p>Create an <code>if()</code> statement which checks the value of <code>USE_MATH</code>. Inside the <code>if()</code> put the <code>target_compile_definitions()</code> command with the compile definition <code>USE_MYMATH</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>MathFunctions/CMakeLists.txt</strong></pre>
+</div>
+<div class="sourceCode" id="cb8" data-filename="MathFunctions/CMakeLists.txt"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a># TODO 8: If USE_MYMATH is ON, use target_compile_definitions to pass</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a># USE_MYMATH as a precompiled definition to our source files</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>if(USE_MYMATH)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    target_compile_definitions(MathFunctions PRIVATE "USE_MYMATH")</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>endif()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now when <code>USE_MYMATH</code> is <code>ON</code>, the compile definition <code>USE_MYMATH</code> will be set. We can then use this compile definitnion to enable or disable sections of our source code.</p>
+</section>
+<section id="todo-9---adding-the-changes-to-the-source-code" class="level4">
+<h4 class="anchored" data-anchor-id="todo-9---adding-the-changes-to-the-source-code">TODO 9 - Adding the Changes to the Source Code</h4>
+<p>We add the corresponding changes to the source code. In <code>MathFunctions.cxx</code> we use <code>USE_MYMATH</code> to control which square root function is used:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>MathFunctions/MathFunctions.cxx</strong></pre>
+</div>
+<div class="sourceCode" id="cb9" data-filename="MathFunctions/MathFunctions.cxx"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">// </span><span class="al">TODO</span><span class="co"> 9: If USE_MYMATH is defined, use detail::mysqrt.</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Otherwise, use std::sqrt.</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#ifdef USE_MYMATH</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> detail::mysqrt<span class="op">(</span>x<span class="op">);</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#else</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">std::</span>sqrt<span class="op">(</span>x<span class="op">);</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#endif</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="todo-10---including-mysqrt.h-conditionally" class="level4">
+<h4 class="anchored" data-anchor-id="todo-10---including-mysqrt.h-conditionally">TODO 10 - Including <code>mysqrt.h</code> Conditionally</h4>
+<p>Next, we need to include <code>mysqrt.h</code> if <code>USE_MYMATH</code> is defined.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>MathFunctions/MathFunctions.cxx</strong></pre>
+</div>
+<div class="sourceCode" id="cb10" data-filename="MathFunctions/MathFunctions.cxx"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// </span><span class="al">TODO</span><span class="co"> 10: Wrap the mysqrt include in a precompiled ifdef based on USE_MYMATH</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef USE_MYMATH</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">"mysqrt.h"</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="todo-11---including-cmath" class="level4">
+<h4 class="anchored" data-anchor-id="todo-11---including-cmath">TODO 11 - Including <code>cmath</code></h4>
+<p>Now since we use <code>std::sqrt()</code> (see TODO 9), we must include <code>cmath</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>MathFunctions/MathFunctions.cxx</strong></pre>
+</div>
+<div class="sourceCode" id="cb11" data-filename="MathFunctions/MathFunctions.cxx"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">// </span><span class="al">TODO</span><span class="co"> 11: include cmath</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="todo-12-13---omitting-compilation-of-mysqrt.cxx-if-option-is-off" class="level4">
+<h4 class="anchored" data-anchor-id="todo-12-13---omitting-compilation-of-mysqrt.cxx-if-option-is-off">TODO 12 &amp; 13 - Omitting Compilation of <code>mysqrt.cxx</code> if Option is off</h4>
+<p>At this piont, even if <code>USE_MYMATH</code> is off, <code>mysqrt.cxx</code> would not be used but <strong>still compiled</strong> because <code>MathFunctions</code> target has <code>mysqrt.cxx</code> listed under sources.</p>
+<p>We can fix this in various ways:</p>
+<ol type="1">
+<li>use <code>target_sources()</code> to add <code>mysqrt.cxx</code> rom within the <code>USE_MYMATH</code> block.</li>
+<li>create an additional library within the <code>USE_MYMATH</code> block which is responsible for compiling <code>mysqrt.cxx</code>.</li>
+</ol>
+<p>We will go with the second option.</p>
+<p>First we create an additional library from within <code>USE_MYMATH</code> called <code>SqrtLibrary</code> that has sources <code>mysqrt.cxx</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>MathFunctions/CMakeLists.txt</strong></pre>
+</div>
+<div class="sourceCode" id="cb12" data-filename="MathFunctions/CMakeLists.txt"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>if(USE_MYMATH)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    target_compile_definitions(MathFunctions PRIVATE "USE_MYMATH")</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    # TODO 12: When USE_MYMATH is ON, add a library for SqrtLibrary with</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    # source mysqrt.cxx</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    add_library(SqrtLibrary STATIC</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                mysqrt.cxx)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>endif()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we link <code>SqrtLibrary</code> onto <code>MathFunctions</code> when <code>USE_MYMATH</code> is enabled:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>MathFunctions/CMakeLists.txt</strong></pre>
+</div>
+<div class="sourceCode" id="cb13" data-filename="MathFunctions/CMakeLists.txt"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>if(USE_MYMATH)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    target_compile_definitions(MathFunctions PRIVATE "USE_MYMATH")</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    # TODO 12: When USE_MYMATH is ON, add a library for SqrtLibrary with</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    # source mysqrt.cxx</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    add_library(SqrtLibrary STATIC</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                mysqrt.cxx)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    # TODO 13: When USE_MYMATH is ON, link SqrtLibrary to the MathFunctions Library</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    target_link_libraries(MathFunctions PRIVATE SqrtLibrary)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>endif()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="todo-14---removing-mysqrt.cxx-from-library-source" class="level4">
+<h4 class="anchored" data-anchor-id="todo-14---removing-mysqrt.cxx-from-library-source">TODO 14 - Removing <code>mysqrt.cxx</code> from Library Source</h4>
+<p>Finally, we can remove <code>mysqrt.cxx</code> from our <code>MathFunctions</code> library source list because it will be pulled when <code>SqrtLibrary</code> is included.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>MathFunctions/CMakeLists.txt</strong></pre>
+</div>
+<div class="sourceCode" id="cb14" data-filename="MathFunctions/CMakeLists.txt"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>add_library(MathFunctions MathFunctions.cxx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>With these changes, the <code>mysqrt</code> function is now completely optional to whoever is building and using <code>MathFunctions</code> library. Users can toggle <code>USE_MYMATH</code> to this end.</p>
+</section>
+</section>
+<section id="building-running" class="level3">
+<h3 class="anchored" data-anchor-id="building-running">Building &amp; Running</h3>
 
 
 </section>
