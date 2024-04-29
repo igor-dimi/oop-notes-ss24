@@ -11,6 +11,7 @@ book:
     - part: 01/cmake/cmake.qmd
       chapters:
         - 01/cmake/01.qmd
+        - 01/cmake/02.qmd
     - part: 01/fundamentals/00-fundamentals.qmd
       chapters: 
         - 01/fundamentals/01-vars.qmd
