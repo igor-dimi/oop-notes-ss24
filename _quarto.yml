@@ -1,6 +1,7 @@
 project:
   type: book
 
+
 book:
   title: "OOP for Scientific Computing Notes - SoSe 24"
   author: "Igor Dimitrov"
@@ -19,8 +20,10 @@ book:
         - 01/fundamentals/03-indirection.qmd
         - 01/fundamentals/04-control-flow.qmd
         - 01/fundamentals/05-oop.qmd
+  downloads: pdf
 
 number-depth: 2
+
 
 bibliography: references.bib
 
