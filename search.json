@@ -248,5 +248,82 @@
       "Basic Concepts of C++",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Control Flow</span>"
     ]
+  },
+  {
+    "objectID": "01/fundamentals/05-oop.html",
+    "href": "01/fundamentals/05-oop.html",
+    "title": "7  Object Orientated Programming in C++",
+    "section": "",
+    "text": "7.1 Introduction\nCombine data and functions as a unit. Components of a class are called members. In OOP parlance functions members are called methods\nConcrete objects created from a class that exist during life-time are called instances.\nClasses are like new data types, and instance objects are declared just like variables of fundamental types would.\nExample",
+    "crumbs": [
+      "Basic Concepts of C++",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Object Orientated Programming in C++</span>"
+    ]
+  },
+  {
+    "objectID": "01/fundamentals/05-oop.html#introduction",
+    "href": "01/fundamentals/05-oop.html#introduction",
+    "title": "7  Object Orientated Programming in C++",
+    "section": "",
+    "text": "methods: behaviour of the object\ndata members: state state of the object\n\n\n\n\nclass Account\n{\n    public: \n        double get_balance() const;\n        double withdraw(double amount);\n    private :\n        double balance = 100; //initialize with default 100\n};\n\nAccount::get_balance(){return balance;}\nAccount::withdraw(doulbe amount){balance -= amount;}\n\nAccount a1;\na1.withdraw(25);\n\n\n\n\n\n\nNote\n\n\n\nThe keyword const in double get_balance() const denotes that get_balance() doesn’t modify the state of the object \\(\\Rightarrow\\) accessor method.\n\n\n\naccessor methods: methods that do not modify the state of the object like get_balance(). They should be denoted by the const keyword as above.\nmutator methods: methods that modify the state of the object like withdraw().",
+    "crumbs": [
+      "Basic Concepts of C++",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Object Orientated Programming in C++</span>"
+    ]
+  },
+  {
+    "objectID": "01/fundamentals/05-oop.html#encapsulation",
+    "href": "01/fundamentals/05-oop.html#encapsulation",
+    "title": "7  Object Orientated Programming in C++",
+    "section": "7.2 Encapsulation",
+    "text": "7.2 Encapsulation\n\npublic members of the class is the interface provided for the user of the class.\nprivate members of the class are used to implement the public interface.\n\nThis separation is called encapulsation and information hiding. This facilitates changing the implementation without changing the interface or affecting other programs that use this class.\nUsually an improvement of an existing code comes through changing the underlying data structures. If internal representation if kept hidden from the user of the class, than this change will not effect the user.\n\n\n\n\n\n\nNote\n\n\n\nIt is good practice to list public members before private ones, since users reading the class are primarily interested in the interface as opposed to implementation details.\n\n\nTo adhere to the principle of information hiding data members should be always kept private. Accessing or mutating the data members should be provided through a public interface of accessor and mutator member functions, and never directly.",
+    "crumbs": [
+      "Basic Concepts of C++",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Object Orientated Programming in C++</span>"
+    ]
+  },
+  {
+    "objectID": "01/fundamentals/05-oop.html#separate-compilation",
+    "href": "01/fundamentals/05-oop.html#separate-compilation",
+    "title": "7  Object Orientated Programming in C++",
+    "section": "7.3 Separate Compilation",
+    "text": "7.3 Separate Compilation\nEncapsulation and information hiding nicely leads to the concept of modularization and separate compilation. When interface definitions and implementations of a class are separated in distinct source files, only the files that are modified can be recompiled, other files need not to be.\nConsider the situation we want to simulate a cash register machine, with a class that provides the following interface:\n\n\n\ncash register machine\n\n\nWe provide the interface for the class ’CashRegister’in a header file:\n\n\ncash_register.hh\n\n#ifndef CASHR_H\n#define CASHR_H\n\nclass CashRegister\n{\n    public:\n        CashRegister();\n        double get_total() const;\n        int get_count() const;\n        void clear();\n        void add_item(double amount);\n        void display() const;\n    private:\n        int item_count;\n        double price_total;\n};\n\n#endif // !CASHR_h\n\nNote the\n#ifdef CASHR_H\n#define CASHR_H\n\n//... contents of the header file\n\n#endif //CASHR_H\nconstruct. This is called a header guard. It is possible that in a project there are many files that use the CashRegister class. When multiple such files are included in another file, the problem will arise that header definitions of CashRegister are included multiple times. As multiple definitions are not legal, this would cause a compiler error. Header guard ensures this, and always should be used.\nThe implementation of this interface definition is provided separately in a .cpp file:\n\n\ncash_register.cc\n\n#include \"cash_register.hh\"\n#include &lt;iostream&gt;\n\nCashRegister::CashRegister()\n{\n    item_count = 0;\n    price_total = 0;\n}\nint CashRegister::get_count() const {return item_count;}\ndouble CashRegister::get_total() const {return price_total;}\nvoid CashRegister::display() const {\n    std::cout &lt;&lt; \"count: \" &lt;&lt; get_count() &lt;&lt; std::endl\n              &lt;&lt; \"sum: \" &lt;&lt; get_total() &lt;&lt; std::endl;\n}\nvoid CashRegister::clear() \n{\n    item_count = 0; \n    price_total = 0;\n}\nvoid CashRegister::add_item(double amount)\n{\n    item_count++;\n    price_total += amount;\n}\n\nNote that other additional headers needed for the implementation like ` are also included.\nFinally we create test program called test_cashregister.cc with a main() function, that will utilize and test the CashRegister class:\n\n\ntest_cashregister.cc\n\n#include \"cash_register.hh\"\n#include &lt;iostream&gt;\n\n\nvoid display_n(CashRegister cr)\n{\n    cr.display();\n    std::cout &lt;&lt; std::endl;\n}\n\nint main(int argc, char const *argv[])\n{\n    CashRegister cr1;\n    display_n(cr1);\n    cr1.add_item(15.4); \n    display_n(cr1);\n    cr1.clear();\n    display_n(cr1);\n    return 0;\n}\n\nNote that test_cashregister.cc only has the interface to CashRegister via the header cash_register.hh but not the actual implementation. This is well intented, since we want to provide the implementation to the compiler as follows:\ng++ -o test_cashregister test_cashregister.cc cash_register.cc\nHow headers are interrelated and compiled together into an executable can be visualised as follows:\n\n\n\ntest CashRegister\n\n\nThe important advantage here is that if the implementation of CashRegister changes, this is reflected solely in cash_register.cc. Thus during recompilation, this file alone needs to be recompiled and linked against test_cashregister.cc. For large software projects and collaborative programming this modularization is essential.",
+    "crumbs": [
+      "Basic Concepts of C++",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Object Orientated Programming in C++</span>"
+    ]
+  },
+  {
+    "objectID": "01/fundamentals/05-oop.html#constructors-destructors",
+    "href": "01/fundamentals/05-oop.html#constructors-destructors",
+    "title": "7  Object Orientated Programming in C++",
+    "section": "7.4 Constructors & Destructors",
+    "text": "7.4 Constructors & Destructors\n\nConstructors\n\nConstructor method is called after an object is initialized/created in memory.\nIt can defined manually by the programmer, otherwise a default constructor always exists. In case of manual definition it can have a list of arguments, just like any other method.\nWhen a constuctor is defined manually, the default constructor (one without any arguments must be redefined explicitly by the programmer) \\(\\Rightarrow\\) overloading.\nFor class A its constructor is called A(). (Same name as its class)\nHas no return value, but doesn’t use keyword void\n\n\n\nDestructors\n\nThe method called before the memory occupied by the object is freed.\nIt can be defined by the programmer, otherwise default destructor is created.\nDestructor for class A is called ~A()\nDestructors have no arguments, no return value, do not use void.\n\nExample:\nclass Account\n{\n    public : \n        Account(double amount);\n        Account(); //default constructor must be now explicitly defined\n        ~Account();\n        ... //rest of class\n};\n\n// ... rest of implementations\n\n// initializes account with initial balance of amount\nAccount::Account(double amount) {balance = amount;} \n\n// overloaded constructors defininig default constructor, which\n// initializes account to a default value of 100\nAccount::Account() {balance = 100;} \nThen\n    Account a1;\n    std::cout &lt;&lt; a1.get_balance() &lt;&lt; std::endl;\n    a1.withdraw(100);\n    std::cout &lt;&lt; a1.get_balance() &lt;&lt; std::endl;\n\n    Account a2(500);\n    std::cout &lt;&lt; a2.get_balance() &lt;&lt; std::endl;\n    a2.withdraw(100);\n    std::cout &lt;&lt; a2.get_balance() &lt;&lt; std::endl;\nprints out\n100\n0\n500\n400",
+    "crumbs": [
+      "Basic Concepts of C++",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Object Orientated Programming in C++</span>"
+    ]
+  },
+  {
+    "objectID": "01/fundamentals/05-oop.html#composition-aggregation",
+    "href": "01/fundamentals/05-oop.html#composition-aggregation",
+    "title": "7  Object Orientated Programming in C++",
+    "section": "7.5 Composition / Aggregation",
+    "text": "7.5 Composition / Aggregation",
+    "crumbs": [
+      "Basic Concepts of C++",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Object Orientated Programming in C++</span>"
+    ]
+  },
+  {
+    "objectID": "01/fundamentals/05-oop.html#inheritence",
+    "href": "01/fundamentals/05-oop.html#inheritence",
+    "title": "7  Object Orientated Programming in C++",
+    "section": "7.6 Inheritence",
+    "text": "7.6 Inheritence",
+    "crumbs": [
+      "Basic Concepts of C++",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Object Orientated Programming in C++</span>"
+    ]
   }
 ]
