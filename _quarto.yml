@@ -18,6 +18,9 @@ book:
         - 01/fundamentals/02-types.qmd
         - 01/fundamentals/03-indirection.qmd
         - 01/fundamentals/04-control-flow.qmd
+        - 01/fundamentals/05-oop.qmd
+
+number-depth: 2
 
 bibliography: references.bib
 
