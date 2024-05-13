@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -259,8 +259,9 @@ window.Quarto = {
   <li><a href="#constructors" id="toc-constructors" class="nav-link" data-scroll-target="#constructors">Constructors</a></li>
   <li><a href="#destructors" id="toc-destructors" class="nav-link" data-scroll-target="#destructors">Destructors</a></li>
   </ul></li>
-  <li><a href="#composition-aggregation" id="toc-composition-aggregation" class="nav-link" data-scroll-target="#composition-aggregation"><span class="header-section-number">7.5</span> Composition / Aggregation</a></li>
-  <li><a href="#inheritence" id="toc-inheritence" class="nav-link" data-scroll-target="#inheritence"><span class="header-section-number">7.6</span> Inheritence</a></li>
+  <li><a href="#pointers-references-to-objects" id="toc-pointers-references-to-objects" class="nav-link" data-scroll-target="#pointers-references-to-objects"><span class="header-section-number">7.5</span> Pointers / References to Objects</a></li>
+  <li><a href="#composition-aggregation" id="toc-composition-aggregation" class="nav-link" data-scroll-target="#composition-aggregation"><span class="header-section-number">7.6</span> Composition / Aggregation</a></li>
+  <li><a href="#inheritence" id="toc-inheritence" class="nav-link" data-scroll-target="#inheritence"><span class="header-section-number">7.7</span> Inheritence</a></li>
   </ul>
 </nav>
     </div>
@@ -516,11 +517,43 @@ Note
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>400</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="composition-aggregation" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="composition-aggregation"><span class="header-section-number">7.5</span> Composition / Aggregation</h2>
+<section id="pointers-references-to-objects" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="pointers-references-to-objects"><span class="header-section-number">7.5</span> Pointers / References to Objects</h2>
+<p><strong>Pointers</strong> or <strong>references</strong> can provide shared access to objects. Assume that a bank account is shared by two people. With pointers:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">//ap1 points to an account object on heap</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>Account <span class="op">*</span>ap1 <span class="op">=</span> <span class="kw">new</span> Account<span class="op">(</span><span class="dv">300</span><span class="op">);</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">//ap2 points to the same object</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>Account <span class="op">*</span>ap2 <span class="op">=</span> ap1<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can access this objects methods via its pointer:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">(*</span>ap1<span class="op">).</span>withdraw<span class="op">();</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Equivalent, and a more common way:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ap1<span class="op">-&gt;</span>withdraw<span class="op">(</span><span class="dv">10</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Which can be understood as: “follow the pointer ap1 to the object it follows and access the method”.</p>
+<p>The changes will be reflected of course via the pointer <code>ap2</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ap1<span class="op">-&gt;</span>get_balance<span class="op">()</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ap2<span class="op">-&gt;</span>get_balance<span class="op">()</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">//both return the same value of 290</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Same can be achieved with references:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Account a<span class="op">(</span><span class="dv">20</span><span class="op">);</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>Account <span class="op">&amp;</span>b <span class="op">=</span> a<span class="op">;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">//both return 20</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>a<span class="op">.</span>get_balance<span class="op">();</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>b<span class="op">.</span>get_balance<span class="op">();</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">//withdraw 5 from a</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>a<span class="op">.</span>withdraw<span class="op">(</span><span class="dv">5</span><span class="op">);</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">/*changes reflected in both,</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">both return 15: */</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>a<span class="op">.</span>get_balance<span class="op">()</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>b<span class="op">.</span>get_balance<span class="op">()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="inheritence" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="inheritence"><span class="header-section-number">7.6</span> Inheritence</h2>
+<section id="composition-aggregation" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="composition-aggregation"><span class="header-section-number">7.6</span> Composition / Aggregation</h2>
+</section>
+<section id="inheritence" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="inheritence"><span class="header-section-number">7.7</span> Inheritence</h2>
 
 
 </section>

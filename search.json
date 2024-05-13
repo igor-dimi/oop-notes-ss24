@@ -305,11 +305,22 @@
     ]
   },
   {
+    "objectID": "01/fundamentals/05-oop.html#pointers-references-to-objects",
+    "href": "01/fundamentals/05-oop.html#pointers-references-to-objects",
+    "title": "7  Object Orientated Programming in C++",
+    "section": "7.5 Pointers / References to Objects",
+    "text": "7.5 Pointers / References to Objects\nPointers or references can provide shared access to objects. Assume that a bank account is shared by two people. With pointers:\n//ap1 points to an account object on heap\nAccount *ap1 = new Account(300); \n//ap2 points to the same object\nAccount *ap2 = ap1;\nWe can access this objects methods via its pointer:\n(*ap1).withdraw();\nEquivalent, and a more common way:\nap1-&gt;withdraw(10);\nWhich can be understood as: “follow the pointer ap1 to the object it follows and access the method”.\nThe changes will be reflected of course via the pointer ap2:\nap1-&gt;get_balance()\nap2-&gt;get_balance()\n//both return the same value of 290\nSame can be achieved with references:\nAccount a(20);\nAccount &b = a;\n\n//both return 20\na.get_balance();\nb.get_balance();\n\n//withdraw 5 from a\na.withdraw(5);\n\n/*changes reflected in both,\nboth return 15: */\na.get_balance()\nb.get_balance()",
+    "crumbs": [
+      "Basic Concepts of C++",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Object Orientated Programming in C++</span>"
+    ]
+  },
+  {
     "objectID": "01/fundamentals/05-oop.html#composition-aggregation",
     "href": "01/fundamentals/05-oop.html#composition-aggregation",
     "title": "7  Object Orientated Programming in C++",
-    "section": "7.5 Composition / Aggregation",
-    "text": "7.5 Composition / Aggregation",
+    "section": "7.6 Composition / Aggregation",
+    "text": "7.6 Composition / Aggregation",
     "crumbs": [
       "Basic Concepts of C++",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Object Orientated Programming in C++</span>"
@@ -319,8 +330,8 @@
     "objectID": "01/fundamentals/05-oop.html#inheritence",
     "href": "01/fundamentals/05-oop.html#inheritence",
     "title": "7  Object Orientated Programming in C++",
-    "section": "7.6 Inheritence",
-    "text": "7.6 Inheritence",
+    "section": "7.7 Inheritence",
+    "text": "7.7 Inheritence",
     "crumbs": [
       "Basic Concepts of C++",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Object Orientated Programming in C++</span>"
