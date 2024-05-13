@@ -277,10 +277,66 @@ prints out
 400
 ```
 
-## Pointers to Objects
+## Pointers / References to Objects
 
-**Pointers** can provide shared access to objects. Assume that a bank account is shared by two people. 
-This can be 
+**Pointers** or **references** can provide shared access to objects. 
+Assume that a bank account is shared by two people. With pointers:
+
+```cpp
+//ap1 points to an account object on heap
+Account *ap1 = new Account(300); 
+//ap2 points to the same object
+Account *ap2 = ap1;
+```
+
+We can access this objects methods via its pointer:
+
+```cpp
+(*ap1).withdraw();
+```
+
+Equivalent, and a more common way:
+
+```cpp
+ap1->withdraw(10);
+```
+
+Which can be understood as: "follow the pointer ap1 to the object
+it follows and access the method". 
+
+The changes will be reflected of course via the pointer `ap2`:
+
+```cpp
+ap1->get_balance()
+ap2->get_balance()
+//both return the same value of 290
+```
+
+Same can be achieved with references:
+
+```cpp
+Account a(20);
+Account &b = a;
+
+//both return 20
+a.get_balance();
+b.get_balance();
+
+//withdraw 5 from a
+a.withdraw(5);
+
+/*changes reflected in both,
+both return 15: */
+a.get_balance()
+b.get_balance()
+```
+
+
+
+
+
+
+
 
 
 ## Composition / Aggregation
