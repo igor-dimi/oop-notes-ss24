@@ -277,7 +277,10 @@ prints out
 400
 ```
 
+## Pointers to Objects
 
+**Pointers** can provide shared access to objects. Assume that a bank account is shared by two people. 
+This can be 
 
 
 ## Composition / Aggregation
