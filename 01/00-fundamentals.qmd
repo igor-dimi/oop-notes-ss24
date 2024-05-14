@@ -1,0 +1,10 @@
+---
+title: "Basic Concepts of C++"
+---
+
+* variables and types
+* pointers and references
+* control structures
+* functions and templates
+* classes and inheritance 
+* namespaces and structure

@@ -1,0 +1,76 @@
+---
+title: "Indirection"
+---
+
+## Pointers
+
+```{.c}
+include <iostream>
+
+int main(int argc, char const *argv[])
+{
+    int i = 5;
+    int *p1 = &i;
+    int *p2 = new int;
+
+    std::cout << "i: " << i << std::endl
+              << "*p1: " << *p1 << std::endl
+              << "p1: " << p1 << std::endl
+              << "&p1: " << &p1 << std::endl
+              << "p2: " << p2 << std::endl
+              << "*p2: " << *p2 << std::endl;
+    delete p2;
+    return 0;
+}
+```
+output:
+
+```{text}
+i: 5
+*p1: 5
+p1: 0x7fff8d568184
+&p1: 0x7fff8d568188
+p2: 0x55c014358eb0
+*p2: 0
+```
+
+* release memory with `delete`. 
+* deleting too early -> bugs, too late -> memory leaks
+
+## References 
+
+References are **aliases for an existing entity**. k
+
+```{.cpp}
+include <iostream>
+
+int main(int argc, const char** argv) {
+
+    int a = 4;
+    std::cout << "a: " << a <<std::endl;
+    int &b = a;
+    b = 5;
+    std::cout << "a: " << a << std::endl
+              << "b: " << b << std::endl;
+
+    return 0;
+}
+```
+
+output:
+
+```{text}
+a: 4
+a: 5
+b: 5
+```
+
+
+## Rvalue (double) References 
+
+Two uses:
+
+* **range-based** `for` loops
+* **move semantics** 
+
+lvalue references refer to entities, rvalue references refer to literals. 
