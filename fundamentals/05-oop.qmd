@@ -335,15 +335,457 @@ a.get_balance()
 b.get_balance()
 ```
 
-
-
-
-
-
-
-
-
 ## Composition / Aggregation
+
+In real world objects are usually composed of other objects/components.
+A car has chasis, tires, engine etc. In oop this is called
+**composition** or **aggregation**. 
+
+The compisition is classified based on the arity of objects that
+are aggregated and the nature of the association.  
+
+The nature of association is divided into two classes:
+
+* **strong association**/**strict aggregation**.
+* **weak association**.
+
+First we consider **strong association/strict aggregation**
+
+### Strict Aggregation
+
+In strict aggregation an object is concretely made up of its component objects,
+and its integrity and lifetime depends on them. A car is strictly 
+composed of four tires and can not exist without the tires. 
+
+Strict aggregation itself is categorized depending on the number of objects
+aggregated:
+
+* **Fixed number composition**: A *car* has exactly four *tires*, or exactly
+  one *engine*.
+* **Arbitrary number composition**: 
+  An *order* consists of at least one and at most arbitary number of
+  *items*.
+
+In UML notation:
+
+![aggregation](./imgs/aggregation-uml.png) 
+
+#### Fixed Number Aggregation
+
+We first consider the car-engine situation, where a car is composed exactly of one
+engine. (We ignore all other components that might make up a car for the sake
+of brevity). 
+
+The interface is illustrated in the following UML diagram:
+
+![car-engine uml](./imgs/car-engine-uml.png)
+
+Note that we provide two overloaded constructors: one that receives data members
+that need to initialize engine component as parameters, and another that receives
+and engine object as parameter and copies those engines data attributes to the 
+corresponding data attributes in the car object.
+
+c++ implementation:
+
+* the interface:
+
+```{.cpp filename="car.hh"}
+#ifndef CAR_H
+#define CAR_H
+
+#include <string>
+
+class Engine
+{
+    public:
+        Engine(std::string manufacturer, int horse_power);
+        int get_hp();
+        std::string get_brand();
+        void display();
+    private:
+        std::string manufacturer;
+        int horse_power;
+};
+
+class Car
+{
+    public:
+        Car(std::string brand,
+            std::string type,
+            std::string engine_manufacturer,
+            int horse_power);
+        Car(std::string brand,
+            std::string type,
+            Engine engine);
+        std::string get_brand();
+        std::string get_type();
+        int get_hp();
+        std::string get_engine();
+        void display();
+    private:
+        Engine engine;
+        std::string brand;
+        std::string type;
+};
+#endif // !CAR_H
+```
+
+* The implementatin of the classes:
+
+```{.cpp filename="car.cc"}
+#include "car.hh"
+#include <iostream>
+
+Engine::Engine(std::string _brand, int _hp) : 
+    manufacturer(_brand), 
+    horse_power(_hp) {}
+
+std::string Engine::get_brand() {return manufacturer;}
+int Engine::get_hp() {return horse_power;}
+void Engine::display()
+{
+
+std::cout << "manufacturer: " << get_brand() << std::endl
+          << "horse power: " << get_hp() << std::endl;
+}
+
+Car::Car(std::string _brand,
+    std::string _type,
+    std::string engine_manufacturer,
+    int hp) :
+        brand(_brand),
+        type(_type),
+        engine(engine_manufacturer,
+                hp) {}
+
+Car::Car(std::string _brand,
+         std::string _type,
+         Engine _engine) :
+            brand(_brand),
+            type(_type),
+            engine(_engine) {};
+
+std::string Car::get_brand(){return brand;}
+std::string Car::get_type() {return type;}
+std::string Car::get_engine() {return engine.get_brand();}
+int Car::get_hp() {return engine.get_hp();}
+void Car::display()
+{
+std::cout << "brand: " << get_brand() << std::endl
+          << "type: " << get_type() << std::endl
+          << "  engine: " << std::endl;
+          engine.display();
+}
+```
+
+* we test these classes:
+
+```{.cpp filename="test_car.cc"}
+#include "car.hh"
+#include <iostream>
+
+int main(int argc, char const *argv[])
+{
+    Car c1("Audi", "sport", "Volkswagen", 220);
+    c1.display();
+    std::cout << std::endl;
+
+    Engine e("Toyota", 135);
+    Car c2("Honda", "family", e);
+    c2.display();
+    std::cout << std::endl;
+
+    return 0;
+}
+```
+
+output: 
+
+```default
+brand: Audi
+type: sport
+  engine: 
+manufacturer: Volkswagen
+horse power: 220
+
+brand: Honda
+type: family
+  engine: 
+manufacturer: Toyota
+horse power: 135
+```
+
+:::{.callout-note}
+* We used `Engine` `display()` function 
+  in the implementation of `Car`'s `display()` function.
+  Thus utilizing 'code-reuse' principle of OOP in the context
+  of aggregation. 
+* We created two car objects, once with each of the overloaded
+  constructors. Second constructor used an existing engine object
+  to copy the data members of that engine to the corresponding data
+  members in the car object.
+:::
+
+#### Arbitrary Number Aggregation
+
+Now consider the second case where an order **has** at least
+one item, but can have arbitrary many items. 
+
+This situation is demonstrated with the following UML diagram:
+
+![order items uml](./imgs/order-items.png)
+
+Note the overloaded constructors for `Order`. The c++ implementation:
+
+* the interface:
+  
+```{.cpp filename="order.hh"}
+#ifndef ORDR_H
+#define ORDR_H
+#include <string>
+#include <vector>
+
+class Item
+{
+    public:
+        Item(std::string id, 
+            std::string description, 
+            double price);
+
+        std::string get_id();
+        std::string get_description();
+        double get_price();
+
+        void display();
+
+    private:
+        std::string id;
+        std::string description;
+        double price;
+};
+
+
+class Order
+{
+    public:
+        Order(std::string order_id, 
+            std::string customer_name, 
+            std::string item_id,
+            std::string item_desc, 
+            double item_price);
+
+        Order(std::string id, 
+            std::string customer_name, 
+            Item item);
+
+        std::string get_order_id();
+        std::string get_customer_name();
+        double get_total_price() const;
+        int get_item_count() const;
+        void add_item(Item item);
+
+        void display() const;
+    private: 
+        std::string id;
+        std::string customer_name;
+        std::vector<Item> items;
+};
+#endif // !ORDR_H
+```
+
+* the implementation:
+
+```{.cpp filename="order.cc"}
+#include "order.hh"
+#include <iostream>
+
+Item::Item(std::string _id, 
+    std::string _desc,
+    double _price) :
+    id(_id),
+    description(_desc),
+    price(_price) {}
+
+std::string Item::get_id() {return id;}
+std::string Item::get_description() {return description;}
+double Item::get_price() {return price;}
+
+void Item::display()
+{
+    std::cout << "id: " << id << std::endl
+              << "description: " << description << std::endl
+              << "price: " << price << std::endl;
+}
+
+Order::Order(std::string order_id, 
+        std::string _customer_name, 
+        std::string item_id,
+        std::string item_desc, 
+        double item_price) :
+    
+    id(order_id),
+    customer_name(_customer_name)
+{
+    items.push_back({item_id, item_desc, item_price});
+}
+
+Order::Order(std::string _id, 
+    std::string _customer_name, 
+    Item item) :
+
+    id(_id),
+    customer_name(_customer_name)
+{
+    items.push_back(item);
+}
+
+std::string Order::get_order_id() {return id;}
+std::string Order::get_customer_name() {return customer_name;}
+double Order::get_total_price() const
+{
+    double sum = 0;
+    for (auto it : items) {
+        sum += it.get_price();
+    }
+    return sum;
+}
+
+int Order::get_item_count() const
+{
+    return items.size();
+}
+
+void Order::add_item(Item item)
+{
+    items.push_back(item);
+}
+
+void Order::display() const
+{
+    std::cout << "order id: " << id << std::endl
+              << "customer name: " << customer_name << std::endl
+              << "  Items: " << std::endl << std::endl;
+    
+    for (auto it : items) {
+        it.display();
+        std::cout << std::endl;
+    }
+    std::cout << "item count: " << get_item_count() << std::endl;
+    std::cout << "total price: " << get_total_price() << std::endl;
+    
+
+}
+```
+
+* testing:
+
+```{.cpp filename="test_order.cc"}
+#include "order.hh"
+#include <iostream>
+
+int main(int argc, char const *argv[])
+{
+    
+    Order o1(
+        "1",
+        "bob",
+        "123",
+        "water",
+        0.95
+    );
+    o1.display();
+    Item i1(
+        "2",
+        "bread",
+        1.25
+    );
+    o1.add_item(i1);
+    std::cout << std::endl;
+    o1.display();
+
+
+    Item i2(
+        "3",
+        "cola",
+        2.5
+    );
+
+    Order o2(
+        "3",
+        "alice",
+        i2
+    );
+
+    std::cout << std::endl;
+    o2.display();
+
+    std::cout << std::endl;
+    i1.display();
+}
+```
+
+Finally we compile the test with the command
+
+```bash
+g++ -o test_order test_order.cc order.cc
+```
+
+to obtain the output:
+
+```default
+order id: 1
+customer name: bob
+  Items: 
+
+id: 123
+description: water
+price: 0.95
+
+item count: 1
+total price: 0.95
+
+order id: 1
+customer name: bob
+  Items: 
+
+id: 123
+description: water
+price: 0.95
+
+id: 2
+description: bread
+price: 1.25
+
+item count: 2
+total price: 2.2
+
+order id: 3
+customer name: alice
+  Items: 
+
+id: 3
+description: cola
+price: 2.5
+
+item count: 1
+total price: 2.5
+
+id: 2
+description: bread
+price: 1.25
+```
+
+We created two orders, demonstrating each one of the overloaded
+constructors, by passing an existing item object to the second
+order objects constructor as argument.
+
+We demonstrated the `display()` function both of the `Order` and
+of `Item` objects. 
+
+Note that as before, `display()` function from 
+`Order` class utilizes code-reuse by using `display()` from the `Item` object it aggregates. 
+
+
 
 
 ## Inheritence

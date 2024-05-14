@@ -6,3 +6,9 @@ duff: duff.cc
 	g++ -o duff duff.cc
 test_account: test_account.cc account.cc account.hh
 	g++ -o test_account test_account.cc account.cc
+test_car: test_car.cc car.cc car.hh
+	g++ -o test_car test_car.cc car.cc
+test_order: test_order.cc order.cc order.hh
+	g++ -o test_order test_order.cc order.cc
+test_vector: test_vector.cc
+	g++ -o test_vector test_vector.cc

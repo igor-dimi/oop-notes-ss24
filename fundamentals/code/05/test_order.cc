@@ -4,25 +4,39 @@
 int main(int argc, char const *argv[])
 {
     
-    Order o1("water", 18.5, "alice");
+    Order o1(
+        "1",
+        "bob",
+        "123",
+        "water",
+        0.95
+    );
+    o1.display();
+    Item i1(
+        "2",
+        "bread",
+        1.25
+    );
+    o1.add_item(i1);
+    std::cout << std::endl;
     o1.display();
 
-    double* pp = new double(10);
-    double price{10};
-    std::cout << *pp << std::endl
-              << price << std::endl;
 
-    Order o2 {"bread", 1.175, "Bob"};
+    Item i2(
+        "3",
+        "cola",
+        2.5
+    );
+
+    Order o2(
+        "3",
+        "alice",
+        i2
+    );
+
+    std::cout << std::endl;
     o2.display();
 
-    Item it1("butter", 1.5);
-    it1.display();
-
-    Order o3(it1, "Michael");
-    Order o4(it1, "Janet");
-
-    o3.display();
-    o4.display();
-
-    return 0;
+    std::cout << std::endl;
+    i1.display();
 }
