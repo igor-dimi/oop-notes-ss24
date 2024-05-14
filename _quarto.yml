@@ -15,11 +15,11 @@ book:
         - 01/cmake/02.qmd
     - part: 01/fundamentals/00-fundamentals.qmd
       chapters: 
-        - 01/fundamentals/01-vars.qmd
-        - 01/fundamentals/02-types.qmd
-        - 01/fundamentals/03-indirection.qmd
-        - 01/fundamentals/04-control-flow.qmd
-        - 01/fundamentals/05-oop.qmd
+        - fundamentals/01-vars.qmd
+        - fundamentals/02-types.qmd
+        - fundamentals/03-indirection.qmd
+        - fundamentals/04-control-flow.qmd
+        - fundamentals/05-oop.qmd
   downloads: pdf
 
 number-depth: 2
