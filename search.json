@@ -10,8 +10,8 @@
     ]
   },
   {
-    "objectID": "01/cmake/cmake.html",
-    "href": "01/cmake/cmake.html",
+    "objectID": "cmake/cmake.html",
+    "href": "cmake/cmake.html",
     "title": "CMake Tutorial",
     "section": "",
     "text": "Notes from the official CMake Tutorial link",
@@ -20,8 +20,8 @@
     ]
   },
   {
-    "objectID": "01/cmake/01.html",
-    "href": "01/cmake/01.html",
+    "objectID": "cmake/01.html",
+    "href": "cmake/01.html",
     "title": "1  Step 1",
     "section": "",
     "text": "1.1 Exercise 1",
@@ -31,8 +31,8 @@
     ]
   },
   {
-    "objectID": "01/cmake/01.html#exercise-1",
-    "href": "01/cmake/01.html#exercise-1",
+    "objectID": "cmake/01.html#exercise-1",
+    "href": "cmake/01.html#exercise-1",
     "title": "1  Step 1",
     "section": "",
     "text": "Most basic CMake project is an executable built from a single file. Only CMakeLists.txt with three components is required. This is our goal with this exercise.\n\n\n\n\n\n\n\nNote\n\n\n\nStylistically lower case commands are preffered in CMake\n\n\n\nThe Three Basic Commands\n\nAny project’s top most CMakeLists.txt must start by specifying a minimum CMake version using using the cmake_minimum_required() command.\nAfterwards we use the project() command to set the project name.\nFinally we use the add_executable() to make CMake create an executable using the specified source code files\n\n\n\nGetting Started\nWe will build the following c++ file that computes the square root of a number:\n\n\ntutorial.cxx\n\n// A simple program that computes the square root of a number\n#include &lt;cmath&gt;\n#include &lt;cstdlib&gt; // TODO 5: Remove this line\n#include &lt;iostream&gt;\n#include &lt;string&gt;\n\n// TODO 11: Include TutorialConfig.h\n\nint main(int argc, char* argv[])\n{\n  if (argc &lt; 2) {\n    // TODO 12: Create a print statement using Tutorial_VERSION_MAJOR\n    //          and Tutorial_VERSION_MINOR\n    std::cout &lt;&lt; \"Usage: \" &lt;&lt; argv[0] &lt;&lt; \" number\" &lt;&lt; std::endl;\n    return 1;\n  }\n\n  // convert input to double\n  // TODO 4: Replace atof(argv[1]) with std::stod(argv[1])\n  const double inputValue = atof(argv[1]);\n\n  // calculate square root\n  const double outputValue = sqrt(inputValue);\n  std::cout &lt;&lt; \"The square root of \" &lt;&lt; inputValue &lt;&lt; \" is \" &lt;&lt; outputValue\n            &lt;&lt; std::endl;\n  return 0;\n}\n\n\nWe complete the initial 3 TODOS of the CMakeLists.txt:\n\n\n\nCMakelists.txt\n\n# TODO 1: Set the minimum required version of CMake to be 3.10\ncmake_minimum_required(VERSION 3.10)\n\n# TODO 2: Create a project named Tutorial\nproject(Tutorial)\n\n# TODO 7: Set the project version number as 1.0 in the above project command\n\n# TODO 6: Set the variable CMAKE_CXX_STANDARD to 11\n#         and the variable CMAKE_CXX_STANDARD_REQUIRED to True\n\n# TODO 8: Use configure_file to configure and copy TutorialConfig.h.in to\n#         TutorialConfig.h\n\n# TODO 3: Add an executable called Tutorial to the project\n# Hint: Be sure to specify the source file as tutorial.cxx\nadd_executable(Tutorial tutorial.cxx)\n\n# TODO 9: Use target_include_directories to include ${PROJECT_BINARY_DIR}\n\n\n\nBuild and Run\n\ncreate a build directory:\nmkdir build\nchange into the build directory and build with cmake:\ncd build \ncmake ../\nActually compile/link the project with\ncmake --build .\n\nNow an executable Tutorial has been created and can be run with\n./Tutorial 3.0\nwith the output\nThe square root of 3 is 1.73205\nAll good!",
@@ -42,8 +42,8 @@
     ]
   },
   {
-    "objectID": "01/cmake/01.html#exercise-2",
-    "href": "01/cmake/01.html#exercise-2",
+    "objectID": "cmake/01.html#exercise-2",
+    "href": "cmake/01.html#exercise-2",
     "title": "1  Step 1",
     "section": "1.2 Exercise 2",
     "text": "1.2 Exercise 2\n\nCMake has some special variables that have meanig to CMake when set by project\nMany of these variables start with CMAKE_. Two of these special variables:\n\nCMAKE_CXX_STANDARD\nCMAKE_CXX_STANDARD_REQUIRED\n\nThese two together may be used to specify the C++ standard needed to build the project\nGoal: Add a feature that requires C++11 and utilize above two variables. TODO4 - TODO6\n\n\nGetting Started\n\nTODO 4 & 5 - adding C++11 code to the source tutorial.cxx:\n\n\n\ntutorial.cxx\n\n// A simple program that computes the square root of a number\n#include &lt;cmath&gt;\n//#include &lt;cstdlib&gt; // TODO 5: Remove this line\n#include &lt;iostream&gt;\n#include &lt;string&gt;\n\n// TODO 11: Include TutorialConfig.h\n\nint main(int argc, char* argv[])\n{\n  if (argc &lt; 2) {\n    // TODO 12: Create a print statement using Tutorial_VERSION_MAJOR\n    //          and Tutorial_VERSION_MINOR\n    std::cout &lt;&lt; \"Usage: \" &lt;&lt; argv[0] &lt;&lt; \" number\" &lt;&lt; std::endl;\n    return 1;\n  }\n\n  // convert input to double\n  // TODO 4: Replace atof(argv[1]) with std::stod(argv[1])\n  const double inputValue = std::stod(argv[1]);\n\n  // calculate square root\n  const double outputValue = sqrt(inputValue);\n  std::cout &lt;&lt; \"The square root of \" &lt;&lt; inputValue &lt;&lt; \" is \" &lt;&lt; outputValue\n            &lt;&lt; std::endl;\n  return 0;\n}\n\nTODO 6 - set the aforementioned variables:\n\nset(CMAKE_CXX_STANDARD 11)\nset(CMAKE_CXX_STANDARD_REQUIRED True)\n\n\n\nCMakelists.txt\n\n# TODO 1: Set the minimum required version of CMake to be 3.10\ncmake_minimum_required(VERSION 3.10)\n\n# TODO 2: Create a project named Tutorial\nproject(Tutorial)\n\n# TODO 7: Set the project version number as 1.0 in the above project command\n\n# TODO 6: Set the variable CMAKE_CXX_STANDARD to 11\n#         and the variable CMAKE_CXX_STANDARD_REQUIRED to True\nset(CMAKE_CXX_STANDARD 11)\nset(CMAKE_CXX_STANDARD_REQUIRED True)\n\n\n# TODO 8: Use configure_file to configure and copy TutorialConfig.h.in to\n#         TutorialConfig.h\n\n# TODO 3: Add an executable called Tutorial to the project\n# Hint: Be sure to specify the source file as tutorial.cxx\nadd_executable(Tutorial tutorial.cxx)\n\n# TODO 9: Use target_include_directories to include ${PROJECT_BINARY_DIR}\n\n\n\nBuild and Run\nWe already created a build directory adn ran cmake ../ in the previous exercise, which created the project configurations. We don’t need to redo this steps, instead we simply rebuild the project:\ncd build\ncmake --build .\nWe run the executable\n./Tutorial 10\nto obtain:\nThe square root of 10 is 3.16228",
@@ -53,8 +53,8 @@
     ]
   },
   {
-    "objectID": "01/cmake/01.html#exercise-3",
-    "href": "01/cmake/01.html#exercise-3",
+    "objectID": "cmake/01.html#exercise-3",
+    "href": "cmake/01.html#exercise-3",
     "title": "1  Step 1",
     "section": "1.3 Exercise 3",
     "text": "1.3 Exercise 3\nSometimes it is useful to have a variable that is defined in CMakelists.txt file also be available in source code. In our case we will define the version number in CMakelists.txt and make it available in a header file.\nWe can accomplished this with a configured header file, where there are two variables that can be replaced marked with @VAR@. We use configure_file() command to copy the contents of the configured header file to a standard header file, where the @VAR@ variables are automatically replaced by CMake.\nWe include this header file generated by CMake in our source code and use the variables defined therein.\nWe could edit these variables directly in the source code, but using CMake avoids duplication and creates a single source of truth.\nGoal: Define and report the project’s version number. TODOS: 7 - 12.\n\nGetting Started\nFirst we define the version number with project() command:\nproject(\n  Tutorial \n  VERSION 1.0\n)\nNow CMake automatically sets in the background two variables:\n\nTutorial_VERION_MAJOR as 1\nTutorial_VERION_MINOR as 0\n\nsince we defined the VERSION as 1.0.\nNow we can utilize these variables in a TutorialConfig.h.in file that we will use as an input to CMake to generate a TutorialConfig.h.\nWe create TutorialConfig.h.in an add following two lines\n\n\nTutorialConfig.h.in\n\n//File: TutorialConfig.h.in\n#define Tutorial_VERSION_MAJOR @Tutorial_VERSION_MAJOR@\n#define Tutorial_VERSION_MINOR @Tutorial_VERSION_MINOR@\n:::\n\nNote that we access the CMake variables that were previously automatically set by the project() command via the @VAR@ syntax.\nNext we instruct CMake to generate a TutorialConfig.h from TutorialConfig.h.in with the configure_file() command:\nconfigure_file(TutorialConfig.h.in TutorialConfig.h)\nThe generated header file will be written into the project binary directory. In our case it is simply build/ directory.\nWe must add this directory to the list of paths that CMake searches for include files with the target_include_directories() command:\ntarget_include_directories(\n  Tutorial\n  PUBLIC \"${PROJECT_BINARY_DIR}\"\n)\nFinally we modify tutorial.cxx to include the generated header file:\n#include \"TutorialConfig.h\"\nand include the print directives that utilize the variables from the header file:\n  if (argc &lt; 2) {\n    // TODO 12: Create a print statement using Tutorial_VERSION_MAJOR\n    //          and Tutorial_VERSION_MINOR\n    std::cout &lt;&lt; argv[0] &lt;&lt; \" Version \" &lt;&lt; Tutorial_VERSION_MAJOR &lt;&lt; \".\"  \n                                        &lt;&lt; Tutorial_VERSION_MINOR &lt;&lt; std::endl; \n    std::cout &lt;&lt; \"Usage: \" &lt;&lt; argv[0] &lt;&lt; \" number\" &lt;&lt; std::endl;\n    return 1;\n  }\n\n\nBuild & Run\nAgain we only need to rebuild:\ncd build \ncmake --build .\nIf we run Tutorial with wrong argument list we get the Version number and the usage message:\n./Tutorial\nOutput:\n./Tutorial Version 1.0\nUsage: ./Tutorial number\nThe end!",
@@ -64,8 +64,8 @@
     ]
   },
   {
-    "objectID": "01/cmake/02.html",
-    "href": "01/cmake/02.html",
+    "objectID": "cmake/02.html",
+    "href": "cmake/02.html",
     "title": "2  Step 2",
     "section": "",
     "text": "2.1 Exercise 1 - Creating a Library\nGoal: Add and use a library\nTo add a library with CMake, use the add_library() command and specify the source files that make up the library.\nInstead of placing all source files in a single directory, we can organize our project with one or more subdirectories. Here we create a subdirectory specifically for our library.\nTo this subdirectory we add another CMakeLists.txt file and source files.\nIn the top level CMakeLists.txt file, use the add_subdirectory() command to add the subdirectory to the build.\nThe library is connected to the executable target with",
@@ -75,8 +75,8 @@
     ]
   },
   {
-    "objectID": "01/cmake/02.html#exercise-1---creating-a-library",
-    "href": "01/cmake/02.html#exercise-1---creating-a-library",
+    "objectID": "cmake/02.html#exercise-1---creating-a-library",
+    "href": "cmake/02.html#exercise-1---creating-a-library",
     "title": "2  Step 2",
     "section": "",
     "text": "target_include_directories()\ntarget_link_libraries()\n\n\nGetting Started\nWe add a library that contains own implementation for computing square root of a number. The executable can then optionally use this library instead of the standard square root function.\nThe libary is put into a subdirectory MathFunctions. This directory already contains:\n\nheader files:\n\nmysqrt.h\nMathFunctions.h\n\ntheir respective source files:\n\nmysqrt.cxx contains custom implementation of square root function\nMathFunctions.cxx contains a wrapper around sqrt function from msqrt.cxx in order to hide implementation details.\n\nTODO: 1 - 6\n\nCreating a library target\nMaking use of the new library target\nLinking the new library target to the executable target\nSpecifying library’s header location\nUsing the library\nReplacing sqrt with the wrapper function mathfunctions::sqrt\n\n\nIn the CMakeLists.txt file in the MathFunctions directoyr, we craete a library target called MathFunctions with add_library().\n\nTODO 1 - Creating a Library Target\nIn the CMakeLists.txt in the MathFunctions directory, we create a library target called MathFunctions with add_library():\n\n\nMathFunctions/CMakeLists.txt\n\n# TODO 1: Add a library called MathFunctions with sources MathFunctions.cxx\nadd_library(MathFunctions MathFunctions.cxx mysqrt.cxx)\n\nThe source files of the library are passed as arguments.\n\n\nTODO 2 - Making use of the new Library\nTo make use of the new library we add an add_subdirectory() in the top-level CMakeLists.txt:\n\n\nCMakeLists.txt\n\nadd_subdirectory(MathFunctions)\n\n\n\nTODO 3 - Linking the new Library Target to the Executable Target\nWe link the new library target to the executable target with target_link_libraries()\n\n\nCMakeLists.txt\n\ntarget_link_libraries(Tutorial PUBLIC MathFunctions)\n\n\n\nTODO 4 - Specifying Library’s Header File Location\nModify the existing target_include_directories() to add the MathFunctions subdirectory as an include directory so that the MathFunctions.h header file can be found:\n\n\nCMakeLists.txt\n\n# TODO 4: Add MathFunctions to Tutorial's target_include_directories()\n# Hint: ${PROJECT_SOURCE_DIR} is a path to the project source. AKA This folder!\n\n# add the binary tree to the search path for include files\n# so that we will find TutorialConfig.h\ntarget_include_directories(Tutorial PUBLIC\n                           \"${PROJECT_BINARY_DIR}\"\n                           \"${PROJECT_BINARY_DIR}/MathFunctions\"\n                           )\n\n\n\nTODO 5 & 6- Using the Library\nWe use the library by including MathFunctions.h in tutorial.cxx:\n\n\ntutorial.cxx\n\n// TODO 5: Include MathFunctions.h\n#include \"MathFunctions/MathFunctions.h\"\n\nReplace sqrt with the wrapper function mathfunctions::sqrt:\n\n\ntutorial.cxx\n\n  // TODO 6: Replace sqrt with mathfunctions::sqrt\n\n  // calculate square root\n  // const double outputValue = sqrt(inputValue);\n  const double outputValue = mathfunctions::sqrt(inputValue);",
@@ -86,8 +86,8 @@
     ]
   },
   {
-    "objectID": "01/cmake/02.html#exercise-2---adding-an-option",
-    "href": "01/cmake/02.html#exercise-2---adding-an-option",
+    "objectID": "cmake/02.html#exercise-2---adding-an-option",
+    "href": "cmake/02.html#exercise-2---adding-an-option",
     "title": "2  Step 2",
     "section": "2.2 Exercise 2 - Adding an Option",
     "text": "2.2 Exercise 2 - Adding an Option\nIn this exercise we add an option in the MathFunctions library to allow developers to select either the custom or the built-in implementation using the option() command\nGoal: Add an option to build without MathFunctions\n\nGetting Started\nWe will create a variable USE_MYMATH using option() in MathFunctions/CMakeLists.txt There we use that option to pass a compile time definition to the MathFunctions library.\nThen, update MathFunctions.cxx to redirect compilation based on USE_MYMATH.\nLastly, we prevent mysqrt.cxx from being compiled when USE_MYMATH is on by making it its own library inside of the USE_MYMATH block of MathFunctions/CMakeLists.txt\nTODOS: 7 - 14:\n\nAdd an option to MathFunctions/CMakeLists.txt\nMake building and linking our library with mysqrt function conditional using this new option\nAdd the corresponding changes to the source code MathFunctions/MathFunctions.cxx\nIncluding mysqrt.h if the optional varible is defined.\nIncluding cmath as well\nOmmitting unneccesary usage/build of mysqrt.cxx if the custom option is off.\nLink SqrtLibrary onto MathFunctions when the optional variable is enabled.\nWe remove mysqrt.cxx from MathFunctions library source list because it will be pulled when SqrtLibrary is enabled.\n\n\nTODO 7 - Adding an Option\nWe add an option to MathFunctions/CMakeLists.txt. This will be displayed in the cmake-gui and ccmake with a default value of ON.\n\n\nMathFunctions/CMakeLists.txt\n\n# TODO 7: Create a variable USE_MYMATH using option and set default to ON\noption(USE_MYMATH \"Use custom math implementation\" ON)\n\n\n\nTODO 8 - Make Building and Linking the Library Conditional\nMake building and linking our library with mysqrt function conditional using this new option.\nCreate an if() statement which checks the value of USE_MATH. Inside the if() put the target_compile_definitions() command with the compile definition USE_MYMATH:\n\n\nMathFunctions/CMakeLists.txt\n\n# TODO 8: If USE_MYMATH is ON, use target_compile_definitions to pass\n# USE_MYMATH as a precompiled definition to our source files\nif(USE_MYMATH)\n    target_compile_definitions(MathFunctions PRIVATE \"USE_MYMATH\")\nendif()\n\nNow when USE_MYMATH is ON, the compile definition USE_MYMATH will be set. We can then use this compile definitnion to enable or disable sections of our source code.\n\n\nTODO 9 - Adding the Changes to the Source Code\nWe add the corresponding changes to the source code. In MathFunctions.cxx we use USE_MYMATH to control which square root function is used:\n\n\nMathFunctions/MathFunctions.cxx\n\n  // TODO 9: If USE_MYMATH is defined, use detail::mysqrt.\n  // Otherwise, use std::sqrt.\n  #ifdef USE_MYMATH\n    return detail::mysqrt(x);\n  #else\n    return std::sqrt(x);\n  #endif\n\n\n\nTODO 10 - Including mysqrt.h Conditionally\nNext, we need to include mysqrt.h if USE_MYMATH is defined.\n\n\nMathFunctions/MathFunctions.cxx\n\n// TODO 10: Wrap the mysqrt include in a precompiled ifdef based on USE_MYMATH\n#ifdef USE_MYMATH\n  #include \"mysqrt.h\"\n#endif\n\n\n\nTODO 11 - Including cmath\nNow since we use std::sqrt() (see TODO 9), we must include cmath:\n\n\nMathFunctions/MathFunctions.cxx\n\n// TODO 11: include cmath\n#include &lt;cmath&gt;\n\n\n\nTODO 12 & 13 - Omitting Compilation of mysqrt.cxx if Option is off\nAt this piont, even if USE_MYMATH is off, mysqrt.cxx would not be used but still compiled because MathFunctions target has mysqrt.cxx listed under sources.\nWe can fix this in various ways:\n\nuse target_sources() to add mysqrt.cxx rom within the USE_MYMATH block.\ncreate an additional library within the USE_MYMATH block which is responsible for compiling mysqrt.cxx.\n\nWe will go with the second option.\nFirst we create an additional library from within USE_MYMATH called SqrtLibrary that has sources mysqrt.cxx:\n\n\nMathFunctions/CMakeLists.txt\n\nif(USE_MYMATH)\n    target_compile_definitions(MathFunctions PRIVATE \"USE_MYMATH\")\n    # TODO 12: When USE_MYMATH is ON, add a library for SqrtLibrary with\n    # source mysqrt.cxx\n    add_library(SqrtLibrary STATIC\n                mysqrt.cxx)\nendif()\n\nNext, we link SqrtLibrary onto MathFunctions when USE_MYMATH is enabled:\n\n\nMathFunctions/CMakeLists.txt\n\nif(USE_MYMATH)\n    target_compile_definitions(MathFunctions PRIVATE \"USE_MYMATH\")\n    # TODO 12: When USE_MYMATH is ON, add a library for SqrtLibrary with\n    # source mysqrt.cxx\n    add_library(SqrtLibrary STATIC\n                mysqrt.cxx)\n    # TODO 13: When USE_MYMATH is ON, link SqrtLibrary to the MathFunctions Library\n    target_link_libraries(MathFunctions PRIVATE SqrtLibrary)\nendif()\n\n\n\nTODO 14 - Removing mysqrt.cxx from Library Source\nFinally, we can remove mysqrt.cxx from our MathFunctions library source list because it will be pulled when SqrtLibrary is included.\n\n\nMathFunctions/CMakeLists.txt\n\nadd_library(MathFunctions MathFunctions.cxx)\n\nWith these changes, the mysqrt function is now completely optional to whoever is building and using MathFunctions library. Users can toggle USE_MYMATH to this end.\n\n\n\nBuilding & Running\nWe can manually configure CMake to use the variable providing an option from the command line:\ncmake ../ -DUSE_MYMATH=OFF #or ON\nAlternatively we can use cmake-gui or ccmake:\nccmake ../\nand set the automatically detected USE_MYMATH variable via the user interface. Afterwards build from within the build directory:\ncmake --build .",
@@ -97,8 +97,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/00-fundamentals.html",
-    "href": "01/fundamentals/00-fundamentals.html",
+    "objectID": "fundamentals/00-fundamentals.html",
+    "href": "fundamentals/00-fundamentals.html",
     "title": "Basic Concepts of C++",
     "section": "",
     "text": "variables and types\npointers and references\ncontrol structures\nfunctions and templates\nclasses and inheritance\nnamespaces and structure",
@@ -107,8 +107,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/01-vars.html",
-    "href": "01/fundamentals/01-vars.html",
+    "objectID": "fundamentals/01-vars.html",
+    "href": "fundamentals/01-vars.html",
     "title": "3  Variables, Temporaries, Literals",
     "section": "",
     "text": "3.1 Variables",
@@ -118,8 +118,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/01-vars.html#temporaries",
-    "href": "01/fundamentals/01-vars.html#temporaries",
+    "objectID": "fundamentals/01-vars.html#temporaries",
+    "href": "fundamentals/01-vars.html#temporaries",
     "title": "3  Variables, Temporaries, Literals",
     "section": "3.2 Temporaries",
     "text": "3.2 Temporaries",
@@ -129,8 +129,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/01-vars.html#literals",
-    "href": "01/fundamentals/01-vars.html#literals",
+    "objectID": "fundamentals/01-vars.html#literals",
+    "href": "fundamentals/01-vars.html#literals",
     "title": "3  Variables, Temporaries, Literals",
     "section": "3.3 Literals",
     "text": "3.3 Literals",
@@ -140,8 +140,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/02-types.html",
-    "href": "01/fundamentals/02-types.html",
+    "objectID": "fundamentals/02-types.html",
+    "href": "fundamentals/02-types.html",
     "title": "4  Data Types",
     "section": "",
     "text": "4.1 Introducing New Types",
@@ -151,8 +151,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/02-types.html#introducing-new-types",
-    "href": "01/fundamentals/02-types.html#introducing-new-types",
+    "objectID": "fundamentals/02-types.html#introducing-new-types",
+    "href": "fundamentals/02-types.html#introducing-new-types",
     "title": "4  Data Types",
     "section": "",
     "text": "Enum\nenum Color = {RED, BLUE, GREEN}\n\n\nStruct\n…",
@@ -162,8 +162,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/02-types.html#const-correctness",
-    "href": "01/fundamentals/02-types.html#const-correctness",
+    "objectID": "fundamentals/02-types.html#const-correctness",
+    "href": "fundamentals/02-types.html#const-correctness",
     "title": "4  Data Types",
     "section": "4.2 Const-Correctness",
     "text": "4.2 Const-Correctness\nMarks something that can’t be modified.\ninclude &lt;iostream&gt;\n\nint main(int argc, char const *argv[])\n{\n    int n = 5;\n    const int j = 4;\n    const int &k = n; //k can't be modified, equivalently n can't be modified over k\n    n++; //but this changes n and indirectly k (because k references n)\n    \n\n    const int *p1 = &n; // modifiable pointer to const int \n    int const *p2 = &n; // same thing\n    int *const p3 = &n; // constant pointer to modifiable int\n\n    // p1 = &j -- ok\n    // *p1 = 3 -- not ok! \n    // p3 = &j -- not ok\n    // *p3 = 10 -- ok\n\n    std::cout &lt;&lt; \"n: \" &lt;&lt; n &lt;&lt; std::endl\n              &lt;&lt; \"j: \" &lt;&lt; j &lt;&lt; std::endl\n              &lt;&lt; \"p1: \" &lt;&lt; p1 &lt;&lt; std::endl\n              &lt;&lt; \"p2: \" &lt;&lt; p2 &lt;&lt; std::endl\n              &lt;&lt; \"p3: \" &lt;&lt; p3 &lt;&lt; std::endl;\n    \n    \n    return 0;\n}",
@@ -173,8 +173,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/03-indirection.html",
-    "href": "01/fundamentals/03-indirection.html",
+    "objectID": "fundamentals/03-indirection.html",
+    "href": "fundamentals/03-indirection.html",
     "title": "5  Indirection",
     "section": "",
     "text": "5.1 Pointers\noutput:",
@@ -184,8 +184,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/03-indirection.html#pointers",
-    "href": "01/fundamentals/03-indirection.html#pointers",
+    "objectID": "fundamentals/03-indirection.html#pointers",
+    "href": "fundamentals/03-indirection.html#pointers",
     "title": "5  Indirection",
     "section": "",
     "text": "include &lt;iostream&gt;\n\nint main(int argc, char const *argv[])\n{\n    int i = 5;\n    int *p1 = &i;\n    int *p2 = new int;\n\n    std::cout &lt;&lt; \"i: \" &lt;&lt; i &lt;&lt; std::endl\n              &lt;&lt; \"*p1: \" &lt;&lt; *p1 &lt;&lt; std::endl\n              &lt;&lt; \"p1: \" &lt;&lt; p1 &lt;&lt; std::endl\n              &lt;&lt; \"&p1: \" &lt;&lt; &p1 &lt;&lt; std::endl\n              &lt;&lt; \"p2: \" &lt;&lt; p2 &lt;&lt; std::endl\n              &lt;&lt; \"*p2: \" &lt;&lt; *p2 &lt;&lt; std::endl;\n    delete p2;\n    return 0;\n}\n\ni: 5\n*p1: 5\np1: 0x7fff8d568184\n&p1: 0x7fff8d568188\np2: 0x55c014358eb0\n*p2: 0\n\nrelease memory with delete.\ndeleting too early -&gt; bugs, too late -&gt; memory leaks",
@@ -195,8 +195,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/03-indirection.html#references",
-    "href": "01/fundamentals/03-indirection.html#references",
+    "objectID": "fundamentals/03-indirection.html#references",
+    "href": "fundamentals/03-indirection.html#references",
     "title": "5  Indirection",
     "section": "5.2 References",
     "text": "5.2 References\nReferences are aliases for an existing entity. k\ninclude &lt;iostream&gt;\n\nint main(int argc, const char** argv) {\n\n    int a = 4;\n    std::cout &lt;&lt; \"a: \" &lt;&lt; a &lt;&lt;std::endl;\n    int &b = a;\n    b = 5;\n    std::cout &lt;&lt; \"a: \" &lt;&lt; a &lt;&lt; std::endl\n              &lt;&lt; \"b: \" &lt;&lt; b &lt;&lt; std::endl;\n\n    return 0;\n}\noutput:\na: 4\na: 5\nb: 5",
@@ -206,8 +206,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/03-indirection.html#rvalue-double-references",
-    "href": "01/fundamentals/03-indirection.html#rvalue-double-references",
+    "objectID": "fundamentals/03-indirection.html#rvalue-double-references",
+    "href": "fundamentals/03-indirection.html#rvalue-double-references",
     "title": "5  Indirection",
     "section": "5.3 Rvalue (double) References",
     "text": "5.3 Rvalue (double) References\nTwo uses:\n\nrange-based for loops\nmove semantics\n\nlvalue references refer to entities, rvalue references refer to literals.",
@@ -217,8 +217,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/04-control-flow.html",
-    "href": "01/fundamentals/04-control-flow.html",
+    "objectID": "fundamentals/04-control-flow.html",
+    "href": "fundamentals/04-control-flow.html",
     "title": "6  Control Flow",
     "section": "",
     "text": "6.1 If",
@@ -228,8 +228,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/04-control-flow.html#if",
-    "href": "01/fundamentals/04-control-flow.html#if",
+    "objectID": "fundamentals/04-control-flow.html#if",
+    "href": "fundamentals/04-control-flow.html#if",
     "title": "6  Control Flow",
     "section": "",
     "text": "include &lt;iostream&gt;\n\nint main(int argc, char const *argv[])\n{\n    int i;\n    std::cin &gt;&gt; i;\n\n    if (i % 2 == 0) std::cout &lt;&lt; i &lt;&lt; \" is even\" &lt;&lt; std::endl;\n    else std::cout &lt;&lt; i &lt;&lt; \" is odd\" &lt;&lt; std::endl;\n    return 0;\n}",
@@ -239,8 +239,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/04-control-flow.html#switch",
-    "href": "01/fundamentals/04-control-flow.html#switch",
+    "objectID": "fundamentals/04-control-flow.html#switch",
+    "href": "fundamentals/04-control-flow.html#switch",
     "title": "6  Control Flow",
     "section": "6.2 Switch",
     "text": "6.2 Switch\ninclude &lt;iostream&gt;\n\nenum Color {RED, BLUE, GREEN};\n\nint main(int argc, char const *argv[])\n{\n    int i;\n    Color c = RED;\n\n    std::cin &gt;&gt; i;\n\n    switch(i) {\n        case 0:\n            c = RED;\n            break;\n        case 1 :\n            c = BLUE;\n            break;\n        case 2 :\n            c = GREEN;\n            break;\n        default :\n            std::cout &lt;&lt; \"error: invalid color\" &lt;&lt; std::endl;\n    }\n\n    std::cout &lt;&lt; c &lt;&lt; std::endl;\n\n    return 0;\n}",
@@ -250,8 +250,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/05-oop.html",
-    "href": "01/fundamentals/05-oop.html",
+    "objectID": "fundamentals/05-oop.html",
+    "href": "fundamentals/05-oop.html",
     "title": "7  Object Orientated Programming in C++",
     "section": "",
     "text": "7.1 Introduction\nCombine data and functions as a unit. Components of a class are called members. In OOP parlance functions members are called methods\nConcrete objects created from a class that exist during life-time are called instances.\nClasses are like new data types, and instance objects are declared just like variables of fundamental types would.\nExample",
@@ -261,8 +261,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/05-oop.html#introduction",
-    "href": "01/fundamentals/05-oop.html#introduction",
+    "objectID": "fundamentals/05-oop.html#introduction",
+    "href": "fundamentals/05-oop.html#introduction",
     "title": "7  Object Orientated Programming in C++",
     "section": "",
     "text": "methods: behaviour of the object\ndata members: state state of the object\n\n\n\n\nclass Account\n{\n    public: \n        double get_balance() const;\n        double withdraw(double amount);\n    private :\n        double balance = 100; //initialize with default 100\n};\n\nAccount::get_balance(){return balance;}\nAccount::withdraw(doulbe amount){balance -= amount;}\n\nAccount a1;\na1.withdraw(25);\n\n\n\n\n\n\nNote\n\n\n\nThe keyword const in double get_balance() const denotes that get_balance() doesn’t modify the state of the object \\(\\Rightarrow\\) accessor method.\n\n\n\naccessor methods: methods that do not modify the state of the object like get_balance(). They should be denoted by the const keyword as above.\nmutator methods: methods that modify the state of the object like withdraw().",
@@ -272,8 +272,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/05-oop.html#encapsulation",
-    "href": "01/fundamentals/05-oop.html#encapsulation",
+    "objectID": "fundamentals/05-oop.html#encapsulation",
+    "href": "fundamentals/05-oop.html#encapsulation",
     "title": "7  Object Orientated Programming in C++",
     "section": "7.2 Encapsulation",
     "text": "7.2 Encapsulation\n\npublic members of the class is the interface provided for the user of the class.\nprivate members of the class are used to implement the public interface.\n\nThis separation is called encapulsation and information hiding. This facilitates changing the implementation without changing the interface or affecting other programs that use this class.\nUsually an improvement of an existing code comes through changing the underlying data structures. If internal representation if kept hidden from the user of the class, than this change will not effect the user.\n\n\n\n\n\n\nNote\n\n\n\nIt is good practice to list public members before private ones, since users reading the class are primarily interested in the interface as opposed to implementation details.\n\n\nTo adhere to the principle of information hiding data members should be always kept private. Accessing or mutating the data members should be provided through a public interface of accessor and mutator member functions, and never directly.",
@@ -283,8 +283,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/05-oop.html#separate-compilation",
-    "href": "01/fundamentals/05-oop.html#separate-compilation",
+    "objectID": "fundamentals/05-oop.html#separate-compilation",
+    "href": "fundamentals/05-oop.html#separate-compilation",
     "title": "7  Object Orientated Programming in C++",
     "section": "7.3 Separate Compilation",
     "text": "7.3 Separate Compilation\nEncapsulation and information hiding nicely leads to the concept of modularization and separate compilation. When interface definitions and implementations of a class are separated in distinct source files, only the files that are modified can be recompiled, other files need not to be.\nConsider the situation we want to simulate a cash register machine, with a class that provides the following interface:\n\n\n\ncash register machine\n\n\nWe provide the interface for the class ’CashRegister’in a header file:\n\n\ncash_register.hh\n\n#ifndef CASHR_H\n#define CASHR_H\n\nclass CashRegister\n{\n    public:\n        CashRegister();\n        double get_total() const;\n        int get_count() const;\n        void clear();\n        void add_item(double amount);\n        void display() const;\n    private:\n        int item_count;\n        double price_total;\n};\n\n#endif // !CASHR_h\n\nNote the\n#ifdef CASHR_H\n#define CASHR_H\n\n//... contents of the header file\n\n#endif //CASHR_H\nconstruct. This is called a header guard. It is possible that in a project there are many files that use the CashRegister class. When multiple such files are included in another file, the problem will arise that header definitions of CashRegister are included multiple times. As multiple definitions are not legal, this would cause a compiler error. Header guard ensures this, and always should be used.\nThe implementation of this interface definition is provided separately in a .cpp file:\n\n\ncash_register.cc\n\n#include \"cash_register.hh\"\n#include &lt;iostream&gt;\n\nCashRegister::CashRegister()\n{\n    item_count = 0;\n    price_total = 0;\n}\nint CashRegister::get_count() const {return item_count;}\ndouble CashRegister::get_total() const {return price_total;}\nvoid CashRegister::display() const {\n    std::cout &lt;&lt; \"count: \" &lt;&lt; get_count() &lt;&lt; std::endl\n              &lt;&lt; \"sum: \" &lt;&lt; get_total() &lt;&lt; std::endl;\n}\nvoid CashRegister::clear() \n{\n    item_count = 0; \n    price_total = 0;\n}\nvoid CashRegister::add_item(double amount)\n{\n    item_count++;\n    price_total += amount;\n}\n\nNote that other additional headers needed for the implementation like ` are also included.\nFinally we create test program called test_cashregister.cc with a main() function, that will utilize and test the CashRegister class:\n\n\ntest_cashregister.cc\n\n#include \"cash_register.hh\"\n#include &lt;iostream&gt;\n\n\nvoid display_n(CashRegister cr)\n{\n    cr.display();\n    std::cout &lt;&lt; std::endl;\n}\n\nint main(int argc, char const *argv[])\n{\n    CashRegister cr1;\n    display_n(cr1);\n    cr1.add_item(15.4); \n    display_n(cr1);\n    cr1.clear();\n    display_n(cr1);\n    return 0;\n}\n\nNote that test_cashregister.cc only has the interface to CashRegister via the header cash_register.hh but not the actual implementation. This is well intented, since we want to provide the implementation to the compiler as follows:\ng++ -o test_cashregister test_cashregister.cc cash_register.cc\nHow headers are interrelated and compiled together into an executable can be visualised as follows:\n\n\n\ntest CashRegister\n\n\nThe important advantage here is that if the implementation of CashRegister changes, this is reflected solely in cash_register.cc. Thus during recompilation, this file alone needs to be recompiled and linked against test_cashregister.cc. For large software projects and collaborative programming this modularization is essential.",
@@ -294,8 +294,8 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/05-oop.html#constructors-destructors",
-    "href": "01/fundamentals/05-oop.html#constructors-destructors",
+    "objectID": "fundamentals/05-oop.html#constructors-destructors",
+    "href": "fundamentals/05-oop.html#constructors-destructors",
     "title": "7  Object Orientated Programming in C++",
     "section": "7.4 Constructors & Destructors",
     "text": "7.4 Constructors & Destructors\n\nConstructors\n\nConstructor method is called after an object is initialized/created in memory.\nIt can defined manually by the programmer, otherwise a default constructor always exists. In case of manual definition it can have a list of arguments, just like any other method.\nWhen a constuctor is defined manually, the default constructor (one without any arguments must be redefined explicitly by the programmer) \\(\\Rightarrow\\) overloading.\nFor class A its constructor is called A(). (Same name as its class)\nHas no return value, but doesn’t use keyword void\n\n\n\nDestructors\n\nThe method called before the memory occupied by the object is freed.\nIt can be defined by the programmer, otherwise default destructor is created.\nDestructor for class A is called ~A()\nDestructors have no arguments, no return value, do not use void.\n\nExample:\nclass Account\n{\n    public : \n        Account(double amount);\n        Account(); //default constructor must be now explicitly defined\n        ~Account();\n        ... //rest of class\n};\n\n// ... rest of implementations\n\n// initializes account with initial balance of amount\nAccount::Account(double amount) {balance = amount;} \n\n// overloaded constructors defininig default constructor, which\n// initializes account to a default value of 100\nAccount::Account() {balance = 100;} \nThen\n    Account a1;\n    std::cout &lt;&lt; a1.get_balance() &lt;&lt; std::endl;\n    a1.withdraw(100);\n    std::cout &lt;&lt; a1.get_balance() &lt;&lt; std::endl;\n\n    Account a2(500);\n    std::cout &lt;&lt; a2.get_balance() &lt;&lt; std::endl;\n    a2.withdraw(100);\n    std::cout &lt;&lt; a2.get_balance() &lt;&lt; std::endl;\nprints out\n100\n0\n500\n400",
@@ -305,30 +305,30 @@
     ]
   },
   {
-    "objectID": "01/fundamentals/05-oop.html#pointers-references-to-objects",
-    "href": "01/fundamentals/05-oop.html#pointers-references-to-objects",
+    "objectID": "fundamentals/05-oop.html#pointers-references-to-objects",
+    "href": "fundamentals/05-oop.html#pointers-references-to-objects",
     "title": "7  Object Orientated Programming in C++",
     "section": "7.5 Pointers / References to Objects",
-    "text": "7.5 Pointers / References to Objects\nPointers or references can provide shared access to objects. Assume that a bank account is shared by two people. With pointers:\n//ap1 points to an account object on heap\nAccount *ap1 = new Account(300); \n//ap2 points to the same object\nAccount *ap2 = ap1;\nWe can access this objects methods via its pointer:\n(*ap1).withdraw();\nEquivalent, and a more common way:\nap1-&gt;withdraw(10);\nWhich can be understood as: “follow the pointer ap1 to the object it follows and access the method”.\nThe changes will be reflected of course via the pointer ap2:\nap1-&gt;get_balance()\nap2-&gt;get_balance()\n//both return the same value of 290\nSame can be achieved with references:\nAccount a(20);\nAccount &b = a;\n\n//both return 20\na.get_balance();\nb.get_balance();\n\n//withdraw 5 from a\na.withdraw(5);\n\n/*changes reflected in both,\nboth return 15: */\na.get_balance()\nb.get_balance()",
+    "text": "7.5 Pointers / References to Objects\nPointers or references can provide shared access to objects. Assume that a bank account is shared by two people. With pointers:\n//ap1 points to an account object on heap\nAccount *ap1 = new Account(300); \n//ap2 points to the same object\nAccount *ap2 = ap1;\nVisually this looks like:\n\n\n\nobject pointers\n\n\nWe can access this objects methods via its pointer:\n(*ap1).withdraw();\nEquivalent, and a more common way:\nap1-&gt;withdraw(10);\nWhich can be understood as: “follow the pointer ap1 to the object it follows and access the method”.\nThe changes will be reflected of course via the pointer ap2:\nap1-&gt;get_balance()\nap2-&gt;get_balance()\n//both return the same value of 290\nSame can be achieved with references:\nAccount a(20);\nAccount &b = a;\n\n//both return 20\na.get_balance();\nb.get_balance();\n\n//withdraw 5 from a\na.withdraw(5);\n\n/*changes reflected in both,\nboth return 15: */\na.get_balance()\nb.get_balance()",
     "crumbs": [
       "Basic Concepts of C++",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Object Orientated Programming in C++</span>"
     ]
   },
   {
-    "objectID": "01/fundamentals/05-oop.html#composition-aggregation",
-    "href": "01/fundamentals/05-oop.html#composition-aggregation",
+    "objectID": "fundamentals/05-oop.html#composition-aggregation",
+    "href": "fundamentals/05-oop.html#composition-aggregation",
     "title": "7  Object Orientated Programming in C++",
     "section": "7.6 Composition / Aggregation",
-    "text": "7.6 Composition / Aggregation",
+    "text": "7.6 Composition / Aggregation\nIn real world objects are usually composed of other objects/components. A car has chasis, tires, engine etc. In oop this is called composition or aggregation.\nThe compisition is classified based on the arity of objects that are aggregated and the nature of the association.\nThe nature of association is divided into two classes:\n\nstrong association/strict aggregation.\nweak association.\n\nFirst we consider strong association/strict aggregation\n\nStrict Aggregation\nIn strict aggregation an object is concretely made up of its component objects, and its integrity and lifetime depends on them. A car is strictly composed of four tires and can not exist without the tires.\nStrict aggregation itself is categorized depending on the number of objects aggregated:\n\nFixed number composition: A car has exactly four tires, or exactly one engine.\nArbitrary number composition: An order consists of at least one and at most arbitary number of items.\n\nIn UML notation:\n\n\n\naggregation\n\n\n\nFixed Number Aggregation\nWe first consider the car-engine situation, where a car is composed exactly of one engine. (We ignore all other components that might make up a car for the sake of brevity).\nThe interface is illustrated in the following UML diagram:\n\n\n\ncar-engine uml\n\n\nNote that we provide two overloaded constructors: one that receives data members that need to initialize engine component as parameters, and another that receives and engine object as parameter and copies those engines data attributes to the corresponding data attributes in the car object.\nc++ implementation:\n\nthe interface:\n\n\n\ncar.hh\n\n#ifndef CAR_H\n#define CAR_H\n\n#include &lt;string&gt;\n\nclass Engine\n{\n    public:\n        Engine(std::string manufacturer, int horse_power);\n        int get_hp();\n        std::string get_brand();\n        void display();\n    private:\n        std::string manufacturer;\n        int horse_power;\n};\n\nclass Car\n{\n    public:\n        Car(std::string brand,\n            std::string type,\n            std::string engine_manufacturer,\n            int horse_power);\n        Car(std::string brand,\n            std::string type,\n            Engine engine);\n        std::string get_brand();\n        std::string get_type();\n        int get_hp();\n        std::string get_engine();\n        void display();\n    private:\n        Engine engine;\n        std::string brand;\n        std::string type;\n};\n#endif // !CAR_H\n\n\nThe implementatin of the classes:\n\n\n\ncar.cc\n\n#include \"car.hh\"\n#include &lt;iostream&gt;\n\nEngine::Engine(std::string _brand, int _hp) : \n    manufacturer(_brand), \n    horse_power(_hp) {}\n\nstd::string Engine::get_brand() {return manufacturer;}\nint Engine::get_hp() {return horse_power;}\nvoid Engine::display()\n{\n\nstd::cout &lt;&lt; \"manufacturer: \" &lt;&lt; get_brand() &lt;&lt; std::endl\n          &lt;&lt; \"horse power: \" &lt;&lt; get_hp() &lt;&lt; std::endl;\n}\n\nCar::Car(std::string _brand,\n    std::string _type,\n    std::string engine_manufacturer,\n    int hp) :\n        brand(_brand),\n        type(_type),\n        engine(engine_manufacturer,\n                hp) {}\n\nCar::Car(std::string _brand,\n         std::string _type,\n         Engine _engine) :\n            brand(_brand),\n            type(_type),\n            engine(_engine) {};\n\nstd::string Car::get_brand(){return brand;}\nstd::string Car::get_type() {return type;}\nstd::string Car::get_engine() {return engine.get_brand();}\nint Car::get_hp() {return engine.get_hp();}\nvoid Car::display()\n{\nstd::cout &lt;&lt; \"brand: \" &lt;&lt; get_brand() &lt;&lt; std::endl\n          &lt;&lt; \"type: \" &lt;&lt; get_type() &lt;&lt; std::endl\n          &lt;&lt; \"  engine: \" &lt;&lt; std::endl;\n          engine.display();\n}\n\n\nwe test these classes:\n\n\n\ntest_car.cc\n\n#include \"car.hh\"\n#include &lt;iostream&gt;\n\nint main(int argc, char const *argv[])\n{\n    Car c1(\"Audi\", \"sport\", \"Volkswagen\", 220);\n    c1.display();\n    std::cout &lt;&lt; std::endl;\n\n    Engine e(\"Toyota\", 135);\n    Car c2(\"Honda\", \"family\", e);\n    c2.display();\n    std::cout &lt;&lt; std::endl;\n\n    return 0;\n}\n\noutput:\nbrand: Audi\ntype: sport\n  engine: \nmanufacturer: Volkswagen\nhorse power: 220\n\nbrand: Honda\ntype: family\n  engine: \nmanufacturer: Toyota\nhorse power: 135\n\n\n\n\n\n\nNote\n\n\n\n\nWe used Engine display() function in the implementation of Car‘s display() function. Thus utilizing ’code-reuse’ principle of OOP in the context of aggregation.\nWe created two car objects, once with each of the overloaded constructors. Second constructor used an existing engine object to copy the data members of that engine to the corresponding data members in the car object.\n\n\n\n\n\nArbitrary Number Aggregation\nNow consider the second case where an order has at least one item, but can have arbitrary many items.\nThis situation is demonstrated with the following UML diagram:\n\n\n\norder items uml\n\n\nNote the overloaded constructors for Order. The c++ implementation:\n\nthe interface:\n\n\n\norder.hh\n\n#ifndef ORDR_H\n#define ORDR_H\n#include &lt;string&gt;\n#include &lt;vector&gt;\n\nclass Item\n{\n    public:\n        Item(std::string id, \n            std::string description, \n            double price);\n\n        std::string get_id();\n        std::string get_description();\n        double get_price();\n\n        void display();\n\n    private:\n        std::string id;\n        std::string description;\n        double price;\n};\n\n\nclass Order\n{\n    public:\n        Order(std::string order_id, \n            std::string customer_name, \n            std::string item_id,\n            std::string item_desc, \n            double item_price);\n\n        Order(std::string id, \n            std::string customer_name, \n            Item item);\n\n        std::string get_order_id();\n        std::string get_customer_name();\n        double get_total_price() const;\n        int get_item_count() const;\n        void add_item(Item item);\n\n        void display() const;\n    private: \n        std::string id;\n        std::string customer_name;\n        std::vector&lt;Item&gt; items;\n};\n#endif // !ORDR_H\n\n\nthe implementation:\n\n\n\norder.cc\n\n#include \"order.hh\"\n#include &lt;iostream&gt;\n\nItem::Item(std::string _id, \n    std::string _desc,\n    double _price) :\n    id(_id),\n    description(_desc),\n    price(_price) {}\n\nstd::string Item::get_id() {return id;}\nstd::string Item::get_description() {return description;}\ndouble Item::get_price() {return price;}\n\nvoid Item::display()\n{\n    std::cout &lt;&lt; \"id: \" &lt;&lt; id &lt;&lt; std::endl\n              &lt;&lt; \"description: \" &lt;&lt; description &lt;&lt; std::endl\n              &lt;&lt; \"price: \" &lt;&lt; price &lt;&lt; std::endl;\n}\n\nOrder::Order(std::string order_id, \n        std::string _customer_name, \n        std::string item_id,\n        std::string item_desc, \n        double item_price) :\n    \n    id(order_id),\n    customer_name(_customer_name)\n{\n    items.push_back({item_id, item_desc, item_price});\n}\n\nOrder::Order(std::string _id, \n    std::string _customer_name, \n    Item item) :\n\n    id(_id),\n    customer_name(_customer_name)\n{\n    items.push_back(item);\n}\n\nstd::string Order::get_order_id() {return id;}\nstd::string Order::get_customer_name() {return customer_name;}\ndouble Order::get_total_price() const\n{\n    double sum = 0;\n    for (auto it : items) {\n        sum += it.get_price();\n    }\n    return sum;\n}\n\nint Order::get_item_count() const\n{\n    return items.size();\n}\n\nvoid Order::add_item(Item item)\n{\n    items.push_back(item);\n}\n\nvoid Order::display() const\n{\n    std::cout &lt;&lt; \"order id: \" &lt;&lt; id &lt;&lt; std::endl\n              &lt;&lt; \"customer name: \" &lt;&lt; customer_name &lt;&lt; std::endl\n              &lt;&lt; \"  Items: \" &lt;&lt; std::endl &lt;&lt; std::endl;\n    \n    for (auto it : items) {\n        it.display();\n        std::cout &lt;&lt; std::endl;\n    }\n    std::cout &lt;&lt; \"item count: \" &lt;&lt; get_item_count() &lt;&lt; std::endl;\n    std::cout &lt;&lt; \"total price: \" &lt;&lt; get_total_price() &lt;&lt; std::endl;\n    \n\n}\n\n\ntesting:\n\n\n\ntest_order.cc\n\n#include \"order.hh\"\n#include &lt;iostream&gt;\n\nint main(int argc, char const *argv[])\n{\n    \n    Order o1(\n        \"1\",\n        \"bob\",\n        \"123\",\n        \"water\",\n        0.95\n    );\n    o1.display();\n    Item i1(\n        \"2\",\n        \"bread\",\n        1.25\n    );\n    o1.add_item(i1);\n    std::cout &lt;&lt; std::endl;\n    o1.display();\n\n\n    Item i2(\n        \"3\",\n        \"cola\",\n        2.5\n    );\n\n    Order o2(\n        \"3\",\n        \"alice\",\n        i2\n    );\n\n    std::cout &lt;&lt; std::endl;\n    o2.display();\n\n    std::cout &lt;&lt; std::endl;\n    i1.display();\n}\n\nFinally we compile the test with the command\ng++ -o test_order test_order.cc order.cc\nto obtain the output:\norder id: 1\ncustomer name: bob\n  Items: \n\nid: 123\ndescription: water\nprice: 0.95\n\nitem count: 1\ntotal price: 0.95\n\norder id: 1\ncustomer name: bob\n  Items: \n\nid: 123\ndescription: water\nprice: 0.95\n\nid: 2\ndescription: bread\nprice: 1.25\n\nitem count: 2\ntotal price: 2.2\n\norder id: 3\ncustomer name: alice\n  Items: \n\nid: 3\ndescription: cola\nprice: 2.5\n\nitem count: 1\ntotal price: 2.5\n\nid: 2\ndescription: bread\nprice: 1.25\nWe created two orders, demonstrating each one of the overloaded constructors, by passing an existing item object to the second order objects constructor as argument.\nWe demonstrated the display() function both of the Order and of Item objects.\nNote that as before, display() function from Order class utilizes code-reuse by using display() from the Item object it aggregates.",
     "crumbs": [
       "Basic Concepts of C++",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Object Orientated Programming in C++</span>"
     ]
   },
   {
-    "objectID": "01/fundamentals/05-oop.html#inheritence",
-    "href": "01/fundamentals/05-oop.html#inheritence",
+    "objectID": "fundamentals/05-oop.html#inheritence",
+    "href": "fundamentals/05-oop.html#inheritence",
     "title": "7  Object Orientated Programming in C++",
     "section": "7.7 Inheritence",
     "text": "7.7 Inheritence",
