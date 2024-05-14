@@ -385,7 +385,7 @@ that need to initialize engine component as parameters, and another that receive
 and engine object as parameter and copies those engines data attributes to the 
 corresponding data attributes in the car object.
 
-c++ implementation:
+c++ implementation with `Engine engine` data member:
 
 * the interface:
 
@@ -535,7 +535,9 @@ This situation is demonstrated with the following UML diagram:
 
 ![order items uml](./imgs/order-items.png)
 
-Note the overloaded constructors for `Order`. The c++ implementation:
+Note the overloaded constructors for `Order`. 
+
+The c++ implementation with `std::vector<Item> items` data member:
 
 * the interface:
   
@@ -785,8 +787,30 @@ of `Item` objects.
 Note that as before, `display()` function from 
 `Order` class utilizes code-reuse by using `display()` from the `Item` object it aggregates. 
 
+The central notion of this chapter is arbitrary number aggregation.
+An order may have an arbitrary number of items. In c++ it is very
+common to realize such a relationship with the `std::vector<>`
+class. We defined an `std::vector<Item> items` attribute as a 
+data member of the `Order` class. Then `items` simply aggregates
+`Item` objects during the lifetime of a given `Order` object. 
+Since a c++ vector is a dynamic array and therefore can grow
+arbitrarily, this suitable reflects our sitation. 
 
+The constraint that an order must have **at least** on item is
+realized by our constructors: there is no defualt constructor,
+the constructors that we defined initialize an `Order` object
+with one `Item` object. Thus when an ordes is created, it always
+has one item. 
+Afterwards new items may be added with the `add_item()` method 
 
+:::{.callout-tip}
+To implement arbitrary number aggregation use `std::vector<>` as a data member. E.g. if `A` aggregates arbitrary number of `B` s use `std::vector<B> collection_of_Bs` as a data member 
+of `A`
+:::
+
+### Weak Association
+
+...
 
 ## Inheritence
 
