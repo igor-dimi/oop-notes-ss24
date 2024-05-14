@@ -9,11 +9,11 @@ book:
   page-navigation: true
   chapters:
     - index.qmd
-    - part: 01/cmake/cmake.qmd
+    - part: cmake/cmake.qmd
       chapters:
-        - 01/cmake/01.qmd
-        - 01/cmake/02.qmd
-    - part: 01/fundamentals/00-fundamentals.qmd
+        - cmake/01.qmd
+        - cmake/02.qmd
+    - part: fundamentals/00-fundamentals.qmd
       chapters: 
         - fundamentals/01-vars.qmd
         - fundamentals/02-types.qmd
