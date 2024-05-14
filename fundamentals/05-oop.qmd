@@ -289,6 +289,10 @@ Account *ap1 = new Account(300);
 Account *ap2 = ap1;
 ```
 
+Visually this looks like: 
+
+![object pointers](./imgs/object-pointers.png)
+
 We can access this objects methods via its pointer:
 
 ```cpp
