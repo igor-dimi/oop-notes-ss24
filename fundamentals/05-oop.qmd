@@ -368,7 +368,7 @@ aggregated:
 
 In UML notation:
 
-![aggregation](./imgs/aggregation-uml.png) 
+![aggregation](./imgs/aggregation-uml.png){width="45%"}
 
 #### Fixed Number Aggregation
 
