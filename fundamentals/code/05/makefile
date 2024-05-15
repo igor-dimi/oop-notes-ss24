@@ -12,3 +12,5 @@ test_order: test_order.cc order.cc order.hh
 	g++ -o test_order test_order.cc order.cc
 test_vector: test_vector.cc
 	g++ -o test_vector test_vector.cc
+test_question: test_question.cc question.cc question.hh
+	g++ -o test_question test_question.cc question.cc

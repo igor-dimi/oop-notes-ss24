@@ -14,18 +14,23 @@ std::cout << "manufacturer: " << get_brand() << std::endl
           << "horse power: " << get_hp() << std::endl;
 }
 
-Car::Car(std::string _brand,
-    std::string _type,
-    std::string engine_manufacturer,
-    int hp) :
-        brand(_brand),
-        type(_type),
-        engine(engine_manufacturer,
-                hp) {}
+Car::Car
+    ( //constructor arguments
+        std::string _brand,
+        std::string _type,
+        std::string engine_manufacturer,
+        int hp
+    ) : //initializer list
+            brand(_brand),
+            type(_type),
+            engine(engine_manufacturer, hp) {}
 
-Car::Car(std::string _brand,
-         std::string _type,
-         Engine _engine) :
+Car::Car
+    (
+        std::string _brand,
+        std::string _type,
+        Engine _engine
+    ) :
             brand(_brand),
             type(_type),
             engine(_engine) {};

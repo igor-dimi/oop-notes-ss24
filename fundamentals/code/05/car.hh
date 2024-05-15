@@ -15,18 +15,29 @@ class Engine
         int horse_power;
 };
 
+
 class Car
 {
     public:
-        Car(std::string brand,
+        Car
+          (
+            std::string brand,
             std::string type,
             std::string engine_manufacturer,
-            int horse_power);
-        Car(std::string brand,
+            int horse_power
+          );
+        Car
+          (
+            std::string brand,
             std::string type,
-            Engine engine);
-        std::string get_brand();
-        std::string get_type();
+            Engine engine
+          );
+
+        std::string 
+            get_brand();
+
+        std::string 
+            get_type();
         int get_hp();
         std::string get_engine();
         void display();
