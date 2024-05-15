@@ -24,6 +24,7 @@ book:
 
 number-depth: 2
 
+highlight-style: pygments
 
 bibliography: references.bib
 
