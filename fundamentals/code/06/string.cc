@@ -35,3 +35,13 @@ String& String::operator=(const String& other)
     }
     return *this;
 }
+
+String::String(const String& other)
+{
+    len = other.len;
+    if (len > 0) {
+        buffer = new char[len];
+        for (int i = 0; i < len; i++) buffer[i] = other.buffer[i];
+    }
+    else buffer = nullptr;
+}

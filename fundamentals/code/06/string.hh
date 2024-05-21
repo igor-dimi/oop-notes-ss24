@@ -8,6 +8,7 @@ class String
         String(const char s[]); //construction from a character array
         ~String();
         String& operator=(const String& other);
+        String(const String& other);
         // ...
     private:
         char* buffer;
@@ -15,5 +16,3 @@ class String
 };
 
 #endif // !STR_H
-
-// 

@@ -3,6 +3,7 @@
 #include "string.hh"
 
 int main(int argc, const char** argv) {
+
     std::string s1 = "hey";
     std::string s2 = "there";
     std::cout << s1 + " " + s2 << std::endl;
@@ -11,6 +12,8 @@ int main(int argc, const char** argv) {
     String treasurer("Elena");
 
     secretary = treasurer = secretary;
+
+    String person(secretary);
 
     return 0;
 }
