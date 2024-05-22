@@ -27,42 +27,42 @@ Fraction::Fraction(int n)
     denominator = 1;
 }
 
-Fraction Fraction::operator+(Fraction other) const
+Fraction Fraction::operator+(const Fraction& other) const
 {
     return Fraction(numerator * other.denominator
         + other.numerator * denominator,
         denominator * other.denominator);
 }
 
-Fraction Fraction::operator*(Fraction other) const
+Fraction Fraction::operator*(const Fraction& other) const
 {
     return Fraction(numerator * other.numerator,
         denominator * other.denominator);
 }
 
-Fraction operator+(int n, Fraction f)
+Fraction operator+(int n, const Fraction& f)
 {
     return f + n;
 }
 
 
-Fraction operator*(int n, Fraction f)
+Fraction operator*(int n, const Fraction& f)
 {
     return f * n;
 }
 
-Fraction operator-(Fraction f)
+Fraction operator-(const Fraction& f)
 {
     return f * -1;
 }
 
 
-Fraction Fraction::operator-(Fraction other) const
+Fraction Fraction::operator-(const Fraction& other) const
 {
     return *this + (-other);
 }
 
-Fraction operator-(int n, Fraction f)
+Fraction operator-(int n, const Fraction& f)
 {
     return n + (-f);
 }
@@ -73,70 +73,70 @@ Fraction Fraction::inverse() const
 }
 
 
-Fraction Fraction::operator/(Fraction other) const
+Fraction Fraction::operator/(const Fraction& other) const
 {
     return *this * other.inverse();
 };
 
-Fraction operator/(int n, Fraction f)
+Fraction operator/(int n, const Fraction& f)
 {
     return n * f.inverse();
 }
 
-bool Fraction::operator<(Fraction other) const
+bool Fraction::operator<(const Fraction& other) const
 {
     return numerator * other.denominator
         < denominator * other.numerator;
 }
 
 
-bool Fraction::operator>(Fraction other) const
+bool Fraction::operator>(const Fraction& other) const
 {
     return other < *this;
 }
 
-bool operator<(int n, Fraction f)
+bool operator<(int n, const Fraction& f)
 {
     return f > n;
 }
 
-bool operator>(int n, Fraction f)
+bool operator>(int n, const Fraction& f)
 {
     return f < n;
 }
 
-bool Fraction::operator<=(Fraction other) const
+bool Fraction::operator<=(const Fraction& other) const
 {
     return !(*this > other);
 }
 
-bool Fraction::operator>=(Fraction other) const
+bool Fraction::operator>=(const Fraction& other) const
 {
     return !(*this < other);
 }
 
-bool operator>=(int n, Fraction g) {return g <= n;}
-bool operator<=(int n, Fraction g) {return g >= n;}
+bool operator>=(int n, const Fraction& g) {return g <= n;}
+bool operator<=(int n, const Fraction& g) {return g >= n;}
 
-bool Fraction::operator!=(Fraction other) const
+bool Fraction::operator!=(const Fraction& other) const
 {
     return (*this < other || *this > other);
 } 
 
-bool Fraction::operator==(Fraction other) const
+bool Fraction::operator==(const Fraction& other) const
 {
     return (*this <= other && *this >= other);
 }
 
-bool operator!=(int n, Fraction f) {return f != n;}
-bool operator==(int n, Fraction f) {return f == n;}
+bool operator!=(int n, const Fraction& f) {return f != n;}
+bool operator==(int n, const Fraction& f) {return f == n;}
 
 void Fraction::print(std::ostream& out) const
 {
     out << numerator << "/" << denominator;
 }
 
-std::ostream& operator<<(std::ostream& out, Fraction f)
+std::ostream& operator<<(std::ostream& out, const Fraction& f)
 {
     f.print(out);
     return out;
@@ -148,7 +148,7 @@ void Fraction::read(std::istream& in)
     in >> numerator >> separator >> denominator;
 }
 
-std::istream& operator>>(std::istream& in, Fraction f)
+std::istream& operator>>(std::istream& in,  Fraction& f)
 {
     f.read(in);
     return in;

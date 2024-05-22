@@ -8,16 +8,16 @@ class Fraction
     public: 
         Fraction(int n, int d);
         Fraction(int n);
-        Fraction operator+(Fraction other) const;
-        Fraction operator-(Fraction other) const;
-        Fraction operator*(Fraction other) const;
-        Fraction operator/(Fraction other) const;
-        bool operator<(Fraction other) const;
-        bool operator>(Fraction other) const;
-        bool operator<=(Fraction other) const;
-        bool operator>=(Fraction other) const;
-        bool operator!=(Fraction other) const;
-        bool operator==(Fraction other) const;
+        Fraction operator+(const Fraction& other) const;
+        Fraction operator-(const Fraction& other) const;
+        Fraction operator*(const Fraction& other) const;
+        Fraction operator/(const Fraction& other) const;
+        bool operator<(const Fraction& other) const;
+        bool operator>(const Fraction& other) const;
+        bool operator<=(const Fraction& other) const;
+        bool operator>=(const Fraction& other) const;
+        bool operator!=(const Fraction& other) const;
+        bool operator==(const Fraction& other) const;
         void print(std::ostream& out) const;
         void read(std::istream& in);
 
@@ -29,19 +29,19 @@ class Fraction
         int gcd(int a, int b);
 };
 
-Fraction operator+(int n, Fraction f);
-Fraction operator*(int n, Fraction f);
-Fraction operator-(Fraction f);
-Fraction operator-(int n, Fraction f);
-Fraction operator/(int n, Fraction f);
-bool operator<(int n, Fraction f);
-bool operator>(int n, Fraction f);
-bool operator>=(int n, Fraction g);
-bool operator<=(int n, Fraction g);
-bool operator!=(int n, Fraction g);
-bool operator==(int n, Fraction g);
-std::ostream& operator<<(std::ostream& out, Fraction f);
-std::istream& operator>>(std::istream& in, Fraction f);
+Fraction operator+(int n, const Fraction& f);
+Fraction operator*(int n, const Fraction& f);
+Fraction operator-(const Fraction& f);
+Fraction operator-(int n, const Fraction& f);
+Fraction operator/(int n, const Fraction& f);
+bool operator<(int n, const Fraction& f);
+bool operator>(int n, const Fraction& f);
+bool operator>=(int n, const Fraction& f);
+bool operator<=(int n, const Fraction& f);
+bool operator!=(int n, const Fraction& f);
+bool operator==(int n, const Fraction& f);
+std::ostream& operator<<(std::ostream& out, const Fraction& f);
+std::istream& operator>>(std::istream& in, Fraction& f);
 
 
 
