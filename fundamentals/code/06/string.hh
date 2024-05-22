@@ -9,6 +9,9 @@ class String
         ~String();
         String& operator=(const String& other);
         String(const String& other);
+        String substring(int start, int length) const;
+        String(String&& other);
+        String& String::operator=(String&& other);
         // ...
     private:
         char* buffer;

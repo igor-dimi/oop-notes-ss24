@@ -45,3 +45,32 @@ String::String(const String& other)
     }
     else buffer = nullptr;
 }
+
+String String::substring(int start, int length) const
+{
+
+    String res;
+    if (length > 0) {
+        res.len = length;
+        res.buffer = new char[length];
+        for (int i = 0; i < length; i++)
+            res.buffer[i] = buffer[i + start];
+    }
+    return res;
+}
+
+String::String(String&& other)
+{
+    len = other.len;
+    buffer = other.buffer;
+    other.buffer = nullptr;
+}
+
+String& String::operator=(String&& other)
+{
+    delete [] buffer;
+    len = other.len;
+    buffer = other.buffer;
+    other.buffer = nullptr;
+    return *this;
+}

@@ -15,5 +15,7 @@ int main(int argc, const char** argv) {
 
     String person(secretary);
 
+    secretary.substring(3, 4);
+
     return 0;
 }

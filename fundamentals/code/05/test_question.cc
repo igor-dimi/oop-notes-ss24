@@ -1,5 +1,6 @@
 #include "question.hh"
 #include <iostream>
+#include <memory>
 
 int main(int argc, const char** argv) {
     const int N = 2;
@@ -45,5 +46,11 @@ int main(int argc, const char** argv) {
     // std::cout << "Your answer: ";
     // std::getline(std::cin, response);
     // std::cout << q2.check_response(response) << std::endl;
+
+    std::shared_ptr<Question> q1(new Question);
+    q1->set_question("Inventor of C++?");
+    q1->set_answer("Bjarne Stroustrup");
+    q1->display();
+
     return 0;
 }
