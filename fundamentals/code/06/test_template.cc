@@ -30,6 +30,21 @@ Pair<T> minmax(T data[], int size)
 }
 
 
+void printint2 (std::ostream& out, int data[], int size)
+{
+    for (int i = 0; i < size; i++)
+        out << data[i];
+    out << std::endl;
+}
+
+template<typename T>
+void print2(std::ostream& out, T data[], int size)
+{
+    for (int i = 0; i < size - 1; i++) {
+        std::cout << data[i] << ", ";
+    } std::cout << data[size - 1] << std::endl;
+}
+
 int main(int argc, const char** argv) {
     
     double a[]{1.0, 2.0, 3.0};
@@ -45,6 +60,12 @@ int main(int argc, const char** argv) {
     Pair p2 = minmax(b, 4);
     std::cout << p1.get_first() << " " << p1.get_second() << std::endl;
     std::cout << p2.get_first() << " " << p2.get_second() << std::endl;
+
+    double arr[]{1.0, 2.0};
+    print2(std::cout, arr, 2);
+    int arr2[]{1, 2, 3, 4};
+    print2(std::cout, arr2, 4);
+
 
 
     // this is cool if you ask me and that is the thing , 
