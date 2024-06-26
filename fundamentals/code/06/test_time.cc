@@ -37,7 +37,7 @@ int main(int argc, const char** argv) {
 
     std::cout << p.first << " " << p.second << std::endl;
 
-
+ 
     return 0;
 
 }
