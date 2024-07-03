@@ -1,3 +1,7 @@
+test_arr: arr_templ.cc
+	g++ -o test_arr arr_templ.cc
+test_fact: fact_templ.cc
+	g++ -o test_fact fact_templ.cc 
 test_list2: test_list2.cc list.hh
 	g++ -o test_list2 test_list2.cc 
 
