@@ -1,3 +1,9 @@
+# test_cost_poly: test_cost_poly.cc
+# 	g++ -o test_cost_poly test_cost_poly.cc
+test_slicing: test_slicing.cc
+	g++ -o test_slicing test_slicing.cc
+test_inheritence: test_inheritence.cc
+	g++ -o test_inheritence test_inheritence.cc
 test_template: test_template.cc
 	g++ -o test_template test_template.cc
 test_string2: test_string2.cc string2.cc string2.hh
