@@ -4,3 +4,4 @@ test_string
 test_template
 test_fraction
 test_gcd
+test_inheritence
