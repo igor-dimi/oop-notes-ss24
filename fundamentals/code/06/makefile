@@ -1,3 +1,9 @@
+test_multiple_inheritence: test_multiple_inheritence.cc
+	g++ -o test_multiple_inheritence test_multiple_inheritence.cc
+test_matrix_inheritence: test_matrix_inheritence.cc
+	g++ -o test_matrix_inheritence test_matrix_inheritence.cc
+test_abstract: test_abstract.cc
+	g++ -o test_abstract test_abstract.cc
 # test_cost_poly: test_cost_poly.cc
 # 	g++ -o test_cost_poly test_cost_poly.cc
 test_slicing: test_slicing.cc

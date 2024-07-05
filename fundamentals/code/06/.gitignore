@@ -1,3 +1,6 @@
+test_abstract
+test_matrix_inheritence
+test_multiple_inheritence
 test_slicing
 test_inheritence
 test_stringtest_time
