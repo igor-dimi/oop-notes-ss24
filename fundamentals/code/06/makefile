@@ -1,3 +1,7 @@
+test_raii: test_raii.cc
+	g++ -o test_raii test_raii.cc
+test_factory: test_factory.cc
+	g++ -o test_factory test_factory.cc
 test_multiple_inheritence: test_multiple_inheritence.cc
 	g++ -o test_multiple_inheritence test_multiple_inheritence.cc
 test_matrix_inheritence: test_matrix_inheritence.cc
