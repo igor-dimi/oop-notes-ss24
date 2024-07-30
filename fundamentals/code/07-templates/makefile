@@ -1,3 +1,7 @@
+test_crtp_shape3: test_crtp_shape3.cc
+	g++ -o test_crtp_shape3 test_crtp_shape3.cc
+test_crtp3: test_crtp3.cc
+	g++ -o test_crtp3 test_crtp3.cc
 test_crtp_shape: test_crtp_shape.cc
 	g++ -o test_crtp_shape test_crtp_shape.cc
 test_enum: test_enum.cc
