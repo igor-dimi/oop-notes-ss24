@@ -1,3 +1,4 @@
 motiv
-test_time
-test_string
+test*
+!*.cc
+!*.hh
