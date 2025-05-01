@@ -1,3 +1,5 @@
+test_cost_poly: test_cost_poly.cc
+	g++ -o test_cost_poly test_cost_poly.cc
 test_raii: test_raii.cc
 	g++ -o test_raii test_raii.cc
 test_factory: test_factory.cc
@@ -8,8 +10,6 @@ test_matrix_inheritence: test_matrix_inheritence.cc
 	g++ -o test_matrix_inheritence test_matrix_inheritence.cc
 test_abstract: test_abstract.cc
 	g++ -o test_abstract test_abstract.cc
-# test_cost_poly: test_cost_poly.cc
-# 	g++ -o test_cost_poly test_cost_poly.cc
 test_slicing: test_slicing.cc
 	g++ -o test_slicing test_slicing.cc
 test_inheritence: test_inheritence.cc
