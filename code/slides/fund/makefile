@@ -18,3 +18,4 @@ myvect.o: myvect.cc myvect.hh
 
 clean:
 	rm $(PROGS)
+	rm *.o
