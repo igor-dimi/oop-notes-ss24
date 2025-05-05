@@ -4,3 +4,4 @@ ranges.o
 dynamic_arr
 test_myvect
 *.o
+references

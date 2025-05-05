@@ -1,4 +1,4 @@
-PROGS := arrays dynamic_arr ranges test_myvect
+PROGS := arrays dynamic_arr ranges test_myvect references
 CXX = g++
 CXXFLAGS = -std=c++20 -Wall -O2
 
