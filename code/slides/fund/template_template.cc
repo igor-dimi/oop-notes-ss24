@@ -3,7 +3,6 @@
 template<typename T, int n> struct Vector
 {
     enum {dim = n};
-    // int dim = n;
     T vals[n];
 };
 

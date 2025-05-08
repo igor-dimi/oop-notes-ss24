@@ -1,6 +1,6 @@
 PROGS := arrays dynamic_arr ranges test_myvect references \
 		function_pointer function_templates class_templates \
-		nontype_template template_template
+		nontype_template template_template default_template 
 CXX = g++
 CXXFLAGS = -std=c++20 -Wall -O2
 
