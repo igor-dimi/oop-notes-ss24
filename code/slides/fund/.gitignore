@@ -1,5 +1,7 @@
-arrays
-ranges
-ranges.o
-dynamic_arr
-test_myvect
+*
+!makefile
+!.gitignore
+!*.cc
+!*.cpp
+!*.hh
+!*.h
