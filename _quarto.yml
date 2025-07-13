@@ -20,9 +20,13 @@ book:
         - fundamentals/03-indirection.qmd
         - fundamentals/04-control-flow.qmd
         - fundamentals/05-oop.qmd
+    - part: "Exam"
+      chapters:
+        - exam/plan.qmd
+        - exam/scioop-2021.qmd
   downloads: pdf
 
-number-depth: 2
+number-depth: 1
 
 highlight-style: pygments
 

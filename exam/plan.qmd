@@ -1,0 +1,125 @@
+---
+title: "OOSC++ Exam Study Plan SoSe 25"
+---
+
+## Revised 14-Day Study Plan (High-Yield, Lecturer-Aligned)
+
+### **Day 1–2: OOP Essentials**
+
+* Classes, access specifiers, encapsulation
+* Constructors, destructors, copy/move
+* Inheritance, slicing, polymorphism
+* Virtual functions, abstract classes, `override`, `final`
+* **Practice:** Class hierarchies, virtual dispatch debugging
+
+---
+
+### **Day 3: RAII + Smart Pointers**
+
+* `unique_ptr`, `shared_ptr`, `weak_ptr`, `make_*` functions
+* Lifetime, ownership, dangling pointers
+* RAII for exception safety and resource cleanup
+* **Practice:** Refactor raw pointer code using RAII
+
+---
+
+### **Day 4: Lambda Expressions & Closures**
+
+* Lambda syntax, capture lists, mutable
+* Closures and `std::function`
+* Lambdas in algorithms (`sort`, `for_each`, `transform`)
+* **Practice:** Lambdas with custom predicates and function composition
+
+---
+
+### **Day 5: STL Containers + Iterators + Algorithms**
+
+* `vector`, `map`, `unordered_map`, `list`, etc.
+* Iterator categories and invalidation rules
+* Algorithms: `count_if`, `transform`, `copy_if`, etc.
+* **Practice:** Design small generic utilities with STL components
+
+---
+
+### **Day 6: Move Semantics**
+
+* Copy vs. move constructors
+* `std::move`, lvalues/rvalues
+* Rule of 5 / Rule of 0
+* **Practice:** Trace object lifetimes in copy/move-heavy code
+
+---
+
+### **Day 7: Design Patterns (Modern C++)**
+
+* Strategy, Visitor, Factory
+* Use of polymorphism and smart pointers in patterns
+* When to use composition over inheritance
+* **Practice:** Recognize patterns in sample code
+
+---
+
+### **Day 8–9: Template Programming & Metaprogramming (Core Block)**
+
+* Function/class templates, specialization
+* Variadic templates, template recursion
+* `constexpr` functions and `if constexpr` branching
+* Type traits, `enable_if`, SFINAE
+* Concepts and constraints (C++20)
+* CRTP and static polymorphism
+* **Practice:**
+
+  * Write a compile-time factorial
+  * Implement type-based dispatch using `constexpr`
+  * Build a simple `enable_if` filtering function
+
+---
+
+### **Day 10: Modern C++ Features**
+
+* Structured bindings, `std::optional`, `std::variant`
+* Ranges and views
+* `consteval`, `constinit`
+* Modules and filesystem (skim unless specifically emphasized)
+* **Focus:** What is used in metaprogramming or shown in slides
+
+---
+
+### **Day 11: Exceptions + Type System**
+
+* Exception handling (`throw`, `try`, `catch`, `noexcept`)
+* `assert`, contracts
+* Const correctness, type deduction (`auto`, `decltype`)
+* References vs pointers, `const T*` vs `T const*`
+* **Practice:** Spot exception bugs or type deduction issues
+
+---
+
+### **Day 12: Deep Dive – Template Metaprogramming Challenge Day**
+
+* Redo CRTP and `enable_if` examples
+* Try `constexpr` dispatch on types or algorithms
+* **Practice:**
+
+  * `static_assert` with trait logic
+  * Write a small type trait
+  * Recursively define a compile-time structure (e.g., tuple)
+
+---
+
+### **Day 13: Mock Exam Simulation**
+
+* Time-limited: solve 4–5 realistic tasks
+* Balance between code writing, analysis, bug fixing
+* **Self-grade** based on expected outputs/behaviors
+
+---
+
+### **Day 14: Final Review + Light Touch**
+
+* Revisit your 2 weakest areas
+* Redo key examples from metaprogramming and OOP
+* Skim SOLID principles and major design slides
+* Do not cram anything new — stabilize what you know
+
+---
