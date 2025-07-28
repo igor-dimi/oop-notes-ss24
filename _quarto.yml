@@ -24,9 +24,13 @@ book:
     - part: summary/overview.qmd
       chapters:
         - summary/oop.qmd
+    - part: "Exam"
+      chapters:
+        - exam/plan.qmd
+        - exam/scioop-2021.qmd
   downloads: pdf
 
-number-depth: 2
+number-depth: 1
 
 highlight-style: pygments
 

@@ -1,0 +1,143 @@
+---
+title: Ex 2021
+---
+
+| **Exercise** | 1 | 2 | 3 | 4 | 5 | 6 | $\sum$ | 
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **Points**| 15 | 10 | 15 | 15 | 10 | 25 | 90 |
+
+
+## Exercise 1
+
+Give a short answer to the following questions, each no longer than three lines. Provide some context, and
+focus on the central points like, e.g., advantages and disadvantages of certain constructs.
+
+a) What does the keyword `auto` do, and when should it be used? 
+b) What are lambda expressions? What are they useful for? 
+c) Give a simple example of a situation where a memory leak will occur, and how it can be resolved.
+d) What is a potential use cause for variable templates?
+e) What are lvalues and rvalues, and why is there a distinction? 
+f) When do you need the keyword `explicit`, and why? 
+g) Explain what inhertience is and why is it useful.
+h) Explain the purpose of template specializations through an example.
+i) What are virtual methods, and what are they used for? 
+j) What is an iterator, and why is this concept important for STL algorithms? 
+
+## Exercise 2
+
+Let the number sequence $a_n = a(n)$ be given by the following recurrence relation:
+
+$$
+a(n) = 
+\begin{cases}
+1 & \text{if } n =1 \\
+1 + a(n - a(a(n - 1))) & \text{if } n > 1
+\end{cases}
+$$
+
+The first few values of of this sequence are
+
+$$
+1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, \ldots
+$$
+
+a) Write a template metaprogram that computes $n$-th number $a_n$, when given $n$.
+b) Write an equivalent constant expression, as introduced C++11
+c) How could you implement the constant expression differently in C++14? (In words only, no code needed)
+d) Looking at the numbers of the sequence above, what does $a_n$ specify? 
+
+## Exercise 3
+
+The exercise is about inheritance, dynamic polymorphism, and interface classes:
+
+* Assume you have a class `Matrix` and a class `Vector` already given.
+* Assume further that a struct `Statistics` is given, derived frmo a struct `StatisticsBase`
+* You are tasked with writing a class `Solver` that uses these classes / structs
+* Make sure to use appropriate method and attribute qualifiers and encapsulation for this exercise
+
+Parts of the exercise:
+
+a) Write an abstract base class `SolverBase` with the following functionality:
+
+   * A pure virtual function `solve(const Matrix& m, const Vector& b, Vector& x)`
+   * A pure virtual function `statistics()` that returns an object of type `StatisticsBase`
+b) Write a derived class `Solver` that
+   * holds an object of type `Statistics`, into which data of the solution process will be written. 
+   * provides the methods `solve` and `statistics`, where `statistics` should return an object of type `Statistics`
+
+You may assume that the default constructors / destructor are sufficient. You don't need to implement an algorithm,
+just provide a dummy function body (like `// [...]`) where the actual algorithm would be written, and make sure that 
+everything of importance is there (i.e., return types and statements, method qualifiers, etc.)
+
+c) The method `solve` of the `Solver` class has a different return type than its abstract base class.
+What was the name given for this in the lecture? For this to work, the return types must have two properties, name one.
+
+d) Solver classes have to work for various data types, like, e.g., sparse matrices, block matrices or block vectors.
+How would you need to change your implementation, so that the class `Solver` works for several different matrix 
+and vector classes?
+
+## Exercise 4
+
+This exercise is about using SFINAE to implement a multiplication operator `a * b` that provides products between matrices and vectors.
+
+Assume that type traits `is_matrix<T>` and `is_vector<T>` exist that check if the given type `T` is a matrix or a vector. In particular:
+
+* The trait `is_matrix<T>` checks if `T` fulfills a certain matrix interface:
+  * Has a method template `times` for matrix-matrix products, accepting any matrix type.
+  * Has a method template `matvec`for matrix-vector products, accepting any vector type. 
+  * Exports the number of rows and columns as `T::rows` and `T::cols`, respectively.
+* The trait `is_vector<T>` checks if `T` fulfills a certain vector interface:
+  * Has a method `scalar_prod` for scalar products that expects a vector of the same type.
+  * Exports the number of components as `T::comps`. 
+
+Use SFINAE with the provided type traits to write the following variants of the operator:
+
+a) Return the scalar product if the first operand `a` is a vector and the second oerand `b` has the same type as `a`.
+b) Perform a matrix-vector product if the first operant `a` is a matrix, the second one `b` is a vector, and the number of columns 
+of `a` coincides with the number of components of `b`
+c) Calculate a matrix-matrix product if both operands are of matrix type, and the number of columns of `a` is the number of rows of
+`b`. How can you specify the correct return type easily? 
+d) How can you achieve the same goal without SFINAE in the current standards, e.g. C++17 or C++20 (In words only, no code needed)
+
+*Note*: Type combinations other than those mentioned above are allowed to simply cause compilation errors, of course.
+
+
+## Exercise 5
+
+Assume that a number of classes for $k$-th derivatives of some function $f$ is provided, with the zeroth one being just a functor 
+for $f$ itself, and each subsequent one being a functor for a derivative of a certain order.
+
+Given such a function $f$ and a development point $x_0$, the Taolor polynomial of degree $n$ is
+
+$$
+T_F(x; x_0) = \sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x - x_0)^k
+$$
+
+where $f^{(k)}$ is the $k$-th derivative of $f$. Note the following properties of this polynomial:
+
+* Each term except the first $k$ contains the term $\frac{1}{k}$, contributed by the factorial.
+* Each subsequent term contains one addditional copy of $(x - x_0)$. 
+
+This means we can reuse intermediate values from different terms, and evaluate the polynomial efficiently alternating between
+multiplication and addition of values. 
+
+Provide an implementation of this Taylor polynomial in the form of a variadic template:
+
+* The first template parameter is $f$ itself, the second is its derivative, and so on.
+* The degree $n$ is defined through the number of template parameters.
+* The points $x_0$ and $x$ are provided as normal function arguments.
+* Use an additional function argument to count the recursion level $k$, starting at zero.
+
+*Note*: In practice, this counter is of course hidden away to provide a clean interface, but you can ignore that here.
+
+## Exericse 6
+
+Write a short *essay* (approx, one page) about smart pointers, their origins, their implementation, and their application.
+In particular, consider the following points, which will be takne into account during grading:
+
+a) What is the *original problem* that smart pointers attempt to solve? 
+b) What *general technique* are smart pointers and example of, and what is its working mechanism? 
+c) Why does this solve the aforementioned problem even when *unexpected errors* occur? 
+d) How do shared pointers *manage their resoruces*, and how is this usually implemented? 
+e) What are *advantages* and *disadvantages* of using such smart pointers? 
+
