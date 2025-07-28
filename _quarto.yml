@@ -9,6 +9,7 @@ book:
   page-navigation: true
   chapters:
     - index.qmd
+    - reading.qmd
     - part: cmake/cmake.qmd
       chapters:
         - cmake/01.qmd
@@ -20,6 +21,9 @@ book:
         - fundamentals/03-indirection.qmd
         - fundamentals/04-control-flow.qmd
         - fundamentals/05-oop.qmd
+    - part: summary/overview.qmd
+      chapters:
+        - summary/oop.qmd
   downloads: pdf
 
 number-depth: 2

@@ -1,0 +1,15 @@
+---
+title: Big C++ Chapters Plan
+---
+
+## Chapters 
+
+* 7. Pointers and Structures
+* 8. Streams 
+* 9. Classes
+* 10. Inheritence 
+* 13. Advanced C++ 
+* 14. Linked Lists, Stacks and Queues
+* 15. Sets, maps, and Hash Tables
+* 16. Tree Structures
+* 17. Priority Queues and Heaps 

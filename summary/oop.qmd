@@ -1,0 +1,166 @@
+---
+title: "OOP Essentials"
+---
+
+## Overview
+
+* Object lifetime and ownership
+* Inheritance and virtual dispatch
+* Move semantics in containers
+* Rule of 5 vs Rule of 0 decisions
+
+Here’s how we’ll divide the “OOP Essentials” study phase based on both the plan and the slides:
+
+### Part 1: Classes, Access, Encapsulation
+
+* `class` vs `struct`
+* public / private / protected
+* friend classes
+* encapsulation benefits
+* examples from slides
+
+### Part 2: Constructors and Destructors
+
+* default, copy, move constructors
+* delegating constructors
+* explicit keyword
+* destructor behavior
+* Rule of 0, 3, 5
+* slide examples
+
+### Part 3: Inheritance and Slicing
+
+* public/private/protected inheritance
+* composition vs inheritance
+* object slicing and how to avoid it
+* constructor/destructor order
+* slide examples
+
+### Part 4: Polymorphism
+
+* virtual functions
+* override / final
+* abstract base classes
+* slicing vs virtual dispatch
+* vtable/vptr details (as in slides)
+
+### Part 5: Practice + Optional Quiz/Review
+
+## Part 1: Classes, Access, Encapsulation
+
+Great — let’s begin with **Part 1: Classes, Access, and Encapsulation**, using the lecture slides and adding explanatory depth and examples as needed.
+
+---
+
+### Part 1: Classes, Access Specifiers, and Encapsulation
+
+#### 1.1 `class` vs `struct` in C++
+
+In C++:
+
+* `struct`: default access is **public**
+* `class`: default access is **private**
+
+Otherwise, they are **identical** in terms of features: both can have constructors, destructors, member functions, inheritance, etc.
+
+**Slide Example (slide 55)**:
+
+```cpp
+struct BankAccount {
+    friend class Customer;
+private:
+    double balance = 0.0; // hidden
+};
+```
+
+```cpp
+class Customer {
+    BankAccount account;
+public:
+    void Deposit(double amount) {
+        account.balance += amount;
+    }
+};
+```
+
+**Comment**: This uses `friend` to give `Customer` access to the private `balance`. This breaks encapsulation and should only be done when absolutely necessary (e.g. during refactoring or testing).
+
+---
+
+#### 1.2 Access Specifiers
+
+There are three:
+
+| Specifier   | Access Level                             |
+| ----------- | ---------------------------------------- |
+| `public`    | Accessible everywhere                    |
+| `protected` | Accessible in the class and its children |
+| `private`   | Only accessible in the class itself      |
+
+**In inheritance** (slide 144):
+
+```cpp
+class A : public B { ... }   // public: keeps public/protected of B
+class A : protected B { ... } // public/protected become protected
+class A : private B { ... }   // public/protected become private
+```
+
+---
+
+#### 1.3 Encapsulation (slide 56)
+
+**Encapsulation** means:
+
+* Hiding internal implementation details (`private`)
+* Exposing only a clean and intentional interface (`public`)
+* Improving code clarity, reducing bugs, and making refactoring safer
+
+**Example**:
+
+```cpp
+class Matrix {
+private:
+    std::vector<std::vector<double>> data;
+public:
+    void Set(int i, int j, double val);
+    double Get(int i, int j) const;
+};
+```
+
+**Benefit**: Internals like `data` could be replaced later (e.g. flat vector, sparse storage) without affecting outside users of the `Matrix` class.
+
+---
+
+#### 1.4 Friend Classes and Breaks in Encapsulation
+
+Use `friend` when:
+
+* You need tight integration temporarily (e.g., during refactoring)
+* For testing internal state (often acceptable)
+* To grant access to specific helper classes
+
+Otherwise, prefer:
+
+* Accessor/mutator methods
+* Public APIs with clean contracts
+
+---
+
+### Reflective Check
+
+1. What’s the **main technical difference** between `struct` and `class`?
+2. Why is `friend` potentially dangerous in terms of software design?
+3. When inheriting from a class with `protected` methods, how do those methods behave under `private` inheritance?
+
+Answers:
+
+**1. What’s the main technical difference between `struct` and `class` in C++?**
+→ `struct` defaults to `public` access; `class` defaults to `private`. Otherwise, they are identical in functionality.
+
+**2. Why is `friend` potentially dangerous in terms of software design?**
+→ It breaks encapsulation by giving external classes access to private members, violating modularity and increasing coupling.
+
+**3. When inheriting from a class with `protected` methods, how do those methods behave under `private` inheritance?**
+→ They become `private` in the derived class and are no longer accessible to further subclasses.
+
+
