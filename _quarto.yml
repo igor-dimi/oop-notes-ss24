@@ -10,20 +10,20 @@ book:
   chapters:
     - index.qmd
     - reading.qmd
-    - part: cmake/cmake.qmd
-      chapters:
-        - cmake/01.qmd
-        - cmake/02.qmd
-    - part: fundamentals/00-fundamentals.qmd
-      chapters: 
-        - fundamentals/01-vars.qmd
-        - fundamentals/02-types.qmd
-        - fundamentals/03-indirection.qmd
-        - fundamentals/04-control-flow.qmd
-        - fundamentals/05-oop.qmd
-    - part: summary/overview.qmd
-      chapters:
-        - summary/oop.qmd
+    # - part: cmake/cmake.qmd
+    #   chapters:
+    #     - cmake/01.qmd
+    #     - cmake/02.qmd
+    # - part: fundamentals/00-fundamentals.qmd
+    #   chapters: 
+    #     - fundamentals/01-vars.qmd
+    #     - fundamentals/02-types.qmd
+    #     - fundamentals/03-indirection.qmd
+    #     - fundamentals/04-control-flow.qmd
+    #     - fundamentals/05-oop.qmd
+    # - part: summary/overview.qmd
+    #   chapters:
+    #     - summary/oop.qmd
     - part: "Exam"
       chapters:
         - exam/plan.qmd

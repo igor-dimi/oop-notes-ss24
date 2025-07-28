@@ -23,13 +23,14 @@ title: Reading List
    * 19
 4. Tour of C++
 3. Programming Principles and Practice Using C++, Bjarne Stroustrup
-5. Move Semantics C++
+3. C++ Crash Course - Lospinoso
+4. Move Semantics C++
    * 1. the power of movec semantics
    * 2. core features of move semantics
    * 3. move semantics in classes
    * 4. how to benefit from move semantics
    * 9. perfecct forwarding
-6. C++ Templates - josuttis
+5. C++ Templates - josuttis
    * 1. function templates
    * 2. class templates
    * 3. nontype template parameters
@@ -47,7 +48,7 @@ title: Reading List
    * 15. Template Argument Deduction
    * 16. Specialization and Overloading
    * 18. The Polymorphic Power of Templates
-7. The C++ STL
+6. The C++ STL
    * 1. About this book
    * 2. Intro to C++ and STL
    * 3. New Language Features
@@ -63,7 +64,7 @@ title: Reading List
    * 13. Strings
    * 15. Stream Classes
    * 18. Concurerency
-8. Discovering Modern C++ 
+7. Discovering Modern C++ 
    * 1. C++ Basics: 1.5 - 1.8
    * 2. Classes: 
    * 3. Generic Programming
@@ -71,6 +72,20 @@ title: Reading List
    * 5. Metaprogramming
    * 6. OOP
    * 7. Scientific Projects
-9. Data Structures and Algorithms in C++ - Mark Allen Weiss
-10. Data Structures and Problem Solving Using C++ - Mark Allen Weisse
-11. Objektorientiertes Programmieren in C++ 
+8. Data Structures and Algorithms in C++ - Mark Allen Weiss
+9.  Data Structures and Problem Solving Using C++ - Mark Allen Weisse
+10. Objektorientiertes Programmieren in C++ 
+11. Functional Programming in C++ - Cukic
+    1.  intro to functioal programming
+    2.  getting started with functional programming
+    3.  function objects
+    4.  creating new functions from old ones
+    5.  purity: avoiding mutable state
+    6.  lazy evaluation
+    7.  ranges
+    8.  functional data structures
+    9.  algebraic data types and pattern matching
+    10. monads
+    11. template metaprogramming
+    12. functional design for concurrent systesm
+    13. Testing and Debugging
