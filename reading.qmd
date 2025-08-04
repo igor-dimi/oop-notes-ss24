@@ -89,3 +89,5 @@ title: Reading List
     11. template metaprogramming
     12. functional design for concurrent systesm
     13. Testing and Debugging
+12. Object-Oriented Software Design in C++. Ronald Mak
+13. From Mathematics to Generic Programming. Alexander Stepanov, Daniel Rose
