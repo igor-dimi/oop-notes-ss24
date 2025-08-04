@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Ex 2021 – OOP for Scientific Computing Notes - SoSe 24</title>
+<title>5&nbsp; Indirection – OOP for Scientific Computing Notes - SoSe 24</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,17 +65,18 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../exam/plan.html" rel="prev">
+<link href="../fundamentals/04-control-flow.html" rel="next">
+<link href="../fundamentals/02-types.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ae0b5334a1ec0bf99af3d0c304a697d2.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-236d90495073fb2ac8939117e3e83141.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-f0554184b328e320c28546612668722a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-b34e9e038855c1b350b105f0a57f44a6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -69,35 +105,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -110,7 +117,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exam/plan.html">Exam</a></li><li class="breadcrumb-item"><a href="../exam/scioop-2021.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Scientific Computing Exam 2021</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../fundamentals/00-fundamentals.html">Basic Concepts of C++</a></li><li class="breadcrumb-item"><a href="../fundamentals/03-indirection.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Indirection</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -144,16 +151,10 @@ window.Quarto = {
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reading.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Reading List</span></span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Exam</span></a>
+            <a href="../cmake/cmake.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CMake Tutorial</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -161,14 +162,78 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exam/plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">OOSC++ Exam Study Plan SoSe 25</span></span></a>
+  <a href="../cmake/01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Step 1</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exam/scioop-2021.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Scientific Computing Exam 2021</span></span></a>
+  <a href="../cmake/02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Step 2</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../fundamentals/00-fundamentals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basic Concepts of C++</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fundamentals/01-vars.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variables, Temporaries, Literals</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fundamentals/02-types.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Types</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fundamentals/03-indirection.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Indirection</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fundamentals/04-control-flow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Control Flow</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fundamentals/05-oop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Object Orientated Programming in C++</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Exam</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exam/plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">OOSC++ Exam Study Plan SoSe 25</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exam/scioop-2021.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Scientific Computing Exam 2021</span></span></a>
   </div>
 </li>
       </ul>
@@ -183,21 +248,18 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link active" data-scroll-target="#exercise-1">Exercise 1</a></li>
-  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
-  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise 3</a></li>
-  <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise 4</a></li>
-  <li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a></li>
-  <li><a href="#exericse-6" id="toc-exericse-6" class="nav-link" data-scroll-target="#exericse-6">Exericse 6</a></li>
+  <li><a href="#pointers" id="toc-pointers" class="nav-link active" data-scroll-target="#pointers">Pointers</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#rvalue-double-references" id="toc-rvalue-double-references" class="nav-link" data-scroll-target="#rvalue-double-references">Rvalue (double) References</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exam/plan.html">Exam</a></li><li class="breadcrumb-item"><a href="../exam/scioop-2021.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Scientific Computing Exam 2021</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../fundamentals/00-fundamentals.html">Basic Concepts of C++</a></li><li class="breadcrumb-item"><a href="../fundamentals/03-indirection.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Indirection</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Ex 2021</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Indirection</span></h1>
 </div>
 
 
@@ -214,155 +276,66 @@ window.Quarto = {
 </header>
 
 
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th><strong>Exercise</strong></th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
-<th>6</th>
-<th><span class="math inline">\(\sum\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Points</strong></td>
-<td>15</td>
-<td>10</td>
-<td>15</td>
-<td>15</td>
-<td>10</td>
-<td>25</td>
-<td>90</td>
-</tr>
-</tbody>
-</table>
-<section id="exercise-1" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-1">Exercise 1</h2>
-<p>Give a short answer to the following questions, each no longer than three lines. Provide some context, and focus on the central points like, e.g., advantages and disadvantages of certain constructs.</p>
-<ol type="a">
-<li>What does the keyword <code>auto</code> do, and when should it be used?</li>
-<li>What are lambda expressions? What are they useful for?</li>
-<li>Give a simple example of a situation where a memory leak will occur, and how it can be resolved.</li>
-<li>What is a potential use cause for variable templates?</li>
-<li>What are lvalues and rvalues, and why is there a distinction?</li>
-<li>When do you need the keyword <code>explicit</code>, and why?</li>
-<li>Explain what inhertience is and why is it useful.</li>
-<li>Explain the purpose of template specializations through an example.</li>
-<li>What are virtual methods, and what are they used for?</li>
-<li>What is an iterator, and why is this concept important for STL algorithms?</li>
-</ol>
-</section>
-<section id="exercise-2" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-2">Exercise 2</h2>
-<p>Let the number sequence <span class="math inline">\(a_n = a(n)\)</span> be given by the following recurrence relation:</p>
-<p><span class="math display">\[
-a(n) =
-\begin{cases}
-1 &amp; \text{if } n =1 \\
-1 + a(n - a(a(n - 1))) &amp; \text{if } n &gt; 1
-\end{cases}
-\]</span></p>
-<p>The first few values of of this sequence are</p>
-<p><span class="math display">\[
-1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, \ldots
-\]</span></p>
-<ol type="a">
-<li>Write a template metaprogram that computes <span class="math inline">\(n\)</span>-th number <span class="math inline">\(a_n\)</span>, when given <span class="math inline">\(n\)</span>.</li>
-<li>Write an equivalent constant expression, as introduced C++11</li>
-<li>How could you implement the constant expression differently in C++14? (In words only, no code needed)</li>
-<li>Looking at the numbers of the sequence above, what does <span class="math inline">\(a_n\)</span> specify?</li>
-</ol>
-</section>
-<section id="exercise-3" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-3">Exercise 3</h2>
-<p>The exercise is about inheritance, dynamic polymorphism, and interface classes:</p>
+<section id="pointers" class="level2">
+<h2 class="anchored" data-anchor-id="pointers">Pointers</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>include <span class="op">&lt;</span>iostream<span class="op">&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="dt">const</span> <span class="op">*</span>argv<span class="op">[])</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>p1 <span class="op">=</span> <span class="op">&amp;</span>i<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>p2 <span class="op">=</span> new <span class="dt">int</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    std<span class="op">::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"i: "</span> <span class="op">&lt;&lt;</span> i <span class="op">&lt;&lt;</span> std<span class="op">::</span>endl</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>              <span class="op">&lt;&lt;</span> <span class="st">"*p1: "</span> <span class="op">&lt;&lt;</span> <span class="op">*</span>p1 <span class="op">&lt;&lt;</span> std<span class="op">::</span>endl</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>              <span class="op">&lt;&lt;</span> <span class="st">"p1: "</span> <span class="op">&lt;&lt;</span> p1 <span class="op">&lt;&lt;</span> std<span class="op">::</span>endl</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>              <span class="op">&lt;&lt;</span> <span class="st">"&amp;p1: "</span> <span class="op">&lt;&lt;</span> <span class="op">&amp;</span>p1 <span class="op">&lt;&lt;</span> std<span class="op">::</span>endl</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>              <span class="op">&lt;&lt;</span> <span class="st">"p2: "</span> <span class="op">&lt;&lt;</span> p2 <span class="op">&lt;&lt;</span> std<span class="op">::</span>endl</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>              <span class="op">&lt;&lt;</span> <span class="st">"*p2: "</span> <span class="op">&lt;&lt;</span> <span class="op">*</span>p2 <span class="op">&lt;&lt;</span> std<span class="op">::</span>endl<span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    delete p2<span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>output:</p>
+<pre class="{text}"><code>i: 5
+*p1: 5
+p1: 0x7fff8d568184
+&amp;p1: 0x7fff8d568188
+p2: 0x55c014358eb0
+*p2: 0</code></pre>
 <ul>
-<li>Assume you have a class <code>Matrix</code> and a class <code>Vector</code> already given.</li>
-<li>Assume further that a struct <code>Statistics</code> is given, derived frmo a struct <code>StatisticsBase</code></li>
-<li>You are tasked with writing a class <code>Solver</code> that uses these classes / structs</li>
-<li>Make sure to use appropriate method and attribute qualifiers and encapsulation for this exercise</li>
+<li>release memory with <code>delete</code>.</li>
+<li>deleting too early -&gt; bugs, too late -&gt; memory leaks</li>
 </ul>
-<p>Parts of the exercise:</p>
-<ol type="a">
-<li><p>Write an abstract base class <code>SolverBase</code> with the following functionality:</p>
-<ul>
-<li>A pure virtual function <code>solve(const Matrix&amp; m, const Vector&amp; b, Vector&amp; x)</code></li>
-<li>A pure virtual function <code>statistics()</code> that returns an object of type <code>StatisticsBase</code></li>
-</ul></li>
-<li><p>Write a derived class <code>Solver</code> that</p>
-<ul>
-<li>holds an object of type <code>Statistics</code>, into which data of the solution process will be written.</li>
-<li>provides the methods <code>solve</code> and <code>statistics</code>, where <code>statistics</code> should return an object of type <code>Statistics</code></li>
-</ul></li>
-</ol>
-<p>You may assume that the default constructors / destructor are sufficient. You don’t need to implement an algorithm, just provide a dummy function body (like <code>// [...]</code>) where the actual algorithm would be written, and make sure that everything of importance is there (i.e., return types and statements, method qualifiers, etc.)</p>
-<ol start="3" type="a">
-<li><p>The method <code>solve</code> of the <code>Solver</code> class has a different return type than its abstract base class. What was the name given for this in the lecture? For this to work, the return types must have two properties, name one.</p></li>
-<li><p>Solver classes have to work for various data types, like, e.g., sparse matrices, block matrices or block vectors. How would you need to change your implementation, so that the class <code>Solver</code> works for several different matrix and vector classes?</p></li>
-</ol>
 </section>
-<section id="exercise-4" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-4">Exercise 4</h2>
-<p>This exercise is about using SFINAE to implement a multiplication operator <code>a * b</code> that provides products between matrices and vectors.</p>
-<p>Assume that type traits <code>is_matrix&lt;T&gt;</code> and <code>is_vector&lt;T&gt;</code> exist that check if the given type <code>T</code> is a matrix or a vector. In particular:</p>
-<ul>
-<li>The trait <code>is_matrix&lt;T&gt;</code> checks if <code>T</code> fulfills a certain matrix interface:
-<ul>
-<li>Has a method template <code>times</code> for matrix-matrix products, accepting any matrix type.</li>
-<li>Has a method template <code>matvec</code>for matrix-vector products, accepting any vector type.</li>
-<li>Exports the number of rows and columns as <code>T::rows</code> and <code>T::cols</code>, respectively.</li>
-</ul></li>
-<li>The trait <code>is_vector&lt;T&gt;</code> checks if <code>T</code> fulfills a certain vector interface:
-<ul>
-<li>Has a method <code>scalar_prod</code> for scalar products that expects a vector of the same type.</li>
-<li>Exports the number of components as <code>T::comps</code>.</li>
-</ul></li>
-</ul>
-<p>Use SFINAE with the provided type traits to write the following variants of the operator:</p>
-<ol type="a">
-<li>Return the scalar product if the first operand <code>a</code> is a vector and the second oerand <code>b</code> has the same type as <code>a</code>.</li>
-<li>Perform a matrix-vector product if the first operant <code>a</code> is a matrix, the second one <code>b</code> is a vector, and the number of columns of <code>a</code> coincides with the number of components of <code>b</code></li>
-<li>Calculate a matrix-matrix product if both operands are of matrix type, and the number of columns of <code>a</code> is the number of rows of <code>b</code>. How can you specify the correct return type easily?</li>
-<li>How can you achieve the same goal without SFINAE in the current standards, e.g.&nbsp;C++17 or C++20 (In words only, no code needed)</li>
-</ol>
-<p><em>Note</em>: Type combinations other than those mentioned above are allowed to simply cause compilation errors, of course.</p>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>References are <strong>aliases for an existing entity</strong>. k</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>include <span class="op">&lt;</span>iostream<span class="op">&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span><span class="op">**</span> argv<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"a: "</span> <span class="op">&lt;&lt;</span> a <span class="op">&lt;&lt;</span><span class="bu">std::</span>endl<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">&amp;</span>b <span class="op">=</span> a<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"a: "</span> <span class="op">&lt;&lt;</span> a <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>              <span class="op">&lt;&lt;</span> <span class="st">"b: "</span> <span class="op">&lt;&lt;</span> b <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>output:</p>
+<pre class="{text}"><code>a: 4
+a: 5
+b: 5</code></pre>
 </section>
-<section id="exercise-5" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-5">Exercise 5</h2>
-<p>Assume that a number of classes for <span class="math inline">\(k\)</span>-th derivatives of some function <span class="math inline">\(f\)</span> is provided, with the zeroth one being just a functor for <span class="math inline">\(f\)</span> itself, and each subsequent one being a functor for a derivative of a certain order.</p>
-<p>Given such a function <span class="math inline">\(f\)</span> and a development point <span class="math inline">\(x_0\)</span>, the Taolor polynomial of degree <span class="math inline">\(n\)</span> is</p>
-<p><span class="math display">\[
-T_F(x; x_0) = \sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x - x_0)^k
-\]</span></p>
-<p>where <span class="math inline">\(f^{(k)}\)</span> is the <span class="math inline">\(k\)</span>-th derivative of <span class="math inline">\(f\)</span>. Note the following properties of this polynomial:</p>
+<section id="rvalue-double-references" class="level2">
+<h2 class="anchored" data-anchor-id="rvalue-double-references">Rvalue (double) References</h2>
+<p>Two uses:</p>
 <ul>
-<li>Each term except the first <span class="math inline">\(k\)</span> contains the term <span class="math inline">\(\frac{1}{k}\)</span>, contributed by the factorial.</li>
-<li>Each subsequent term contains one addditional copy of <span class="math inline">\((x - x_0)\)</span>.</li>
+<li><strong>range-based</strong> <code>for</code> loops</li>
+<li><strong>move semantics</strong></li>
 </ul>
-<p>This means we can reuse intermediate values from different terms, and evaluate the polynomial efficiently alternating between multiplication and addition of values.</p>
-<p>Provide an implementation of this Taylor polynomial in the form of a variadic template:</p>
-<ul>
-<li>The first template parameter is <span class="math inline">\(f\)</span> itself, the second is its derivative, and so on.</li>
-<li>The degree <span class="math inline">\(n\)</span> is defined through the number of template parameters.</li>
-<li>The points <span class="math inline">\(x_0\)</span> and <span class="math inline">\(x\)</span> are provided as normal function arguments.</li>
-<li>Use an additional function argument to count the recursion level <span class="math inline">\(k\)</span>, starting at zero.</li>
-</ul>
-<p><em>Note</em>: In practice, this counter is of course hidden away to provide a clean interface, but you can ignore that here.</p>
-</section>
-<section id="exericse-6" class="level2">
-<h2 class="anchored" data-anchor-id="exericse-6">Exericse 6</h2>
-<p>Write a short <em>essay</em> (approx, one page) about smart pointers, their origins, their implementation, and their application. In particular, consider the following points, which will be takne into account during grading:</p>
-<ol type="a">
-<li>What is the <em>original problem</em> that smart pointers attempt to solve?</li>
-<li>What <em>general technique</em> are smart pointers and example of, and what is its working mechanism?</li>
-<li>Why does this solve the aforementioned problem even when <em>unexpected errors</em> occur?</li>
-<li>How do shared pointers <em>manage their resoruces</em>, and how is this usually implemented?</li>
-<li>What are <em>advantages</em> and <em>disadvantages</em> of using such smart pointers?</li>
-</ol>
+<p>lvalue references refer to entities, rvalue references refer to literals.</p>
 
 
 </section>
@@ -769,11 +742,14 @@ T_F(x; x_0) = \sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x - x_0)^k
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../exam/plan.html" class="pagination-link" aria-label="OOSC++ Exam Study Plan SoSe 25">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">OOSC++ Exam Study Plan SoSe 25</span></span>
+      <a href="../fundamentals/02-types.html" class="pagination-link" aria-label="Data Types">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Types</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../fundamentals/04-control-flow.html" class="pagination-link" aria-label="Control Flow">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Control Flow</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

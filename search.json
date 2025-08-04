@@ -14,7 +14,7 @@
     "href": "reading.html",
     "title": "1  Reading List",
     "section": "",
-    "text": "Big C++:\n\n\nPointers and Structures\n\n\nStreams\n\n\nClasses\n\n\nInheritence\n\n\nAdvanced C++\n\n\nLinked Lists, Stacks and Queues\n\n\nSets, maps, and Hash Tables\n\n\nTree Structures\n\n\nPriority Queues and Heaps\n\n\nC++ Primer\n\n2.2 - 2.6\n3\n4.10,11\n5.6\n6 - 16\n17.1, 17.5\n18\n19\n\nTour of C++\nProgramming Principles and Practice Using C++, Bjarne Stroustrup\nC++ Crash Course - Lospinoso\nMove Semantics C++\n\n\nthe power of movec semantics\n\n\ncore features of move semantics\n\n\nmove semantics in classes\n\n\nhow to benefit from move semantics\n\n\nperfecct forwarding\n\n\nC++ Templates - josuttis\n\n\nfunction templates\n\n\nclass templates\n\n\nnontype template parameters\n\n\nvariadic templates\n\n\ntricky basics\n\n\nmove semantics and enable_if&lt;&gt;\n\n\nBy Value or by Reference?\n\n\nCompile-Time Programming\n\n\nUsing Templates in Practice\n\n\nBasic Template Terminology\n\n\nGeneric Libraries\n\n\nFundamnetals in Depth\n\n\nNames in Templates\n\n\nInstantiation\n\n\nTemplate Argument Deduction\n\n\nSpecialization and Overloading\n\n\nThe Polymorphic Power of Templates\n\n\nThe C++ STL\n\n\nAbout this book\n\n\nIntro to C++ and STL\n\n\nNew Language Features\n\n\nGeneral Concepts\n\n\nUtilities\n\n\nSTL\n\n\nSTL Containers\n\n\nSTL Container Members in Detail\n\n\nSTL Iterators\n\n\nSTL function Objects and Using Lambdas\n\n\nSTL Algorithms\n\n\nSpecial Containers\n\n\nStrings\n\n\nStream Classes\n\n\nConcurerency\n\n\nDiscovering Modern C++\n\n\nC++ Basics: 1.5 - 1.8\n\n\nClasses:\n\n\nGeneric Programming\n\n\nLibraries\n\n\nMetaprogramming\n\n\nOOP\n\n\nScientific Projects\n\n\nData Structures and Algorithms in C++ - Mark Allen Weiss\nData Structures and Problem Solving Using C++ - Mark Allen Weisse\nObjektorientiertes Programmieren in C++\nFunctional Programming in C++ - Cukic\n\nintro to functioal programming\ngetting started with functional programming\nfunction objects\ncreating new functions from old ones\npurity: avoiding mutable state\nlazy evaluation\nranges\nfunctional data structures\nalgebraic data types and pattern matching\nmonads\ntemplate metaprogramming\nfunctional design for concurrent systesm\nTesting and Debugging",
+    "text": "Big C++:\n\n\nPointers and Structures\n\n\nStreams\n\n\nClasses\n\n\nInheritence\n\n\nAdvanced C++\n\n\nLinked Lists, Stacks and Queues\n\n\nSets, maps, and Hash Tables\n\n\nTree Structures\n\n\nPriority Queues and Heaps\n\n\nC++ Primer\n\n2.2 - 2.6\n3\n4.10,11\n5.6\n6 - 16\n17.1, 17.5\n18\n19\n\nTour of C++\nProgramming Principles and Practice Using C++, Bjarne Stroustrup\nC++ Crash Course - Lospinoso\nMove Semantics C++\n\n\nthe power of movec semantics\n\n\ncore features of move semantics\n\n\nmove semantics in classes\n\n\nhow to benefit from move semantics\n\n\nperfecct forwarding\n\n\nC++ Templates - josuttis\n\n\nfunction templates\n\n\nclass templates\n\n\nnontype template parameters\n\n\nvariadic templates\n\n\ntricky basics\n\n\nmove semantics and enable_if&lt;&gt;\n\n\nBy Value or by Reference?\n\n\nCompile-Time Programming\n\n\nUsing Templates in Practice\n\n\nBasic Template Terminology\n\n\nGeneric Libraries\n\n\nFundamnetals in Depth\n\n\nNames in Templates\n\n\nInstantiation\n\n\nTemplate Argument Deduction\n\n\nSpecialization and Overloading\n\n\nThe Polymorphic Power of Templates\n\n\nThe C++ STL\n\n\nAbout this book\n\n\nIntro to C++ and STL\n\n\nNew Language Features\n\n\nGeneral Concepts\n\n\nUtilities\n\n\nSTL\n\n\nSTL Containers\n\n\nSTL Container Members in Detail\n\n\nSTL Iterators\n\n\nSTL function Objects and Using Lambdas\n\n\nSTL Algorithms\n\n\nSpecial Containers\n\n\nStrings\n\n\nStream Classes\n\n\nConcurerency\n\n\nDiscovering Modern C++\n\n\nC++ Basics: 1.5 - 1.8\n\n\nClasses:\n\n\nGeneric Programming\n\n\nLibraries\n\n\nMetaprogramming\n\n\nOOP\n\n\nScientific Projects\n\n\nData Structures and Algorithms in C++ - Mark Allen Weiss\nData Structures and Problem Solving Using C++ - Mark Allen Weisse\nObjektorientiertes Programmieren in C++\nFunctional Programming in C++ - Cukic\n\nintro to functioal programming\ngetting started with functional programming\nfunction objects\ncreating new functions from old ones\npurity: avoiding mutable state\nlazy evaluation\nranges\nfunctional data structures\nalgebraic data types and pattern matching\nmonads\ntemplate metaprogramming\nfunctional design for concurrent systesm\nTesting and Debugging\n\nObject-Oriented Software Design in C++. Ronald Mak\nFrom Mathematics to Generic Programming. Alexander Stepanov, Daniel Rose",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Reading List</span>"
     ]
@@ -49,7 +49,7 @@
     "text": "Exercise 1\nGive a short answer to the following questions, each no longer than three lines. Provide some context, and focus on the central points like, e.g., advantages and disadvantages of certain constructs.",
     "crumbs": [
       "Exam",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Ex 2021</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Scientific Computing Exam 2021</span>"
     ]
   },
   {
@@ -60,7 +60,7 @@
     "text": "What does the keyword auto do, and when should it be used?\nWhat are lambda expressions? What are they useful for?\nGive a simple example of a situation where a memory leak will occur, and how it can be resolved.\nWhat is a potential use cause for variable templates?\nWhat are lvalues and rvalues, and why is there a distinction?\nWhen do you need the keyword explicit, and why?\nExplain what inhertience is and why is it useful.\nExplain the purpose of template specializations through an example.\nWhat are virtual methods, and what are they used for?\nWhat is an iterator, and why is this concept important for STL algorithms?",
     "crumbs": [
       "Exam",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Ex 2021</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Scientific Computing Exam 2021</span>"
     ]
   },
   {
@@ -71,7 +71,7 @@
     "text": "Exercise 2\nLet the number sequence \\(a_n = a(n)\\) be given by the following recurrence relation:\n\\[\na(n) =\n\\begin{cases}\n1 & \\text{if } n =1 \\\\\n1 + a(n - a(a(n - 1))) & \\text{if } n &gt; 1\n\\end{cases}\n\\]\nThe first few values of of this sequence are\n\\[\n1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, \\ldots\n\\]\n\nWrite a template metaprogram that computes \\(n\\)-th number \\(a_n\\), when given \\(n\\).\nWrite an equivalent constant expression, as introduced C++11\nHow could you implement the constant expression differently in C++14? (In words only, no code needed)\nLooking at the numbers of the sequence above, what does \\(a_n\\) specify?",
     "crumbs": [
       "Exam",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Ex 2021</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Scientific Computing Exam 2021</span>"
     ]
   },
   {
@@ -82,7 +82,7 @@
     "text": "Exercise 3\nThe exercise is about inheritance, dynamic polymorphism, and interface classes:\n\nAssume you have a class Matrix and a class Vector already given.\nAssume further that a struct Statistics is given, derived frmo a struct StatisticsBase\nYou are tasked with writing a class Solver that uses these classes / structs\nMake sure to use appropriate method and attribute qualifiers and encapsulation for this exercise\n\nParts of the exercise:\n\nWrite an abstract base class SolverBase with the following functionality:\n\nA pure virtual function solve(const Matrix& m, const Vector& b, Vector& x)\nA pure virtual function statistics() that returns an object of type StatisticsBase\n\nWrite a derived class Solver that\n\nholds an object of type Statistics, into which data of the solution process will be written.\nprovides the methods solve and statistics, where statistics should return an object of type Statistics\n\n\nYou may assume that the default constructors / destructor are sufficient. You don’t need to implement an algorithm, just provide a dummy function body (like // [...]) where the actual algorithm would be written, and make sure that everything of importance is there (i.e., return types and statements, method qualifiers, etc.)\n\nThe method solve of the Solver class has a different return type than its abstract base class. What was the name given for this in the lecture? For this to work, the return types must have two properties, name one.\nSolver classes have to work for various data types, like, e.g., sparse matrices, block matrices or block vectors. How would you need to change your implementation, so that the class Solver works for several different matrix and vector classes?",
     "crumbs": [
       "Exam",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Ex 2021</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Scientific Computing Exam 2021</span>"
     ]
   },
   {
@@ -93,7 +93,7 @@
     "text": "Exercise 4\nThis exercise is about using SFINAE to implement a multiplication operator a * b that provides products between matrices and vectors.\nAssume that type traits is_matrix&lt;T&gt; and is_vector&lt;T&gt; exist that check if the given type T is a matrix or a vector. In particular:\n\nThe trait is_matrix&lt;T&gt; checks if T fulfills a certain matrix interface:\n\nHas a method template times for matrix-matrix products, accepting any matrix type.\nHas a method template matvecfor matrix-vector products, accepting any vector type.\nExports the number of rows and columns as T::rows and T::cols, respectively.\n\nThe trait is_vector&lt;T&gt; checks if T fulfills a certain vector interface:\n\nHas a method scalar_prod for scalar products that expects a vector of the same type.\nExports the number of components as T::comps.\n\n\nUse SFINAE with the provided type traits to write the following variants of the operator:\n\nReturn the scalar product if the first operand a is a vector and the second oerand b has the same type as a.\nPerform a matrix-vector product if the first operant a is a matrix, the second one b is a vector, and the number of columns of a coincides with the number of components of b\nCalculate a matrix-matrix product if both operands are of matrix type, and the number of columns of a is the number of rows of b. How can you specify the correct return type easily?\nHow can you achieve the same goal without SFINAE in the current standards, e.g. C++17 or C++20 (In words only, no code needed)\n\nNote: Type combinations other than those mentioned above are allowed to simply cause compilation errors, of course.",
     "crumbs": [
       "Exam",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Ex 2021</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Scientific Computing Exam 2021</span>"
     ]
   },
   {
@@ -104,7 +104,7 @@
     "text": "Exercise 5\nAssume that a number of classes for \\(k\\)-th derivatives of some function \\(f\\) is provided, with the zeroth one being just a functor for \\(f\\) itself, and each subsequent one being a functor for a derivative of a certain order.\nGiven such a function \\(f\\) and a development point \\(x_0\\), the Taolor polynomial of degree \\(n\\) is\n\\[\nT_F(x; x_0) = \\sum_{k=0}^n\\frac{f^{(k)}(x_0)}{k!}(x - x_0)^k\n\\]\nwhere \\(f^{(k)}\\) is the \\(k\\)-th derivative of \\(f\\). Note the following properties of this polynomial:\n\nEach term except the first \\(k\\) contains the term \\(\\frac{1}{k}\\), contributed by the factorial.\nEach subsequent term contains one addditional copy of \\((x - x_0)\\).\n\nThis means we can reuse intermediate values from different terms, and evaluate the polynomial efficiently alternating between multiplication and addition of values.\nProvide an implementation of this Taylor polynomial in the form of a variadic template:\n\nThe first template parameter is \\(f\\) itself, the second is its derivative, and so on.\nThe degree \\(n\\) is defined through the number of template parameters.\nThe points \\(x_0\\) and \\(x\\) are provided as normal function arguments.\nUse an additional function argument to count the recursion level \\(k\\), starting at zero.\n\nNote: In practice, this counter is of course hidden away to provide a clean interface, but you can ignore that here.",
     "crumbs": [
       "Exam",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Ex 2021</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Scientific Computing Exam 2021</span>"
     ]
   },
   {
@@ -115,7 +115,7 @@
     "text": "Exericse 6\nWrite a short essay (approx, one page) about smart pointers, their origins, their implementation, and their application. In particular, consider the following points, which will be takne into account during grading:\n\nWhat is the original problem that smart pointers attempt to solve?\nWhat general technique are smart pointers and example of, and what is its working mechanism?\nWhy does this solve the aforementioned problem even when unexpected errors occur?\nHow do shared pointers manage their resoruces, and how is this usually implemented?\nWhat are advantages and disadvantages of using such smart pointers?",
     "crumbs": [
       "Exam",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Ex 2021</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Scientific Computing Exam 2021</span>"
     ]
   }
 ]
